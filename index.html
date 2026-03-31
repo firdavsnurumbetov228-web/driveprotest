@@ -344,8 +344,6 @@
 </div>
 
 <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
     
     // ========== 29 TA KATEGORIYA ==========
     const categoriesList = [
@@ -634,9 +632,9 @@
         document.body.classList.toggle("dark");
         localStorage.setItem("avto_theme", document.body.classList.contains("dark") ? "dark" : "light");
     }
-    
-    function handleExit() { tg.close(); }
-    
+    document.getElementById("exitBtn").onclick = () => {
+    alert("Saytdan chiqish tugmasi bosildi!");
+};
     function showToast(msg) {
         const div = document.createElement("div");
         div.className = "toast-msg";
