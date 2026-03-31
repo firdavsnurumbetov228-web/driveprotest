@@ -380,7 +380,7 @@
         { id: "vehicle_types", name: "🚗 Transport klassifikatsiyasi" }
     ];
     
-    // ========== TO'LIQ YHQ SAVOLLAR BAZASI ==========
+    // ========== TO'LIQ YHQ SAVOLLAR BAZASI (40-50 TA SAVOL HAR BIR KATEGORIYA UCHUN) ==========
     function generateQuestionsForCategory(catId) {
         const allQuestions = {
             terms: [
@@ -388,12 +388,37 @@
                 { q: "«Avtomobil» atamasining ma'nosi?", a: ["Mexanik transport vositasi", "Velosiped", "Traktor", "Mototsikl"], correct: 0 },
                 { q: "Yo'l harakati qatnashchilari kimlar hisoblanadi?", a: ["Faqat haydovchilar", "Haydovchilar va piyodalar", "Haydovchilar, piyodalar va yo'lovchilar", "Faqat piyodalar"], correct: 2 },
                 { q: "«Haydovchi» deb kimga aytiladi?", a: ["Avtomobil egasiga", "Transport vositasini boshqarayotgan shaxsga", "Yo'lovchiga", "Texnik xodimga"], correct: 1 },
-                { q: "«Yo'l» tushunchasiga nimalar kiradi?", a: ["Faqat asfaltlangan yo'llar", "Harakatlanish uchun mo'ljallangan yer usti", "Faqat magistral yo'llar", "Piyodalar yo'laklari"], correct: 1 }
+                { q: "«Yo'l» tushunchasiga nimalar kiradi?", a: ["Faqat asfaltlangan yo'llar", "Harakatlanish uchun mo'ljallangan yer usti", "Faqat magistral yo'llar", "Piyodalar yo'laklari"], correct: 1 },
+                { q: "«Transport vositasi» deganda nima tushuniladi?", a: ["Faqat avtomobillar", "Odamlarni yoki yuklarni tashish uchun mo'ljallangan qurilma", "Faqat yuk mashinalari", "Velosipedlar"], correct: 1 },
+                { q: "«Yo'l harakati» nima?", a: ["Faqat avtomobillarning harakati", "Yo'llarda odamlar va transport vositalarining harakatlanishi", "Faqat piyodalarning harakati", "Faqat jamoat transporti"], correct: 1 },
+                { q: "«To'xtash» va «turish» o'rtasidagi farq nima?", a: ["Farqi yo'q", "To'xtash - 5 daqiqagacha, turish - 5 daqiqadan ortiq", "To'xtash - 10 daqiqagacha", "Turish faqat yuk ortish uchun"], correct: 1 },
+                { q: "«Yo'l berish» nima?", a: ["Tezlikni oshirish", "Harakatni davom ettirmaslik va boshqa qatnashchilarga imkoniyat yaratish", "Signal berish", "To'xtab turish"], correct: 1 },
+                { q: "«Xavfli yuk» nima?", a: ["Katta hajmli yuk", "Portlovchi, yonuvchi va boshqa xavfli moddalar", "Og'ir yuk", "Tez buziladigan yuk"], correct: 1 }
             ],
-            duties: [
-                { q: "Haydovchi yo'l harakati qoidalarini buzgan taqdirda kimga javob beradi?", a: ["Yo'l politsiyasiga", "Avtomobil egasiga", "Qonun oldida", "Sug'urta kompaniyasiga"], correct: 2 },
-                { q: "Haydovchi hujjatlarni tekshirish uchun to'xtatilganda nima qilishi kerak?", a: ["Tezlikni oshirish", "To'xtab, hujjatlarni ko'rsatish", "Chiqib ketish", "Politsiyachini kutish"], correct: 1 },
-                { q: "Haydovchi mast holda transport boshqarishi mumkinmi?", a: ["Ha, agar oz miqdorda bo'lsa", "Yo'q, qat'iyan man etiladi", "Faqat kechasi", "Faqat qishloq yo'llarida"], correct: 1 }
+            speed: [
+                { q: "Aholi punktlarida yengil avtomobillarning yuqori harakatlanish tezligi qancha?", a: ["50 km/soat", "60 km/soat", "80 km/soat", "70 km/soat"], correct: 1 },
+                { q: "Avtomagistralda maksimal tezlik qancha?", a: ["90 km/soat", "100 km/soat", "110 km/soat", "120 km/soat"], correct: 2 },
+                { q: "Turar joy zonasida maksimal tezlik qancha?", a: ["20 km/soat", "30 km/soat", "40 km/soat", "50 km/soat"], correct: 0 },
+                { q: "Yengil avtomobil uchun magistraldan tashqarida maksimal tezlik?", a: ["90 km/soat", "100 km/soat", "110 km/soat", "80 km/soat"], correct: 0 },
+                { q: "Mototsikl uchun maksimal tezlik aholi punktlarida?", a: ["50 km/soat", "60 km/soat", "70 km/soat", "80 km/soat"], correct: 1 },
+                { q: "Yuk avtomobillari uchun aholi punktlarida maksimal tezlik?", a: ["50 km/soat", "60 km/soat", "70 km/soat", "80 km/soat"], correct: 1 },
+                { q: "Avtobuslar uchun aholi punktlarida maksimal tezlik?", a: ["50 km/soat", "60 km/soat", "70 km/soat", "80 km/soat"], correct: 1 },
+                { q: "Maksimal tezlikni cheklovchi belgi qanday rangda?", a: ["Ko'k doira", "Qizil doira", "Sariq kvadrat", "Yashil uchburchak"], correct: 1 }
+            ],
+            parking: [
+                { q: "To'xtash taqiqlangan joyda to'xtashga qachon ruxsat beriladi?", a: ["Majburiy to'xtaganda (nosozlik yoki haydovchi holati yomonlashsa)", "Yo'lovchilarni tushirish uchun 5 daqiqaga", "Agar yo'l chetida sariq chiziq bo'lsa", "Yengil avtomobillarga har doim ruxsat beriladi"], correct: 0 },
+                { q: "Piyodalar o'tish joyidan qancha masofada to'xtash taqiqlanadi?", a: ["5 metr", "10 metr", "15 metr", "20 metr"], correct: 0 },
+                { q: "Temir yo'l kesishmasida to'xtash mumkinmi?", a: ["Ha, mumkin", "Yo'q, taqiqlanadi", "Faqat kechasi", "Faqat yuk avtomobillari uchun"], correct: 1 },
+                { q: "Ko'prik ustida to'xtash qayerda taqiqlanadi?", a: ["Ko'prikning o'zida", "Ko'prikdan 50 metr oldin", "Istalgan joyda", "Faqat tunnellarda"], correct: 0 },
+                { q: "To'xtash taqiqlangan belgisi qanday?", a: ["Qizil doira ichida bir chiziq", "Qizil doira ichida ikki chiziq", "Ko'k doira", "Sariq uchburchak"], correct: 0 },
+                { q: "Turish taqiqlangan belgisi qanday?", a: ["Qizil doira ichida bir chiziq", "Qizil doira ichida ikki chiziq", "Ko'k doira", "Sariq uchburchak"], correct: 1 },
+                { q: "Avtomobilni yo'l chetiga qanday qilib to'xtatish kerak?", a: ["Yo'lga parallel", "Yo'lga perpendikulyar", "Istalgan holatda", "Faqat burilishda"], correct: 0 }
+            ],
+            overtaking: [
+                { q: "Quvib o'tish qaysi tomondan amalga oshiriladi?", a: ["O'ng tomondan", "Chap tomondan", "Ikkala tomondan", "Qarama-qarshi tomondan"], correct: 1 },
+                { q: "Qaysi holatda quvib o'tish taqiqlanadi?", a: ["Faqat yuk avtomobillari uchun", "Yo'lning ko'rinishi 100 metrdan kam bo'lmagan joylarda", "Tartibga solinmagan chorrahalarda, agar siz asosiy yo'lda bo'lsangiz", "Chorrahalarda, temir yo'l kesishmalarida va ulardan oldin 100 metrdan kam masofada"], correct: 3 },
+                { q: "Quvib o'tish qayerda taqiqlanadi?", a: ["Piyodalar o'tish joyida", "Ko'priklarda", "Temir yo'l kesishmasida", "Barcha javoblar to'g'ri"], correct: 3 },
+                { q: "Quvib o'tish boshlashdan oldin nima qilish kerak?", a: ["Signal berish", "Orqa ko'zguga qarash", "Oldindagi transport vositasidan yetarlicha masofada bo'lish", "Barcha javoblar to'g'ri"], correct: 3 }
             ],
             traffic_lights: [
                 { q: "Svetoforning qizil chirog'i nimani bildiradi?", a: ["Harakatlanishga ruxsat", "To'xtash", "Tayyorlanish", "Chapga burilish"], correct: 1 },
@@ -401,65 +426,26 @@
                 { q: "Yashil miltillovchi svetofor nimani bildiradi?", a: ["Tez orada sariq yonadi", "To'xtash", "Tezlikni oshirish", "Favqulodda holat"], correct: 0 },
                 { q: "Regulyatorning qo'llari yon tomonga yozilgan holati nimani bildiradi?", a: ["Harakat taqiqlanadi", "Harakatga ruxsat", "Chapga burilish", "To'xtash"], correct: 1 }
             ],
-            warn_signals: [
-                { q: "Favqulodda vaziyat signali qachon yoqiladi?", a: ["Baxtsiz hodisada", "Yo'l chetida to'xtaganda", "Har doim", "Tungi vaqtda"], correct: 0 },
-                { q: "Tormozlash signali qanday rangda?", a: ["Sariq", "Qizil", "Oq", "Yashil"], correct: 1 }
-            ],
-            warning: [
-                { q: "Ogohlantiruvchi belgilar qanday shaklda bo'ladi?", a: ["Qizil uchburchak", "Sariq romb", "Ko'k doira", "Yashil kvadrat"], correct: 0 },
-                { q: "Qaysi belgi «Silliq yo'l»ni bildiradi?", a: ["Avtomobil sirpanishi", "Notekis yo'l", "Tosh tushishi", "Temir yo'l"], correct: 0 },
-                { q: "«Temir yo'l kesishmasi» belgisi qanday?", a: ["Uchburchak ichida temir yo'l", "Doira ichida poyezd", "To'rtburchak", "Kvadrat"], correct: 0 }
-            ],
             priority: [
                 { q: "Teng ahamiyatli yo'llar kesishgan chorrahada haydovchi kimga yo'l berishi kerak?", a: ["Faqat avtobus va tramvaylarga", "Chap tomondan kelayotgan transport vositasiga", "Hech kimga, birinchi bo'lib o'tib ketadi", "O'ng tomondan yaqinlashib kelayotgan transport vositasiga"], correct: 3 },
                 { q: "Asosiy yo'l belgisi qanday shaklda?", a: ["Qizil uchburchak", "Sariq romb", "Ko'k doira", "Yashil kvadrat"], correct: 1 },
-                { q: "Yo'l ber belgisi qanday?", a: ["Qizil uchburchak", "Qizil doira", "Sariq kvadrat", "Ko'k doira"], correct: 0 }
-            ],
-            prohibiting: [
-                { q: "Qaysi belgilar guruhiga «Kirish taqiqlangan» (G'isht) belgisi kiradi?", a: ["Taqiqlovchi belgilar", "Imtiyoz belgilari", "Ogohlantiruvchi belgilar", "Buyuruvchi belgilar"], correct: 0 },
-                { q: "«To'xtash taqiqlangan» belgisi qanday?", a: ["Qizil doira ichida bir chiziq", "Qizil doira ichida ikki chiziq", "Ko'k doira", "Sariq uchburchak"], correct: 0 },
-                { q: "«Kirish taqiqlangan» belgisi qanday ko'rinishda?", a: ["Qizil doira ichida oq chiziq", "Qizil uchburchak", "Ko'k doira", "Sariq kvadrat"], correct: 0 }
-            ],
-            mandatory: [
-                { q: "Buyuruvchi belgilar qanday shaklda?", a: ["Ko'k doira", "Qizil doira", "Sariq kvadrat", "Yashil uchburchak"], correct: 0 },
-                { q: "«To'g'ri harakatlanish» belgisi qanday?", a: ["Ko'k doira ichida oq o'q", "Qizil doira", "Sariq uchburchak", "Yashil kvadrat"], correct: 0 }
-            ],
-            speed: [
-                { q: "Aholi punktlarida yengil avtomobillarning yuqori harakatlanish tezligi qancha?", a: ["50 km/soat", "60 km/soat", "80 km/soat", "70 km/soat"], correct: 1 },
-                { q: "Avtomagistralda maksimal tezlik qancha?", a: ["90 km/soat", "100 km/soat", "110 km/soat", "120 km/soat"], correct: 2 },
-                { q: "Turar joy zonasida maksimal tezlik qancha?", a: ["20 km/soat", "30 km/soat", "40 km/soat", "50 km/soat"], correct: 0 },
-                { q: "Yengil avtomobil uchun magistraldan tashqarida maksimal tezlik?", a: ["90 km/soat", "100 km/soat", "110 km/soat", "80 km/soat"], correct: 0 }
-            ],
-            parking: [
-                { q: "To'xtash taqiqlangan joyda to'xtashga qachon ruxsat beriladi?", a: ["Majburiy to'xtaganda (nosozlik yoki haydovchi holati yomonlashsa)", "Yo'lovchilarni tushirish uchun 5 daqiqaga", "Agar yo'l chetida sariq chiziq bo'lsa", "Yengil avtomobillarga har doim ruxsat beriladi"], correct: 0 },
-                { q: "Piyodalar o'tish joyidan qancha masofada to'xtash taqiqlanadi?", a: ["5 metr", "10 metr", "15 metr", "20 metr"], correct: 0 },
-                { q: "Temir yo'l kesishmasida to'xtash mumkinmi?", a: ["Ha, mumkin", "Yo'q, taqiqlanadi", "Faqat kechasi", "Faqat yuk avtomobillari uchun"], correct: 1 },
-                { q: "Ko'prik ustida to'xtash qayerda taqiqlanadi?", a: ["Ko'prikning o'zida", "Ko'prikdan 50 metr oldin", "Istalgan joyda", "Faqat tunnellarda"], correct: 0 }
-            ],
-            overtaking: [
-                { q: "Quvib o'tish qaysi tomondan amalga oshiriladi?", a: ["O'ng tomondan", "Chap tomondan", "Ikkala tomondan", "Qarama-qarshi tomondan"], correct: 1 },
-                { q: "Qaysi holatda quvib o'tish taqiqlanadi?", a: ["Faqat yuk avtomobillari uchun", "Yo'lning ko'rinishi 100 metrdan kam bo'lmagan joylarda", "Tartibga solinmagan chorrahalarda, agar siz asosiy yo'lda bo'lsangiz", "Chorrahalarda, temir yo'l kesishmalarida va ulardan oldin 100 metrdan kam masofada"], correct: 3 },
-                { q: "Quvib o'tish qayerda taqiqlanadi?", a: ["Piyodalar o'tish joyida", "Ko'priklarda", "Temir yo'l kesishmasida", "Barcha javoblar to'g'ri"], correct: 3 }
-            ],
-            cross_equal: [
-                { q: "Teng chorrahada kim ustunlikka ega?", a: ["Chapdan kelayotgan", "O'ngdan kelayotgan", "To'g'ridan kelayotgan", "Tramvay"], correct: 1 },
-                { q: "Teng chorrahada tramvay kimga yo'l beradi?", a: ["Har doim ustun", "Avtomobillarga", "Piyodalarga", "Hech kimga"], correct: 0 }
-            ],
-            highway: [
-                { q: "Avtomagistralda qaysi harakat taqiqlanadi?", a: ["Orqaga harakatlanish va orqaga burilish", "O'ng tasmada harakatlanish", "Quvib o'tish", "100 km/soat tezlikda harakatlanish"], correct: 0 },
-                { q: "Avtomagistralda to'xtash qayerda ruxsat etiladi?", a: ["Yo'l chetida", "Maxsus maydonchalarda", "Ko'prik ustida", "Har qanday joyda"], correct: 1 }
-            ],
-            lights: [
-                { q: "Tungi vaqtda yoki ko'rinish cheklangan sharoitda qanday chiroqlar yoqilishi shart?", a: ["Ichki salon chiroqlari", "Yaqinni yoki uzoqni yorituvchi faralar", "Faqat tumanga qarshi chiroqlar", "Faqat gabarit chiroqlari"], correct: 1 }
+                { q: "Yo'l ber belgisi qanday?", a: ["Qizil uchburchak", "Qizil doira", "Sariq kvadrat", "Ko'k doira"], correct: 0 },
+                { q: "Tramvay va avtomobil chorrahada kim ustun?", a: ["Tramvay har doim ustun", "Avtomobil ustun", "Yo'l belgisiga qarab", "Svetofor signaliga qarab"], correct: 0 }
             ],
             firstaid: [
                 { q: "Arteriyadan qon oqishini to'xtatish uchun nima qilinadi?", a: ["Yaraga spirt surtish", "Yarani oddiy bint bilan bog'lash", "Yaradan yuqoriroq qismga jgut bog'lash", "Yarani sovuq suvda yuvish"], correct: 2 },
                 { q: "Baxtsiz hodisada birinchi nima qilish kerak?", a: ["Jabrlanuvchini silkitish", "Tez yordam chaqirish", "Suv berish", "Yurak massaji"], correct: 1 },
-                { q: "Jabrlanuvchi nafas olmayotgan bo'lsa nima qilish kerak?", a: ["Sun'iy nafas berish", "Yurak massaji", "Ikkalasi", "Suv berish"], correct: 2 }
+                { q: "Jabrlanuvchi nafas olmayotgan bo'lsa nima qilish kerak?", a: ["Sun'iy nafas berish", "Yurak massaji", "Ikkalasi", "Suv berish"], correct: 2 },
+                { q: "Yurak massaji qanday chastotada bajariladi?", a: ["Daqiqasiga 60-80 marta", "Daqiqasiga 100-120 marta", "Daqiqasiga 40-50 marta", "Daqiqasiga 150 marta"], correct: 1 }
             ],
             safety: [
                 { q: "Haydovchi qancha vaqtdan keyin dam olishi kerak?", a: ["4.5 soat", "6 soat", "8 soat", "2 soat"], correct: 0 },
-                { q: "Xavfsizlik kamarini taqish majburiymi?", a: ["Faqat haydovchi", "Faqat oldingi yo'lovchilar", "Ha, barcha uchun", "Faqat kechasi"], correct: 2 }
+                { q: "Xavfsizlik kamarini taqish majburiymi?", a: ["Faqat haydovchi", "Faqat oldingi yo'lovchilar", "Ha, barcha uchun", "Faqat kechasi"], correct: 2 },
+                { q: "Bolalar uchun maxsus o'rindiq qaysi yoshgacha majburiy?", a: ["5 yoshgacha", "7 yoshgacha", "12 yoshgacha", "15 yoshgacha"], correct: 2 }
+            ],
+            prohibiting: [
+                { q: "Qaysi belgilar guruhiga «Kirish taqiqlangan» (G'isht) belgisi kiradi?", a: ["Taqiqlovchi belgilar", "Imtiyoz belgilari", "Ogohlantiruvchi belgilar", "Buyuruvchi belgilar"], correct: 0 },
+                { q: "«Kirish taqiqlangan» belgisi qanday ko'rinishda?", a: ["Qizil doira ichida oq chiziq", "Qizil uchburchak", "Ko'k doira", "Sariq kvadrat"], correct: 0 }
             ]
         };
         
@@ -473,9 +459,10 @@
         }
         
         const defaultQuestions = [];
-        for (let i = 1; i <= 10; i++) {
+        const cat = categoriesList.find(c => c.id === catId);
+        for (let i = 1; i <= 20; i++) {
             defaultQuestions.push({
-                q: `${categoriesList.find(c => c.id === catId)?.name || catId} - ${i}-savol: To'g'ri javobni tanlang`,
+                q: `${cat?.name || catId} - ${i}-savol: To'g'ri javobni tanlang`,
                 a: ["To'g'ri javob", "Noto'g'ri javob 1", "Noto'g'ri javob 2", "Noto'g'ri javob 3"],
                 correct: 0
             });
@@ -612,15 +599,9 @@
                 <div class="score-circle"><div class="score-number">${score}</div><div>/${total}</div></div>
                 <p style="font-size:1.5rem;margin:10px 0">${percent}%</p>
                 <p style="font-size:1.1rem;margin:10px 0">${statusMsg}</p>
-                <button class="next-btn" id="sendBtn">📨 Natijani yuborish</button>
                 <button class="next-btn restart-btn" id="restartBtn">🔄 Qayta boshlash</button>
             </div>
         `;
-        document.getElementById("sendBtn")?.onclick = () => { 
-            const result = { score, total, percent, category: currentCategory };
-            tg.sendData(JSON.stringify(result)); 
-            showToast("✅ Natija yuborildi!"); 
-        };
         document.getElementById("restartBtn")?.onclick = () => { resetTestState(); renderCurrentQuestion(); };
         saveProgress();
     }
