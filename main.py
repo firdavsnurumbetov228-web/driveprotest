@@ -16,7 +16,7 @@ def get_default_keyboard(user_id: int):
     if lang == "uz":
         kb = ReplyKeyboardMarkup(
             keyboard=[
-                [KeyboardButton(text="📚 Terminlar", web_app=WebAppInfo(url="https://auto-test-911.vercel.app/")),
+                [KeyboardButton(text="📚 Terminlar", web_app=WebAppInfo(url="https://avtotest-911-2npy.vercel.app")),
                  KeyboardButton(text="📝 Bot haqida qisqacha", web_app=WebAppInfo(url="https://avtot-test-malumotlar.vercel.app/"))],
                 [KeyboardButton(text="💳 Aktivatsiya / Подписка"),
                  KeyboardButton(text="🌐 Tilni o‘zgartirish")]
@@ -25,8 +25,8 @@ def get_default_keyboard(user_id: int):
         )
     else:
         kb = ReplyKeyboardMarkup(
-                keyboard=[
-                    [KeyboardButton(text="📚 Термины", web_app=WebAppInfo(url="https://auto-test-911.vercel.app/")),
+            keyboard=[
+                [KeyboardButton(text="📚 Термины", web_app=WebAppInfo(url="https://avtotest-911-2npy.vercel.app")),
                  KeyboardButton(text="📝 коротко о боте", web_app=WebAppInfo(url="https://avtot-test-malumotlar.vercel.app/"))],
                 [KeyboardButton(text="💳 Активация / Подписка"),
                  KeyboardButton(text="🌐 Сменить язык")]
