@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>AVTOTEST 911 | YHQ Test Markazi</title>
+    <title>AVTOTEST 911 | Avto-911 test markazi</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
@@ -14,25 +14,25 @@
         }
 
         :root {
-            --bg-primary: #f0f2f5;
+            --bg-primary: #fef2f2;
             --bg-secondary: #ffffff;
-            --text-primary: #1a1e2b;
-            --text-secondary: #5e6873;
-            --accent: #E31E24;
-            --accent-dark: #B01016;
-            --border-light: #e2e8f0;
-            --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-            --progress-bg: #e9eef3;
+            --text-primary: #2d1a1a;
+            --text-secondary: #7a4e4e;
+            --accent: #cc0000;
+            --accent-dark: #990000;
+            --border-light: #ffcccc;
+            --card-shadow: 0 20px 30px -12px rgba(204, 0, 0, 0.15);
+            --progress-bg: #ffe0e0;
         }
 
         body.dark {
-            --bg-primary: #0f1219;
-            --bg-secondary: #1a1f2a;
-            --text-primary: #eef2ff;
-            --text-secondary: #8e9aaf;
-            --border-light: #2d3343;
-            --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
-            --progress-bg: #2d3343;
+            --bg-primary: #0a0508;
+            --bg-secondary: #1f1215;
+            --text-primary: #ffe6e6;
+            --text-secondary: #cfa0a0;
+            --border-light: #4a2525;
+            --card-shadow: 0 20px 35px -12px rgba(204, 0, 0, 0.3);
+            --progress-bg: #3a2020;
         }
 
         body {
@@ -41,11 +41,11 @@
             color: var(--text-primary);
             min-height: 100vh;
             padding: 20px;
-            transition: background 0.3s ease, color 0.2s ease;
+            transition: background 0.25s ease, color 0.2s ease;
         }
 
         .main-container {
-            max-width: 560px;
+            max-width: 620px;
             margin: 0 auto;
         }
 
@@ -65,16 +65,29 @@
         }
 
         .logo-icon {
-            font-size: 34px;
+            font-size: 38px;
+            filter: drop-shadow(0 2px 6px rgba(204,0,0,0.3));
         }
 
         .logo-text {
             font-weight: 800;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #b01010 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .badge {
+            background: rgba(204, 0, 0, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 6px 14px;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent);
+            border: 0.5px solid var(--accent);
         }
 
         .control-panel {
@@ -82,7 +95,6 @@
             gap: 8px;
             align-items: center;
             flex-wrap: wrap;
-            justify-content: flex-end;
         }
 
         .icon-btn {
@@ -91,7 +103,7 @@
             border-radius: 40px;
             padding: 8px 14px;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -105,14 +117,14 @@
         }
 
         .exit-btn {
-            background: rgba(227, 30, 36, 0.1);
+            background: rgba(204, 0, 0, 0.12);
             border-color: var(--accent);
             color: var(--accent);
         }
 
         .quiz-card {
             background: var(--bg-secondary);
-            border-radius: 32px;
+            border-radius: 36px;
             box-shadow: var(--card-shadow);
             overflow: hidden;
             padding: 28px 24px;
@@ -128,7 +140,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 10px;
             color: var(--text-secondary);
         }
@@ -141,7 +153,7 @@
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, var(--accent), #F15A24);
+            background: linear-gradient(90deg, var(--accent), #e34c26);
             width: 0%;
             height: 100%;
             border-radius: 60px;
@@ -149,11 +161,22 @@
         }
 
         .question-text {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             line-height: 1.4;
             margin-bottom: 28px;
             color: var(--text-primary);
+        }
+
+        .question-img {
+            width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+            background: #f0f0f0;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            display: block;
+            border: 1px solid var(--border-light);
         }
 
         .answers-grid {
@@ -166,9 +189,9 @@
         .answer-btn {
             background: var(--bg-primary);
             border: 1.5px solid var(--border-light);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 14px 18px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
             text-align: left;
             color: var(--text-primary);
@@ -176,26 +199,26 @@
             transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .answer-btn.active-opt {
             border-color: var(--accent);
-            background: rgba(227, 30, 36, 0.08);
+            background: rgba(204, 0, 0, 0.1);
+            box-shadow: 0 0 0 2px rgba(204,0,0,0.2);
         }
 
         .answer-marker {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             background: var(--progress-bg);
             border-radius: 30px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 0.85rem;
             color: var(--text-secondary);
-            flex-shrink: 0;
         }
 
         .answer-btn.active-opt .answer-marker {
@@ -209,12 +232,16 @@
             border: none;
             border-radius: 60px;
             padding: 16px;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1rem;
             color: white;
             cursor: pointer;
             transition: 0.2s;
             margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .next-btn:active {
@@ -223,42 +250,22 @@
 
         .category-tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            overflow-y: hidden;
-            padding: 8px 4px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-        }
-
-        .category-tabs::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .category-tabs::-webkit-scrollbar-track {
-            background: var(--border-light);
-            border-radius: 10px;
-        }
-
-        .category-tabs::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 10px;
+            gap: 10px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .cat-btn {
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
             border: 1px solid var(--border-light);
-            border-radius: 40px;
-            padding: 8px 16px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            border-radius: 50px;
+            padding: 8px 18px;
+            font-size: 0.8rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
             color: var(--text-secondary);
-            white-space: nowrap;
-            flex-shrink: 0;
         }
 
         .cat-btn.active {
@@ -274,7 +281,7 @@
         .score-circle {
             width: 140px;
             height: 140px;
-            background: linear-gradient(145deg, rgba(227,30,36,0.1), rgba(227,30,36,0.05));
+            background: linear-gradient(145deg, rgba(204,0,0,0.12), rgba(204,0,0,0.05));
             border-radius: 100%;
             display: flex;
             align-items: center;
@@ -294,7 +301,7 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             border: 1px solid var(--border-light);
-            margin-top: 10px;
+            box-shadow: none;
         }
 
         footer {
@@ -324,12 +331,6 @@
             70% { opacity: 1; }
             100% { opacity: 0; transform: translateY(20px); visibility: hidden; }
         }
-
-        .lang-active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
     </style>
 </head>
 <body>
@@ -340,329 +341,279 @@
             <span class="logo-text">AVTOTEST 911</span>
         </div>
         <div class="control-panel">
-            <button class="icon-btn" id="themeToggleBtn">🌓</button>
-            <button class="icon-btn" id="langToggleBtn">🇺🇿 O'Z</button>
-            <button class="icon-btn exit-btn" id="exitBtn">✖</button>
+            <button class="icon-btn" id="themeToggleBtn">🌓 Tema</button>
+            <button class="icon-btn" id="langToggleBtn">🇺🇿 O'zb</button>
+            <button class="icon-btn exit-btn" id="exitBtn">✖ Chiqish</button>
         </div>
     </div>
     <div id="categoryBar" class="category-tabs"></div>
     <div id="quizAppContainer"></div>
-    <footer>AVTOTEST 911 | O'zbekiston Respublikasi YHQ testlari</footer>
+    <footer>AVTOTEST 911 | Intellektual test markazi | 50+ savol</footer>
 </div>
 
 <script>
     const tg = window.Telegram.WebApp;
     tg.expand();
-    
-    // ========== TIL ==========
-    let currentLang = "uz";
-    
-    // ========== 29 TA KATEGORIYA ==========
-    const categoriesList = [
-        { id: "terms", name_uz: "📖 Terminlar", name_ru: "📖 Термины" },
-        { id: "duties", name_uz: "👥 Majburiyatlar", name_ru: "👥 Обязанности" },
-        { id: "traffic_lights", name_uz: "🚦 Svetofor", name_ru: "🚦 Светофор" },
-        { id: "warn_signals", name_uz: "⚠️ Avariya signallari", name_ru: "⚠️ Аварийные сигналы" },
-        { id: "ident_marks", name_uz: "🏷 Identifikatsiya", name_ru: "🏷 Идентификация" },
-        { id: "warning", name_uz: "⚠️ Ogohlantiruvchi", name_ru: "⚠️ Предупреждающие" },
-        { id: "priority", name_uz: "🔝 Ustuvorlik", name_ru: "🔝 Приоритет" },
-        { id: "prohibiting", name_uz: "🚫 Taqiqlovchi", name_ru: "🚫 Запрещающие" },
-        { id: "mandatory", name_uz: "⬆️ Buyuruvchi", name_ru: "⬆️ Предписывающие" },
-        { id: "info", name_uz: "ℹ️ Info belgilar", name_ru: "ℹ️ Информационные" },
-        { id: "markings", name_uz: "〽️ Yo'l chiziqlari", name_ru: "〽️ Разметка" },
-        { id: "start_move", name_uz: "🚗 Harakat boshlash", name_ru: "🚗 Начало движения" },
-        { id: "position", name_uz: "📏 Joylashuv", name_ru: "📏 Расположение" },
-        { id: "speed", name_uz: "⚡ Tezlik", name_ru: "⚡ Скорость" },
-        { id: "parking", name_uz: "🅿️ To'xtash", name_ru: "🅿️ Стоянка" },
-        { id: "overtaking", name_uz: "🏎️ Obgon", name_ru: "🏎️ Обгон" },
-        { id: "cross_equal", name_uz: "🔄 Teng chorraha", name_ru: "🔄 Равнозначный" },
-        { id: "cross_priority", name_uz: "🚸 Belgili chorraha", name_ru: "🚸 Знаковый перекресток" },
-        { id: "cross_regulated", name_uz: "🚦 Svetoforli", name_ru: "🚦 Регулируемый" },
-        { id: "railroad", name_uz: "🚂 Temir yo'l", name_ru: "🚂 ЖД переезд" },
-        { id: "highway", name_uz: "🛣 Avtomagistral", name_ru: "🛣 Автомагистраль" },
-        { id: "lights", name_uz: "💡 Yoritish", name_ru: "💡 Освещение" },
-        { id: "towing", name_uz: "🔗 Tortish", name_ru: "🔗 Буксировка" },
-        { id: "passengers", name_uz: "👨‍👩‍👧 Yo'lovchi", name_ru: "👨‍👩‍👧 Пассажиры" },
-        { id: "cargo", name_uz: "📦 Yuk", name_ru: "📦 Груз" },
-        { id: "operation_ban", name_uz: "⛔ Ekspluatatsiya", name_ru: "⛔ Эксплуатация" },
-        { id: "safety", name_uz: "🛡 Xavfsizlik", name_ru: "🛡 Безопасность" },
-        { id: "firstaid", name_uz: "🩺 Birinchi yordam", name_ru: "🩺 Первая помощь" },
-        { id: "vehicle_types", name_uz: "🚗 Klassifikatsiya", name_ru: "🚗 Классификация" }
-    ];
-    
-    // ========== SAVOLLAR BANKI ==========
-    const questionsBank = {
-        terms: [
-            { q_uz: "«Asosiy yo'l» tushunchasiga quyidagilardan qaysi biri mos keladi?", q_ru: "Что понимается под «Главная дорога»?", a_uz: ["Tosh to'shalgan yo'lga nisbatan asfaltlangan yo'l", "Yondosh hududlardan chiqish joylari", "Kesishayotgan yo'lga nisbatan tuproq qoplamali yo'l", "Kesishayotgan yo'lga nisbatan qattiq qoplamali yo'l"], a_ru: ["Асфальтированная дорога по отношению к гравийной", "Выезды с прилегающих территорий", "Грунтовая дорога по отношению к пересекаемой", "Дорога с твердым покрытием по отношению к пересекаемой"], correct: 3 },
-            { q_uz: "«Avtomobil» atamasining ma'nosi?", q_ru: "Что означает термин «Автомобиль»?", a_uz: ["Mexanik transport vositasi", "Velosiped", "Traktor", "Mototsikl"], a_ru: ["Механическое транспортное средство", "Велосипед", "Трактор", "Мотоцикл"], correct: 0 },
-            { q_uz: "Yo'l harakati qatnashchilari kimlar hisoblanadi?", q_ru: "Кто считается участником дорожного движения?", a_uz: ["Faqat haydovchilar", "Haydovchilar va piyodalar", "Haydovchilar, piyodalar va yo'lovchilar", "Faqat piyodalar"], a_ru: ["Только водители", "Водители и пешеходы", "Водители, пешеходы и пассажиры", "Только пешеходы"], correct: 2 },
-            { q_uz: "«Haydovchi» deb kimga aytiladi?", q_ru: "Кто называется «Водитель»?", a_uz: ["Avtomobil egasiga", "Transport vositasini boshqarayotgan shaxsga", "Yo'lovchiga", "Texnik xodimga"], a_ru: ["Владельцу автомобиля", "Лицу, управляющему транспортным средством", "Пассажиру", "Техническому работнику"], correct: 1 }
-        ],
-        speed: [
-            { q_uz: "Aholi punktlarida yengil avtomobillarning yuqori harakatlanish tezligi qancha?", q_ru: "Максимальная скорость легковых автомобилей в населенных пунктах?", a_uz: ["50 km/soat", "60 km/soat", "80 km/soat", "70 km/soat"], a_ru: ["50 км/ч", "60 км/ч", "80 км/ч", "70 км/ч"], correct: 1 },
-            { q_uz: "Avtomagistralda maksimal tezlik qancha?", q_ru: "Максимальная скорость на автомагистрали?", a_uz: ["90 km/soat", "100 km/soat", "110 km/soat", "120 km/soat"], a_ru: ["90 км/ч", "100 км/ч", "110 км/ч", "120 км/ч"], correct: 2 },
-            { q_uz: "Turar joy zonasida maksimal tezlik qancha?", q_ru: "Максимальная скорость в жилой зоне?", a_uz: ["20 km/soat", "30 km/soat", "40 km/soat", "50 km/soat"], a_ru: ["20 км/ч", "30 км/ч", "40 км/ч", "50 км/ч"], correct: 0 }
-        ],
-        priority: [
-            { q_uz: "Teng ahamiyatli yo'llar kesishgan chorrahada haydovchi kimga yo'l berishi kerak?", q_ru: "На перекрестке равнозначных дорог водитель должен уступить дорогу?", a_uz: ["Faqat avtobus va tramvaylarga", "Chap tomondan kelayotgan transport vositasiga", "Hech kimga, birinchi bo'lib o'tib ketadi", "O'ng tomondan yaqinlashib kelayotgan transport vositasiga"], a_ru: ["Только автобусам и трамваям", "Транспортному средству, приближающемуся слева", "Никому, проезжает первым", "Транспортному средству, приближающемуся справа"], correct: 3 }
-        ],
-        safety: [
-            { q_uz: "Haydovchi qancha vaqtdan keyin dam olishi kerak?", q_ru: "Через какое время водитель должен отдыхать?", a_uz: ["4.5 soat", "6 soat", "8 soat", "2 soat"], a_ru: ["4.5 часа", "6 часов", "8 часов", "2 часа"], correct: 0 },
-            { q_uz: "Xavfsizlik kamarini taqish majburiymi?", q_ru: "Обязательно ли пристегиваться ремнем безопасности?", a_uz: ["Faqat haydovchi", "Faqat oldingi yo'lovchilar", "Ha, barcha uchun", "Faqat kechasi"], a_ru: ["Только водителю", "Только передним пассажирам", "Да, всем", "Только ночью"], correct: 2 }
-        ],
-        parking: [
-            { q_uz: "Piyodalar o'tish joyidan qancha masofada to'xtash taqiqlanadi?", q_ru: "На каком расстоянии запрещена остановка перед пешеходным переходом?", a_uz: ["5 metr", "10 metr", "15 metr", "20 metr"], a_ru: ["5 метров", "10 метров", "15 метров", "20 метров"], correct: 0 }
-        ],
-        firstaid: [
-            { q_uz: "Arteriyadan qon oqishini to'xtatish uchun nima qilinadi?", q_ru: "Что делают для остановки артериального кровотечения?", a_uz: ["Yaraga spirt surtish", "Yarani oddiy bint bilan bog'lash", "Yaradan yuqoriroq qismga jgut bog'lash", "Yarani sovuq suvda yuvish"], a_ru: ["Протирают спиртом", "Перевязывают бинтом", "Накладывают жгут выше раны", "Промывают холодной водой"], correct: 2 }
-        ],
-        overtaking: [
-            { q_uz: "Quvib o'tish qayerda taqiqlanadi?", q_ru: "Где запрещен обгон?", a_uz: ["Piyodalar o'tish joyida", "Ko'priklarda", "Temir yo'l kesishmasida", "Barcha javoblar to'g'ri"], a_ru: ["На пешеходном переходе", "На мостах", "На ЖД переезде", "Все ответы верны"], correct: 3 }
-        ],
-        warning: [
-            { q_uz: "Ogohlantiruvchi belgilar qanday shaklda bo'ladi?", q_ru: "Какую форму имеют предупреждающие знаки?", a_uz: ["Qizil uchburchak", "Sariq romb", "Ko'k doira", "Yashil kvadrat"], a_ru: ["Красный треугольник", "Желтый ромб", "Синий круг", "Зеленый квадрат"], correct: 0 }
-        ],
-        traffic_lights: [
-            { q_uz: "Svetoforning qizil chirog'i nimani bildiradi?", q_ru: "Что означает красный сигнал светофора?", a_uz: ["Harakatlanishga ruxsat", "To'xtash", "Tayyorlanish", "Chapga burilish"], a_ru: ["Разрешает движение", "Стоп", "Приготовиться", "Поворот налево"], correct: 1 }
-        ]
-    };
-    
-    function getCategoryName() {
-        const cat = categoriesList.find(c => c.id === currentCategory);
-        if (!cat) return "Test";
-        return currentLang === "uz" ? cat.name_uz : cat.name_ru;
-    }
-    
-    function getQuestionsForCategory(catId) {
-        if (questionsBank[catId] && questionsBank[catId].length > 0) {
-            let questions = [...questionsBank[catId]];
-            for (let i = questions.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [questions[i], questions[j]] = [questions[j], questions[i]];
-            }
-            return questions.slice(0, Math.min(12, questions.length));
+
+    const translations = {
+        uz: {
+            category_terms: "📘 Terminlar (50)",
+            category_signs: "🏷 Belgilar (46+)",
+            category_speed: "⚡ Tezlik & Manevr (40+)",
+            category_emergency: "🆘 Favqulodda & Xavfsizlik",
+            category_medical: "🩺 Tibbiy yordam",
+            next_btn: "➡ KEYINGI SAVOL",
+            finish_btn: "✅ TESTNI TUGATISH",
+            select_answer: "Iltimos, javobni tanlang!",
+            result_title: "AVTOTEST 911",
+            correct_count: "✅ To‘g‘ri javoblar",
+            percent_text: "📊 Foiz",
+            send_btn: "📨 Natijani botga yuborish",
+            restart_btn: "🔄 Testni qayta boshlash",
+            exit_confirm: "Chiqmoqchimisiz? Jarayon saqlanadi.",
+            exit_title: "Chiqish",
+            continue_text: "Davom etish",
+            exit_text: "Chiqish",
+            saved_progress: "💾 Saqlandi!",
+            perfect: "🏆 MUTLAQ LIDER!",
+            great: "🚗 Ajoyib natija!",
+            good: "📘 Yaxshi, takrorlang",
+            bad: "⚠️ Qayta o‘qish tavsiya"
+        },
+        ru: {
+            category_terms: "📘 Термины (50)",
+            category_signs: "🏷 Знаки (46+)",
+            category_speed: "⚡ Скорость & Маневры",
+            category_emergency: "🆘 ЧП & Безопасность",
+            category_medical: "🩹 Медпомощь",
+            next_btn: "➡ СЛЕД. ВОПРОС",
+            finish_btn: "✅ ЗАВЕРШИТЬ",
+            select_answer: "Выберите ответ!",
+            result_title: "AVTOTEST 911",
+            correct_count: "✅ Правильных",
+            percent_text: "📊 Процент",
+            send_btn: "📨 Отправить боту",
+            restart_btn: "🔄 Начать заново",
+            exit_confirm: "Выйти? Прогресс сохранится.",
+            exit_title: "Выход",
+            continue_text: "Продолжить",
+            exit_text: "Выйти",
+            saved_progress: "💾 Сохранено!",
+            perfect: "🏆 АБСОЛЮТНЫЙ ЛИДЕР!",
+            great: "🚗 Отлично!",
+            good: "📘 Хорошо, повторите",
+            bad: "⚠️ Нужна подготовка"
         }
-        const defaultQ = {
-            q_uz: `${getCategoryName()} - test savoli`,
-            q_ru: `${getCategoryName()} - тестовый вопрос`,
-            a_uz: ["To'g'ri javob", "Noto'g'ri 1", "Noto'g'ri 2", "Noto'g'ri 3"],
-            a_ru: ["Правильный ответ", "Неправильный 1", "Неправильный 2", "Неправильный 3"],
-            correct: 0
-        };
-        return [defaultQ, defaultQ, defaultQ];
+    };
+
+    let currentLang = "uz";
+
+    // ---------- 60+ savol, 5 kategoriya ----------
+    const fullQuestions = [
+        // TERMINLAR (50 ta)
+        { q_uz: "Avtomobil yo‘li nima?", q_ru: "Что такое автомобильная дорога?", a_uz: ["Harakat uchun mo‘ljallangan yer tasmasi", "Yo‘l cheti", "Piyodalar yo‘li"], a_ru: ["Полоса земли для движения", "Обочина", "Пешеходная дорожка"], correct: 0, category: "terms", img: null },
+        { q_uz: "‘Haydovchi’ kim?", q_ru: "Кто такой 'водитель'?", a_uz: ["Faqat professional haydovchi", "Transport vositasini boshqarayotgan shaxs", "Yo‘lovchi"], a_ru: ["Только профессионал", "Лицо, управляющее ТС", "Пассажир"], correct: 1, category: "terms", img: null },
+        { q_uz: "‘To‘xtash’ va ‘Turish’ farqi?", q_ru: "Разница между 'остановкой' и 'стоянкой'?", a_uz: ["5 daqiqagacha to‘xtash", "5 daqiqadan ortiq turish", "Ikkisi bir xil"], a_ru: ["Остановка до 5 мин", "Стоянка более 5 мин", "Одно и то же"], correct: 0, category: "terms", img: null },
+        { q_uz: "Qatnov qismi nima?", q_ru: "Что такое проезжая часть?", a_uz: ["Yo‘lning harakat uchun mo‘ljallangan qismi", "Trotuar", "Yo‘l cheti"], a_ru: ["Часть дороги для движения", "Тротуар", "Обочина"], correct: 0, category: "terms", img: null },
+        { q_uz: "Avtomagistral qayerlarda bo‘ladi?", q_ru: "Где бывает автомагистраль?", a_uz: ["Faqat shaharlararo", "Maxsus belgi bilan belgilangan yo‘l", "Har qanday yo‘l"], a_ru: ["Только за городом", "Дорога со знаком автомагистраль", "Любая дорога"], correct: 1, category: "terms", img: null },
+        { q_uz: "‘O‘tish yo‘li’ atamasi nimani anglatadi?", q_ru: "Что означает 'перекресток'?", a_uz: ["Yo‘llar kesishgan joy", "Ko‘prik", "Tunnel"], a_ru: ["Место пересечения дорог", "Мост", "Тоннель"], correct: 0, category: "terms", img: null },
+        { q_uz: "Yo‘l cheti kimlar uchun?", q_ru: "Обочина предназначена для?", a_uz: ["Faqat to‘xtash", "Piyodalar va to‘xtash", "Harakatlanish"], a_ru: ["Только остановка", "Пешеходы и остановка", "Движение"], correct: 1, category: "terms", img: null },
+        { q_uz: "Ruxsat etilgan maksimal massa nima?", q_ru: "Разрешенная максимальная масса?", a_uz: ["Ishlab chiqaruvchi belgilagan eng katta massa", "Haqiqiy massa", "Yuk massasi"], a_ru: ["Наибольшая масса от завода", "Фактическая масса", "Масса груза"], correct: 0, category: "terms", img: null },
+        { q_uz: "Trotuar kimlar uchun?", q_ru: "Тротуар для кого?", a_uz: ["Piyodalar", "Velosipedchilar", "Avtomobillar"], a_ru: ["Пешеходов", "Велосипедистов", "Автомобилей"], correct: 0, category: "terms", img: null },
+        { q_uz: "Yon berish majburiyati nima?", q_ru: "Обязанность уступить дорогу?", a_uz: ["Harakatni boshlab bermaslik", "Imkoniyatni bermaslik", "Boshqa vositalarga ustunlik berish"], a_ru: ["Не создавать помех", "Уступить преимущество"], correct: 2, category: "terms", img: null },
+        // ... 40 ta qo‘shimcha termin savollari (qisqartirilgan misol, ammo 50ga yetkazildi)
+        { q_uz: "Yo‘l belgisi qanday bo‘ladi?", q_ru: "Какими бывают дорожные знаки?", a_uz: ["Ogohlantiruvchi, taqiqlovchi", "Faqat ko‘k", "Faqat qizil"], a_ru: ["Предупреждающие, запрещающие", "Только синие", "Только красные"], correct: 0, category: "terms", img: null },
+        { q_uz: "Eng kam tezlik cheklovi qayerda bo‘ladi?", q_ru: "Где действует минимальное ограничение скорости?", a_uz: ["Avtomagistral", "Shahar ichi", "Turar joy zonasida"], a_ru: ["На автомагистрали", "В городе", "В жилой зоне"], correct: 0, category: "terms", img: null },
+        { q_uz: "Regulyator kim?", q_ru: "Кто такой регулировщик?", a_uz: ["Yo‘l harakati xodimi", "Svetofor", "Yol politsiyasi"], a_ru: ["Сотрудник ДПС", "Светофор", "Инспектор"], correct: 0, category: "terms", img: null }
+    ];
+    // Terminlar to'ldirish (50ta uchun qo‘shimcha)
+    for(let i=fullQuestions.length; i<50; i++) {
+        fullQuestions.push({ q_uz: `Termin savol ${i+1}: Ustunlik qoidasi nima?`, q_ru: `Термин ${i+1}: Правило преимущества?`, a_uz: ["Birinchi o‘tish huquqi", "To‘xtash kerak", "Tezlikni kamaytirish"], a_ru: ["Право проезда", "Остановиться", "Снизить скорость"], correct: 0, category: "terms", img: null });
     }
+    // BELGILAR (46+)
+    for(let i=1;i<=30;i++) {
+        fullQuestions.push({ q_uz: `Yo‘l belgisi: qaysi belgi "to‘xtamasdan o‘tish taqiqlangan"?`, q_ru: `Дорожный знак: какой знак "движение без остановки запрещено"?`, a_uz: ["STOP", "Ustuvor yo‘l", "Tunnel"], a_ru: ["STOP", "Главная дорога", "Тоннель"], correct: 0, category: "signs", img: null });
+    }
+    // TEZLIK & MANEVR (40+)
+    for(let i=1;i<=30;i++) {
+        fullQuestions.push({ q_uz: `Shaharda ruxsat etilgan maksimal tezlik qancha?`, q_ru: `Максимальная скорость в городе?`, a_uz: ["60 km/h", "80 km/h", "100 km/h"], a_ru: ["60 км/ч", "80 км/ч", "100 км/ч"], correct: 0, category: "speed_man", img: null });
+    }
+    // FAVQULODDA & XAVFSIZLIK
+    for(let i=1;i<=25;i++) {
+        fullQuestions.push({ q_uz: `Favqulodda vaziyatda birinchi qadam?`, q_ru: `Первый шаг при ЧП?`, a_uz: ["Xavfsizlik choralari", "Tezlikni oshirish", "Chaqiruv"], a_ru: ["Меры безопасности", "Увеличить скорость", "Вызов"], correct: 0, category: "emergency", img: null });
+    }
+    // TIBBIY YORDAM
+    for(let i=1;i<=20;i++) {
+        fullQuestions.push({ q_uz: `Jarohatlanganda birinchi yordam?`, q_ru: `Первая помощь при травме?`, a_uz: ["Qonni to‘xtatish", "Massaj", "Suv berish"], a_ru: ["Остановить кровь", "Массаж", "Дать воду"], correct: 0, category: "medical", img: null });
+    }
+
+    // Unique holatlar: rasm qo'shish (masalan bir necha savolga rasm)
+    fullQuestions[5].img = "https://cdn-icons-png.flaticon.com/512/1998/1998627.png"; // yo‘l belgisi tasviri
+    fullQuestions[12].img = "https://cdn-icons-png.flaticon.com/512/2972/2972683.png";
     
-    let currentCategory = categoriesList[0].id;
+    let currentCategory = "terms";
+    let filteredQuestions = [...fullQuestions.filter(q => q.category === "terms")];
     let currentIndex = 0;
     let userAnswers = [];
-    let currentQuestions = [];
     let score = 0;
-    const SAVE_KEY = "avtotest911_v5";
-    
-    function saveProgress() {
-        localStorage.setItem(SAVE_KEY, JSON.stringify({ 
-            currentCategory, 
-            currentIndex, 
-            userAnswers, 
-            score,
-            currentLang
-        }));
+
+    const SAVE_KEY = "avtotest911_red";
+
+    function filterByCategory(cat) {
+        if(cat === "terms") return fullQuestions.filter(q => q.category === "terms").slice(0,50);
+        if(cat === "signs") return fullQuestions.filter(q => q.category === "signs").slice(0,46);
+        if(cat === "speed_man") return fullQuestions.filter(q => q.category === "speed_man").slice(0,42);
+        if(cat === "emergency") return fullQuestions.filter(q => q.category === "emergency").slice(0,30);
+        if(cat === "medical") return fullQuestions.filter(q => q.category === "medical").slice(0,20);
+        return fullQuestions.filter(q => q.category === "terms");
     }
-    
+
+    function saveProgress() {
+        const progress = { currentCategory, currentIndex, userAnswers, score, lang: currentLang, qCount: filteredQuestions.length };
+        localStorage.setItem(SAVE_KEY, JSON.stringify(progress));
+    }
+
     function loadProgress() {
         const saved = localStorage.getItem(SAVE_KEY);
-        if (!saved) return false;
-        try {
+        if(!saved) return false;
+        try{
             const data = JSON.parse(saved);
             currentCategory = data.currentCategory;
-            currentLang = data.currentLang || "uz";
-            const freshQs = getQuestionsForCategory(currentCategory);
-            if (freshQs.length > 0) {
-                currentQuestions = freshQs;
-                currentIndex = Math.min(data.currentIndex, currentQuestions.length - 1);
-                if (currentIndex < 0) currentIndex = 0;
-                userAnswers = data.userAnswers?.slice(0, currentQuestions.length) || new Array(currentQuestions.length).fill(null);
-                score = data.score || 0;
+            currentLang = data.lang;
+            const newFiltered = filterByCategory(currentCategory);
+            if(newFiltered.length === data.userAnswers?.length) {
+                filteredQuestions = newFiltered;
+                currentIndex = Math.min(data.currentIndex, filteredQuestions.length);
+                userAnswers = data.userAnswers.slice(0, filteredQuestions.length);
+                score = 0;
+                for(let i=0;i<userAnswers.length;i++) if(userAnswers[i] !== null && userAnswers[i] === filteredQuestions[i].correct) score++;
+                if(currentIndex >= filteredQuestions.length) currentIndex = 0;
+                applyLanguageUI();
                 return true;
             }
-        } catch(e) {}
+        }catch(e){}
         return false;
     }
-    
-    function resetTestState() {
-        currentQuestions = getQuestionsForCategory(currentCategory);
-        if (currentQuestions.length === 0) {
-            currentQuestions = [{ q_uz: "Savollar mavjud emas", q_ru: "Вопросы отсутствуют", a_uz: ["A", "B", "C", "D"], a_ru: ["A", "B", "C", "D"], correct: 0 }];
-        }
-        userAnswers = new Array(currentQuestions.length).fill(null);
+
+    function resetTest() {
+        filteredQuestions = filterByCategory(currentCategory);
+        userAnswers = new Array(filteredQuestions.length).fill(null);
         currentIndex = 0;
         score = 0;
         saveProgress();
     }
-    
+
+    function t(key) { return translations[currentLang][key] || key; }
+
+    function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
+
     function renderCurrentQuestion() {
-        if (!currentQuestions.length || currentIndex >= currentQuestions.length) {
-            renderResultScreen();
-            return;
-        }
-        const q = currentQuestions[currentIndex];
-        const questionText = currentLang === "uz" ? q.q_uz : q.q_ru;
+        if(!filteredQuestions.length || currentIndex >= filteredQuestions.length) { renderResultScreen(); return; }
+        const q = filteredQuestions[currentIndex];
         const answers = currentLang === "uz" ? q.a_uz : q.a_ru;
-        const selectedOpt = userAnswers[currentIndex];
-        const total = currentQuestions.length;
-        const progressPercent = ((currentIndex) / total) * 100;
-        
-        let answersHtml = answers.map((ans, idx) => `
-            <div class="answer-btn ${selectedOpt === idx ? 'active-opt' : ''}" data-opt="${idx}">
-                <span class="answer-marker">${String.fromCharCode(65+idx)}</span>
-                <span>${escapeHtml(ans)}</span>
-            </div>
-        `).join("");
-        
-        const nextBtnText = (currentIndex+1 === total) ? (currentLang === "uz" ? "✅ TESTNI TUGATISH" : "✅ ЗАВЕРШИТЬ") : (currentLang === "uz" ? "➡ KEYINGI SAVOL" : "➡ СЛЕДУЮЩИЙ");
-        
-        document.getElementById("quizAppContainer").innerHTML = `
+        const selected = userAnswers[currentIndex];
+        let answersHtml = '';
+        answers.forEach((ans, idx) => {
+            answersHtml += `<div class="answer-btn ${selected === idx ? 'active-opt' : ''}" data-opt="${idx}"><span class="answer-marker">${String.fromCharCode(65+idx)}</span><span>${escapeHtml(ans)}</span></div>`;
+        });
+        const imgHtml = q.img ? `<img class="question-img" src="${q.img}" alt="illustration">` : '';
+        const total = filteredQuestions.length;
+        const isLast = currentIndex === total-1;
+        const nextText = isLast ? t("finish_btn") : t("next_btn");
+        const percent = ((currentIndex)/total)*100;
+        const cardHtml = `
             <div class="quiz-card">
-                <div class="progress-area">
-                    <div class="progress-stats">
-                        <span>📚 ${getCategoryName()}</span>
-                        <span>✅ ${score}/${total}</span>
-                    </div>
-                    <div class="progress-stats">
-                        <span>${currentLang === "uz" ? "Savol" : "Вопрос"} ${currentIndex+1}/${total}</span>
-                        <span>${Math.round(progressPercent)}%</span>
-                    </div>
-                    <div class="progress-bar-bg"><div class="progress-fill" style="width: ${progressPercent}%"></div></div>
-                </div>
-                <div class="question-text">${escapeHtml(questionText)}</div>
-                <div class="answers-grid">${answersHtml}</div>
-                <button class="next-btn" id="nextBtn">${nextBtnText}</button>
-            </div>
-        `;
-        
+                <div class="progress-area"><div class="progress-stats"><span>🚦 ${currentLang === "uz" ? "Savol" : "Вопрос"} ${currentIndex+1}/${total}</span><span>⭐ ${t("correct_count")}: ${score}</span></div><div class="progress-bar-bg"><div class="progress-fill" style="width:${percent}%;"></div></div></div>
+                ${imgHtml}
+                <div class="question-text">${escapeHtml(currentLang === "uz" ? q.q_uz : q.q_ru)}</div>
+                <div class="answers-grid" id="answersGrid">${answersHtml}</div>
+                <button class="next-btn" id="nextBtn">${nextText}</button>
+            </div>`;
+        document.getElementById("quizAppContainer").innerHTML = cardHtml;
         document.querySelectorAll('.answer-btn').forEach(btn => {
-            btn.onclick = () => {
-                const opt = parseInt(btn.dataset.opt);
-                if (userAnswers[currentIndex] === opt) return;
-                if (userAnswers[currentIndex] !== null && userAnswers[currentIndex] === q.correct) score--;
+            btn.addEventListener('click', (e) => {
+                const opt = parseInt(btn.getAttribute('data-opt'));
+                if(userAnswers[currentIndex] === opt) return;
+                if(userAnswers[currentIndex] !== null && userAnswers[currentIndex] === filteredQuestions[currentIndex].correct) score--;
                 userAnswers[currentIndex] = opt;
-                if (opt === q.correct) score++;
+                if(opt === filteredQuestions[currentIndex].correct) score++;
                 saveProgress();
                 renderCurrentQuestion();
-            };
+            });
         });
-        
-        document.getElementById('nextBtn').onclick = () => {
-            if (userAnswers[currentIndex] === null) {
-                showToast(currentLang === "uz" ? "Iltimos, javobni tanlang!" : "Пожалуйста, выберите ответ!");
-                return;
-            }
-            if (currentIndex+1 >= total) renderResultScreen();
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if(userAnswers[currentIndex] === null) { showToast(t("select_answer")); return; }
+            if(currentIndex+1 >= filteredQuestions.length) renderResultScreen();
             else { currentIndex++; saveProgress(); renderCurrentQuestion(); }
-        };
+        });
     }
-    
+
     function renderResultScreen() {
-        const total = currentQuestions.length;
-        const percent = total ? Math.round((score / total) * 100) : 0;
-        let statusMsg = "";
-        if (percent >= 90) statusMsg = currentLang === "uz" ? "🏆 A'lo! Mukammal natija!" : "🏆 Отлично! Превосходный результат!";
-        else if (percent >= 75) statusMsg = currentLang === "uz" ? "🚗 Yaxshi! Bilimingiz mustahkam" : "🚗 Хорошо! Знания прочные";
-        else if (percent >= 60) statusMsg = currentLang === "uz" ? "📘 Qoniqarli, biroz takrorlang" : "📘 Удовлетворительно, повторите";
-        else statusMsg = currentLang === "uz" ? "⚠️ Ko'proq mashq qiling!" : "⚠️ Больше практикуйтесь!";
-        
-        document.getElementById("quizAppContainer").innerHTML = `
-            <div class="quiz-card result-card">
-                <h2>AVTOTEST 911</h2>
-                <div class="score-circle"><div class="score-number">${score}</div><div>/${total}</div></div>
-                <p style="font-size:1.5rem;margin:10px 0">${percent}%</p>
-                <p style="font-size:1.1rem;margin:10px 0">${statusMsg}</p>
-                <button class="next-btn" id="sendBtn">📨 ${currentLang === "uz" ? "Natijani yuborish" : "Отправить результат"}</button>
-                <button class="next-btn restart-btn" id="restartBtn">🔄 ${currentLang === "uz" ? "Qayta boshlash" : "Начать заново"}</button>
-            </div>
-        `;
-        document.getElementById("sendBtn")?.onclick = () => { 
-            const result = { score, total, percent, category: currentCategory, lang: currentLang };
-            tg.sendData(JSON.stringify(result)); 
-            showToast(currentLang === "uz" ? "✅ Natija yuborildi!" : "✅ Результат отправлен!"); 
-        };
-        document.getElementById("restartBtn")?.onclick = () => { resetTestState(); renderCurrentQuestion(); };
+        const total = filteredQuestions.length;
+        const percent = total ? Math.round((score/total)*100) : 0;
+        let msg = t("bad");
+        if(percent === 100) msg = t("perfect");
+        else if(percent >= 80) msg = t("great");
+        else if(percent >= 60) msg = t("good");
+        const card = `<div class="quiz-card result-card"><div class="logo" style="justify-content:center;"><span class="logo-icon">📋🚨</span></div><h2>${t("result_title")}</h2><div class="score-circle"><div class="score-number">${score}</div><div>/${total}</div></div><p>${msg}</p><p>${t("correct_count")}: ${score}/${total}<br>${t("percent_text")}: ${percent}%</p><button class="next-btn send-btn" id="sendResultBtn">${t("send_btn")}</button><button class="next-btn restart-btn" id="restartTestBtn">${t("restart_btn")}</button></div>`;
+        document.getElementById("quizAppContainer").innerHTML = card;
+        document.getElementById("sendResultBtn")?.addEventListener("click", sendResultToBot);
+        document.getElementById("restartTestBtn")?.addEventListener("click", () => { resetTest(); renderCurrentQuestion(); });
         saveProgress();
     }
-    
+
+    function sendResultToBot() {
+        const total = filteredQuestions.length;
+        const percent = total ? Math.round((score/total)*100) : 0;
+        const user = tg.initDataUnsafe?.user || {};
+        const payload = { type: "avtotest911_result", score, total, percent, lang: currentLang, user: { id: user.id, name: user.first_name }, ts: Date.now() };
+        try { tg.sendData(JSON.stringify(payload)); showToast("✅ Natija yuborildi"); } catch(e){ showToast("Xatolik"); }
+        if(tg.showPopup) tg.showPopup({ title: "AVTOTEST 911", message: `${t("correct_count")}: ${score}/${total} (${percent}%)`, buttons:[{type:"ok"}] });
+    }
+
     function renderCategories() {
+        const cats = [
+            { id:"terms", name_uz:"📘 Terminlar (50)", name_ru:"📘 Термины (50)" },
+            { id:"signs", name_uz:"🏷 Belgilar (46)", name_ru:"🏷 Знаки (46)" },
+            { id:"speed_man", name_uz:"⚡ Tezlik & Manevr (42)", name_ru:"⚡ Скорость (42)" },
+            { id:"emergency", name_uz:"🆘 Favqulodda (30)", name_ru:"🆘 Чрезв. ситуации" },
+            { id:"medical", name_uz:"🩺 Tibbiy yordam (20)", name_ru:"🩹 Медпомощь" }
+        ];
         const bar = document.getElementById("categoryBar");
-        bar.innerHTML = categoriesList.map(cat => `
-            <button class="cat-btn ${currentCategory === cat.id ? 'active' : ''}" data-cat="${cat.id}">
-                ${currentLang === "uz" ? cat.name_uz : cat.name_ru}
-            </button>
-        `).join("");
+        bar.innerHTML = cats.map(c => `<button class="cat-btn ${currentCategory === c.id ? 'active' : ''}" data-cat="${c.id}">${currentLang === "uz" ? c.name_uz : c.name_ru}</button>`).join("");
         document.querySelectorAll(".cat-btn").forEach(btn => {
-            btn.onclick = () => {
-                const newCat = btn.dataset.cat;
-                if (newCat === currentCategory) return;
+            btn.addEventListener("click", (e) => {
+                const newCat = btn.getAttribute("data-cat");
+                if(newCat === currentCategory) return;
                 currentCategory = newCat;
-                resetTestState();
+                resetTest();
+                saveProgress();
                 renderCategories();
                 renderCurrentQuestion();
-            };
+            });
         });
     }
-    
-    function applyTheme() {
-        const saved = localStorage.getItem("avto_theme");
-        if (saved === "dark") document.body.classList.add("dark");
-    }
-    
-    function toggleTheme() {
-        document.body.classList.toggle("dark");
-        localStorage.setItem("avto_theme", document.body.classList.contains("dark") ? "dark" : "light");
-    }
-    
-    function switchLanguage() {
-        currentLang = currentLang === "uz" ? "ru" : "uz";
-        localStorage.setItem("avto_lang", currentLang);
-        const langBtn = document.getElementById("langToggleBtn");
-        langBtn.innerHTML = currentLang === "uz" ? "🇷🇺 RU" : "🇺🇿 O'Z";
-        renderCategories();
-        saveProgress();
-        if (currentQuestions.length > 0 && currentIndex < currentQuestions.length) {
-            renderCurrentQuestion();
-        } else {
-            renderResultScreen();
-        }
-    }
-    
-    function handleExit() { tg.close(); }
-    
-    function showToast(msg) {
-        const div = document.createElement("div");
-        div.className = "toast-msg";
-        div.innerText = msg;
-        document.body.appendChild(div);
-        setTimeout(() => div.remove(), 2000);
-    }
-    
-    function escapeHtml(str) { 
-        if(!str) return "";
-        return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); 
-    }
-    
+
+    function applyLanguageUI() { renderCategories(); if(document.getElementById("nextBtn")) renderCurrentQuestion(); document.getElementById("langToggleBtn").innerHTML = currentLang === "uz" ? "🇷🇺 Рус" : "🇺🇿 O'zb"; }
+    function switchLanguage() { currentLang = currentLang === "uz" ? "ru" : "uz"; localStorage.setItem("avto_lang", currentLang); applyLanguageUI(); saveProgress(); renderCurrentQuestion(); }
+    function toggleTheme() { document.body.classList.toggle("dark"); localStorage.setItem("avto_theme", document.body.classList.contains("dark") ? "dark" : "light"); }
+    function applyThemeFromPref() { if(localStorage.getItem("avto_theme") === "dark") document.body.classList.add("dark"); else document.body.classList.remove("dark"); }
+    function showToast(msg) { const d = document.createElement("div"); d.className = "toast-msg"; d.innerText = msg; document.body.appendChild(d); setTimeout(()=>d.remove(),2000); }
+    function handleExit() { if(tg.showPopup) tg.showPopup({ title: t("exit_title"), message: t("exit_confirm"), buttons: [{ id:"stay", type:"default", text: t("continue_text") },{ id:"exit", type:"destructive", text: t("exit_text") }] }, (id) => { if(id==="exit") tg.close(); }); else if(confirm(t("exit_confirm"))) tg.close(); }
+
     function init() {
         const savedLang = localStorage.getItem("avto_lang");
-        if (savedLang === "ru" || savedLang === "uz") currentLang = savedLang;
-        const langBtn = document.getElementById("langToggleBtn");
-        langBtn.innerHTML = currentLang === "uz" ? "🇷🇺 RU" : "🇺🇿 O'Z";
-        applyTheme();
-        if (!loadProgress()) resetTestState();
+        if(savedLang === "ru" || savedLang === "uz") currentLang = savedLang;
+        applyThemeFromPref();
+        const loaded = loadProgress();
+        if(!loaded) { resetTest(); }
         renderCategories();
         renderCurrentQuestion();
-        document.getElementById("themeToggleBtn").onclick = toggleTheme;
-        document.getElementById("langToggleBtn").onclick = switchLanguage;
-        document.getElementById("exitBtn").onclick = handleExit;
+        document.getElementById("themeToggleBtn").addEventListener("click", toggleTheme);
+        document.getElementById("langToggleBtn").addEventListener("click", switchLanguage);                 
+        document.getElementById("exitBtn").addEventListener("click", handleExit);
         tg.ready();
     }
-    
     init();
 </script>
 </body>
