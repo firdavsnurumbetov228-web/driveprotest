@@ -17,7 +17,7 @@ def get_default_keyboard(user_id: int):
         kb = ReplyKeyboardMarkup(
             keyboard=[
                 [KeyboardButton(text="📚 Terminlar", web_app=WebAppInfo(url="https://avtotest-911-2npy.vercel.app")),
-                 KeyboardButton(text="📝 Bot haqida qisqacha", web_app=WebAppInfo(url="https://avtotest-911-2npy.vercel.app"))],
+                 KeyboardButton(text="📝 Bot haqida qisqacha", web_app=WebAppInfo(url="https://avtot-test-malumotlar.vercel.app/"))],
                 [KeyboardButton(text="💳 Aktivatsiya / Подписка"),
                  KeyboardButton(text="🌐 Tilni o‘zgartirish")]
             ],
@@ -27,7 +27,7 @@ def get_default_keyboard(user_id: int):
         kb = ReplyKeyboardMarkup(
             keyboard=[
                 [KeyboardButton(text="📚 Термины", web_app=WebAppInfo(url="https://avtotest-911-2npy.vercel.app")),
-                 KeyboardButton(text="📝 коротко о боте", web_app=WebAppInfo(url="https://avtotest-911-2npy.vercel.app"))],
+                 KeyboardButton(text="📝 коротко о боте", web_app=WebAppInfo(url="https://avtot-test-malumotlar.vercel.app/"))],
                 [KeyboardButton(text="💳 Активация / Подписка"),
                  KeyboardButton(text="🌐 Сменить язык")]
             ],
@@ -61,7 +61,7 @@ async def handle_message(message: types.Message):
             await message.answer("Язык изменён на узбекский!", reply_markup=get_default_keyboard(user_id))
         elif message.text not in ["📚 Термины", "📝 коротко о боте"]:
             await message.answer("Пожалуйста, используйте кнопки 👆")
-            
+
 @dp.message()
 async def get_webapp_data(message: types.Message):
     if message.web_app_data:
