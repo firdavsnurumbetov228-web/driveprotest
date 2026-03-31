@@ -664,6 +664,27 @@
     }
     
     init();
+    // Toast xabar ko'rsatish
+    function showToast(msg) {
+        const div = document.createElement("div");
+        div.className = "toast-msg";
+        div.innerText = msg;
+        document.body.appendChild(div);
+        setTimeout(() => {
+            div.remove();
+        }, 2000);
+    }
+
+    // Event listeners
+    document.getElementById("themeToggleBtn").onclick = toggleTheme;
+    document.getElementById("langToggleBtn").onclick = switchLanguage;
+    document.getElementById("exitBtn").onclick = handleExit;
+
+    // Ilk yuklash
+    applyTheme();
+    if (!loadProgress()) resetTestState();
+    renderCategories();
+    renderCurrentQuestion();
 </script>
 </body>
 </html>
