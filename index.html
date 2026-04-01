@@ -408,12 +408,11 @@
 
     let currentLang = "uz";
 
-    // ---------- 60+ savol, 5 kategoriya ----------
     const fullQuestions = [
-        // TERMINLAR (50 ta)
-        { q_uz: "Avtomobil yo‘li nima?", q_ru: "Что такое автомобильная дорога?", a_uz: ["Harakat uchun mo‘ljallangan yer tasmasi", "Yo‘l cheti", "Piyodalar yo‘li"], a_ru: ["Полоса земли для движения", "Обочина", "Пешеходная дорожка"], correct: 0, category: "terms", img: null },
-        { q_uz: "‘Haydovchi’ kim?", q_ru: "Кто такой 'водитель'?", a_uz: ["Faqat professional haydovchi", "Transport vositasini boshqarayotgan shaxs", "Yo‘lovchi"], a_ru: ["Только профессионал", "Лицо, управляющее ТС", "Пассажир"], correct: 1, category: "terms", img: null },
-        { q_uz: "‘To‘xtash’ va ‘Turish’ farqi?", q_ru: "Разница между 'остановкой' и 'стоянкой'?", a_uz: ["5 daqiqagacha to‘xtash", "5 daqiqadan ortiq turish", "Ikkisi bir xil"], a_ru: ["Остановка до 5 мин", "Стоянка более 5 мин", "Одно и то же"], correct: 0, category: "terms", img: null },
+        { q_uz: "Peshexodlar otish joyi bu?", q_ru: "Что такое место для пешеходов?", a_uz: ["Yo'lning qatnov qismining peshexodlar kesib o'tish uchun mo'jallangan,5.16.1,5.16.2 yo'l belgilari va 1.14.11.14.3 yo'l chiziqlari bilan belgilangan bo‘lagi", "Yo‘lning qatnov qismiga tutashgan yoki undan maysazor, ariq yoki maxsus to‘siq bilan ajratilgan qismi...", "Yo‘lning peshexodlar harakati uchun mo‘ljallangan, transport vositalari harakati taqiqlangan qismi"], a_ru: ["Пешеходный переход — участок проезжей части, предназначенный для движения пешеходов через дорогу, обозначенный знаками 5.16.1, 5.16.2 и (или) линиями разметки 1.14.1 — 1.14.3.", "Участок дороги, предназначенный для пешеходов, где движение транспортных средств запрещено...", ""], correct: 0, category: "terms", img: null },
+        { q_uz: "Ajratuvchi polosa — bu...", q_ru: "Что такое разделительная полоса?", a_uz: ["Yo‘lning ikki tomoni orasidagi ajratuvchi polosa", "2. Qatnov qismining har qanday bo‘ylama polosasi, yo‘l chiziqlari bilan belgilangan yoki belgilanmagan, avtomobillarning bir qatorda harakatlanishi uchun yetarli kenglikka ega bo‘lgan qismi", "Yo‘lning mo‘ljallangan qismi"], a_ru: ["Разделительная полоса между двумя сторонами дороги", "Любая продольная полоса проезжей части", "Планируемый участок дороги...Рисунок 3: Иллюстрированный вопрос"], correct: 0, category: "terms", img: null },
+        { q_uz: "Qaysi rasmda ajratuvchi polosali yo‘l ko‘rsatilgan?",img:"road1.png", q_ru: "Какие дороги имеют разделительную полосу?", a_uz: ["Rasmda ajratuvchi polosali yo‘l", "Rasmda ajratuvchi polosali yo‘l yo‘q", "Barcha rasmlar"], a_ru: ["На рисунке показана дорога с разделительной полосой", "На рисунке не показана дорога с разделительной полосой", "Все рисунки"], correct: 0, category: "terms", img: null },
+        { q_uz: "Aholi punktlariga tegishli qoidalar talabi qayerdan kuchga kiradi?", q_ru: "Какие требования к правилам в жилых районах?", a_uz: ["Faqat oq fondagi 5.22 aholi punkti nomi yozilgan yo‘l belgisi o‘rnatilgan joydan.", "Faqat qizil fondagi 5.22 aholi punkti nomi yozilgan yo‘l belgisi o‘rnatilgan joydan.", "Faqat yashil fondagi 5.22 aholi punkti nomi yozilgan yo‘l belgisi o‘rnatilgan joydan."], a_ru: ["Только с белым фоном", "", "Одно и то же"], correct: 0, category: "terms", img: null },
         { q_uz: "Qatnov qismi nima?", q_ru: "Что такое проезжая часть?", a_uz: ["Yo‘lning harakat uchun mo‘ljallangan qismi", "Trotuar", "Yo‘l cheti"], a_ru: ["Часть дороги для движения", "Тротуар", "Обочина"], correct: 0, category: "terms", img: null },
         { q_uz: "Avtomagistral qayerlarda bo‘ladi?", q_ru: "Где бывает автомагистраль?", a_uz: ["Faqat shaharlararo", "Maxsus belgi bilan belgilangan yo‘l", "Har qanday yo‘l"], a_ru: ["Только за городом", "Дорога со знаком автомагистраль", "Любая дорога"], correct: 1, category: "terms", img: null },
         { q_uz: "‘O‘tish yo‘li’ atamasi nimani anglatadi?", q_ru: "Что означает 'перекресток'?", a_uz: ["Yo‘llar kesishgan joy", "Ko‘prik", "Tunnel"], a_ru: ["Место пересечения дорог", "Мост", "Тоннель"], correct: 0, category: "terms", img: null },
@@ -421,7 +420,7 @@
         { q_uz: "Ruxsat etilgan maksimal massa nima?", q_ru: "Разрешенная максимальная масса?", a_uz: ["Ishlab chiqaruvchi belgilagan eng katta massa", "Haqiqiy massa", "Yuk massasi"], a_ru: ["Наибольшая масса от завода", "Фактическая масса", "Масса груза"], correct: 0, category: "terms", img: null },
         { q_uz: "Trotuar kimlar uchun?", q_ru: "Тротуар для кого?", a_uz: ["Piyodalar", "Velosipedchilar", "Avtomobillar"], a_ru: ["Пешеходов", "Велосипедистов", "Автомобилей"], correct: 0, category: "terms", img: null },
         { q_uz: "Yon berish majburiyati nima?", q_ru: "Обязанность уступить дорогу?", a_uz: ["Harakatni boshlab bermaslik", "Imkoniyatni bermaslik", "Boshqa vositalarga ustunlik berish"], a_ru: ["Не создавать помех", "Уступить преимущество"], correct: 2, category: "terms", img: null },
-        // ... 40 ta qo‘shimcha termin savollari (qisqartirilgan misol, ammo 50ga yetkazildi)
+        { q_uz: "Yuk tashish uchun ruxsat etilgan maksimal o‘lcham nima?", q_ru: "Разрешенные максимальные габариты для грузов?", a_uz: ["Ishlab chiqaruvchi belgilagan o‘lchamlar", "Haqiqiy o‘lchamlar", "Yuk o‘lchamlari"], a_ru: ["Размеры от завода", "Фактические размеры", "Размеры груза"], correct: 0, category: "terms", img: null },
         { q_uz: "Yo‘l belgisi qanday bo‘ladi?", q_ru: "Какими бывают дорожные знаки?", a_uz: ["Ogohlantiruvchi, taqiqlovchi", "Faqat ko‘k", "Faqat qizil"], a_ru: ["Предупреждающие, запрещающие", "Только синие", "Только красные"], correct: 0, category: "terms", img: null },
         { q_uz: "Eng kam tezlik cheklovi qayerda bo‘ladi?", q_ru: "Где действует минимальное ограничение скорости?", a_uz: ["Avtomagistral", "Shahar ichi", "Turar joy zonasida"], a_ru: ["На автомагистрали", "В городе", "В жилой зоне"], correct: 0, category: "terms", img: null },
         { q_uz: "Regulyator kim?", q_ru: "Кто такой регулировщик?", a_uz: ["Yo‘l harakati xodimi", "Svetofor", "Yol politsiyasi"], a_ru: ["Сотрудник ДПС", "Светофор", "Инспектор"], correct: 0, category: "terms", img: null }
@@ -442,12 +441,10 @@
     for(let i=1;i<=25;i++) {
         fullQuestions.push({ q_uz: `Favqulodda vaziyatda birinchi qadam?`, q_ru: `Первый шаг при ЧП?`, a_uz: ["Xavfsizlik choralari", "Tezlikni oshirish", "Chaqiruv"], a_ru: ["Меры безопасности", "Увеличить скорость", "Вызов"], correct: 0, category: "emergency", img: null });
     }
-    // TIBBIY YORDAM
     for(let i=1;i<=20;i++) {
         fullQuestions.push({ q_uz: `Jarohatlanganda birinchi yordam?`, q_ru: `Первая помощь при травме?`, a_uz: ["Qonni to‘xtatish", "Massaj", "Suv berish"], a_ru: ["Остановить кровь", "Массаж", "Дать воду"], correct: 0, category: "medical", img: null });
     }
 
-    // Unique holatlar: rasm qo'shish (masalan bir necha savolga rasm)
     fullQuestions[5].img = "https://cdn-icons-png.flaticon.com/512/1998/1998627.png"; // yo‘l belgisi tasviri
     fullQuestions[12].img = "https://cdn-icons-png.flaticon.com/512/2972/2972683.png";
     
