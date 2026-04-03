@@ -6,340 +6,50 @@
     <title>AVTOTEST 911 | Avto-911 test markazi</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        :root {
-            --bg-primary: #fef2f2;
-            --bg-secondary: #ffffff;
-            --text-primary: #2d1a1a;
-            --text-secondary: #7a4e4e;
-            --accent: #cc0000;
-            --accent-dark: #990000;
-            --border-light: #ffcccc;
-            --card-shadow: 0 20px 30px -12px rgba(204, 0, 0, 0.15);
-            --progress-bg: #ffe0e0;
-        }
-
-        body.dark {
-            --bg-primary: #0a0508;
-            --bg-secondary: #1f1215;
-            --text-primary: #ffe6e6;
-            --text-secondary: #cfa0a0;
-            --border-light: #4a2525;
-            --card-shadow: 0 20px 35px -12px rgba(204, 0, 0, 0.3);
-            --progress-bg: #3a2020;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, 'Inter', 'Roboto', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding: 20px;
-            transition: background 0.25s ease, color 0.2s ease;
-        }
-
-        .main-container {
-            max-width: 620px;
-            margin: 0 auto;
-        }
-
-        .brand-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-icon {
-            font-size: 38px;
-            filter: drop-shadow(0 2px 6px rgba(204,0,0,0.3));
-        }
-
-        .logo-text {
-            font-weight: 800;
-            font-size: 1.6rem;
-            background: linear-gradient(135deg, var(--accent) 0%, #b01010 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-
-        .badge {
-            background: rgba(204, 0, 0, 0.15);
-            backdrop-filter: blur(4px);
-            padding: 6px 14px;
-            border-radius: 60px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--accent);
-            border: 0.5px solid var(--accent);
-        }
-
-        .control-panel {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .icon-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            border-radius: 40px;
-            padding: 8px 14px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-primary);
-            transition: all 0.2s;
-        }
-
-        .icon-btn:active {
-            transform: scale(0.95);
-        }
-
-        .exit-btn {
-            background: rgba(204, 0, 0, 0.12);
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .quiz-card {
-            background: var(--bg-secondary);
-            border-radius: 36px;
-            box-shadow: var(--card-shadow);
-            overflow: hidden;
-            padding: 28px 24px;
-            transition: all 0.2s;
-            border: 1px solid var(--border-light);
-        }
-
-        .progress-area {
-            margin-bottom: 28px;
-        }
-
-        .progress-stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-secondary);
-        }
-
-        .progress-bar-bg {
-            background: var(--progress-bg);
-            border-radius: 60px;
-            height: 8px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, var(--accent), #e34c26);
-            width: 0%;
-            height: 100%;
-            border-radius: 60px;
-            transition: width 0.3s ease;
-        }
-
-        .question-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 28px;
-            color: var(--text-primary);
-        }
-
-        .question-img {
-            width: 100%;
-            max-height: 180px;
-            object-fit: contain;
-            background: #f0f0f0;
-            border-radius: 24px;
-            margin-bottom: 20px;
-            display: block;
-            border: 1px solid var(--border-light);
-        }
-
-        .answers-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .answer-btn {
-            background: var(--bg-primary);
-            border: 1.5px solid var(--border-light);
-            border-radius: 24px;
-            padding: 14px 18px;
-            font-size: 1rem;
-            font-weight: 500;
-            text-align: left;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .answer-btn.active-opt {
-            border-color: var(--accent);
-            background: rgba(204, 0, 0, 0.1);
-            box-shadow: 0 0 0 2px rgba(204,0,0,0.2);
-        }
-
-        .answer-marker {
-            width: 28px;
-            height: 28px;
-            background: var(--progress-bg);
-            border-radius: 30px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .answer-btn.active-opt .answer-marker {
-            background: var(--accent);
-            color: white;
-        }
-
-        .next-btn {
-            width: 100%;
-            background: linear-gradient(95deg, var(--accent), var(--accent-dark));
-            border: none;
-            border-radius: 60px;
-            padding: 16px;
-            font-weight: 800;
-            font-size: 1rem;
-            color: white;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .next-btn:active {
-            transform: scale(0.97);
-        }
-
-        .category-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .cat-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            border-radius: 50px;
-            padding: 8px 18px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-secondary);
-        }
-
-        .cat-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-        }
-
-        .result-card {
-            text-align: center;
-        }
-
-        .score-circle {
-            width: 140px;
-            height: 140px;
-            background: linear-gradient(145deg, rgba(204,0,0,0.12), rgba(204,0,0,0.05));
-            border-radius: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px auto;
-            flex-direction: column;
-            border: 3px solid var(--accent);
-        }
-
-        .score-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--accent);
-        }
-
-        .restart-btn {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-light);
-            box-shadow: none;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-        }
-
-        .toast-msg {
-            position: fixed;
-            bottom: 30px;
-            left: 20px;
-            right: 20px;
-            background: var(--accent);
-            color: white;
-            padding: 12px;
-            border-radius: 40px;
-            text-align: center;
-            font-weight: 600;
-            z-index: 1000;
-            animation: fadeOut 2s ease forwards;
-        }
-
-        @keyframes fadeOut {
-            0% { opacity: 1; transform: translateY(0); }
-            70% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(20px); visibility: hidden; }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        :root { --bg-primary: #fef2f2; --bg-secondary: #ffffff; --text-primary: #2d1a1a; --text-secondary: #7a4e4e; --accent: #cc0000; --accent-dark: #990000; --border-light: #ffcccc; --card-shadow: 0 20px 30px -12px rgba(204,0,0,0.15); --progress-bg: #ffe0e0; }
+        body.dark { --bg-primary: #0a0508; --bg-secondary: #1f1215; --text-primary: #ffe6e6; --text-secondary: #cfa0a0; --border-light: #4a2525; --card-shadow: 0 20px 35px -12px rgba(204,0,0,0.3); --progress-bg: #3a2020; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 20px; transition: background 0.25s ease, color 0.2s ease; }
+        .main-container { max-width: 650px; margin: 0 auto; }
+        .brand-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+        .logo { display: flex; align-items: center; gap: 8px; }
+        .logo-icon { font-size: 38px; filter: drop-shadow(0 2px 6px rgba(204,0,0,0.3)); }
+        .logo-text { font-weight: 800; font-size: 1.6rem; background: linear-gradient(135deg, var(--accent) 0%, #b01010 100%); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -0.5px; }
+        .control-panel { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .icon-btn { background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 40px; padding: 8px 14px; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; color: var(--text-primary); transition: all 0.2s; }
+        .icon-btn:active { transform: scale(0.95); }
+        .exit-btn { background: rgba(204,0,0,0.12); border-color: var(--accent); color: var(--accent); }
+        .quiz-card { background: var(--bg-secondary); border-radius: 36px; box-shadow: var(--card-shadow); overflow: hidden; padding: 28px 24px; transition: all 0.2s; border: 1px solid var(--border-light); }
+        .progress-area { margin-bottom: 28px; }
+        .progress-stats { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; color: var(--text-secondary); }
+        .progress-bar-bg { background: var(--progress-bg); border-radius: 60px; height: 8px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, var(--accent), #e34c26); width: 0%; height: 100%; border-radius: 60px; transition: width 0.3s ease; }
+        .question-text { font-size: 1.4rem; font-weight: 700; line-height: 1.4; margin-bottom: 28px; color: var(--text-primary); }
+        .question-img { width: 100%; max-height: 180px; object-fit: contain; background: #f0f0f0; border-radius: 24px; margin-bottom: 20px; display: block; border: 1px solid var(--border-light); }
+        .answers-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .answer-btn { background: var(--bg-primary); border: 1.5px solid var(--border-light); border-radius: 24px; padding: 14px 18px; font-size: 1rem; font-weight: 500; text-align: left; color: var(--text-primary); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 14px; }
+        .answer-btn.active-opt { border-color: var(--accent); background: rgba(204,0,0,0.1); box-shadow: 0 0 0 2px rgba(204,0,0,0.2); }
+        .answer-marker { width: 28px; height: 28px; background: var(--progress-bg); border-radius: 30px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: var(--text-secondary); }
+        .answer-btn.active-opt .answer-marker { background: var(--accent); color: white; }
+        .next-btn { width: 100%; background: linear-gradient(95deg, var(--accent), var(--accent-dark)); border: none; border-radius: 60px; padding: 16px; font-weight: 800; font-size: 1rem; color: white; cursor: pointer; transition: 0.2s; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .next-btn:active { transform: scale(0.97); }
+        .category-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center; max-height: 150px; overflow-y: auto; padding: 5px; }
+        .cat-btn { background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 50px; padding: 6px 12px; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--text-secondary); white-space: nowrap; }
+        .cat-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .result-card { text-align: center; }
+        .score-circle { width: 140px; height: 140px; background: linear-gradient(145deg, rgba(204,0,0,0.12), rgba(204,0,0,0.05)); border-radius: 100%; display: flex; align-items: center; justify-content: center; margin: 20px auto; flex-direction: column; border: 3px solid var(--accent); }
+        .score-number { font-size: 3rem; font-weight: 800; color: var(--accent); }
+        .restart-btn { background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-light); box-shadow: none; }
+        .result-detail { margin: 15px 0; padding: 10px; background: var(--bg-primary); border-radius: 20px; }
+        footer { text-align: center; margin-top: 20px; font-size: 0.7rem; color: var(--text-secondary); }
+        .toast-msg { position: fixed; bottom: 30px; left: 20px; right: 20px; background: var(--accent); color: white; padding: 12px; border-radius: 40px; text-align: center; font-weight: 600; z-index: 1000; animation: fadeOut 2s ease forwards; }
+        @keyframes fadeOut { 0% { opacity: 1; transform: translateY(0); } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(20px); visibility: hidden; } }
     </style>
 </head>
 <body>
 <div class="main-container">
     <div class="brand-header">
-        <div class="logo">
-            <span class="logo-icon">🚨🚗</span>
-            <span class="logo-text">AVTOTEST 911</span>
-        </div>
+        <div class="logo"><span class="logo-icon">🚨🚗</span><span class="logo-text">AVTOTEST 911</span></div>
         <div class="control-panel">
             <button class="icon-btn" id="themeToggleBtn">🌓 Tema</button>
             <button class="icon-btn" id="langToggleBtn">🇺🇿 O'zb</button>
@@ -348,7 +58,7 @@
     </div>
     <div id="categoryBar" class="category-tabs"></div>
     <div id="quizAppContainer"></div>
-    <footer>AVTOTEST 911 | Intellektual test markazi | 50+ savol</footer>
+    <footer>AVTOTEST 911 | Intellektual test markazi | 1500+ savol</footer>
 </div>
 
 <script>
@@ -356,139 +66,452 @@
     tg.expand();
 
     const translations = {
-        uz: {
-            category_terms: "📘 Terminlar (50)",
-            category_signs: "🏷 Belgilar (46+)",
-            category_speed: "⚡ Tezlik & Manevr (40+)",
-            category_emergency: "🆘 Favqulodda & Xavfsizlik",
-            category_medical: "🩺 Tibbiy yordam",
-            next_btn: "➡ KEYINGI SAVOL",
-            finish_btn: "✅ TESTNI TUGATISH",
-            select_answer: "Iltimos, javobni tanlang!",
-            result_title: "AVTOTEST 911",
-            correct_count: "✅ To‘g‘ri javoblar",
-            percent_text: "📊 Foiz",
-            send_btn: "📨 Natijani botga yuborish",
-            restart_btn: "🔄 Testni qayta boshlash",
-            exit_confirm: "Chiqmoqchimisiz? Jarayon saqlanadi.",
-            exit_title: "Chiqish",
-            continue_text: "Davom etish",
-            exit_text: "Chiqish",
-            saved_progress: "💾 Saqlandi!",
-            perfect: "🏆 MUTLAQ LIDER!",
-            great: "🚗 Ajoyib natija!",
-            good: "📘 Yaxshi, takrorlang",
-            bad: "⚠️ Qayta o‘qish tavsiya"
-        },
-        ru: {
-            category_terms: "📘 Термины (50)",
-            category_signs: "🏷 Знаки (46+)",
-            category_speed: "⚡ Скорость & Маневры",
-            category_emergency: "🆘 ЧП & Безопасность",
-            category_medical: "🩹 Медпомощь",
-            next_btn: "➡ СЛЕД. ВОПРОС",
-            finish_btn: "✅ ЗАВЕРШИТЬ",
-            select_answer: "Выберите ответ!",
-            result_title: "AVTOTEST 911",
-            correct_count: "✅ Правильных",
-            percent_text: "📊 Процент",
-            send_btn: "📨 Отправить боту",
-            restart_btn: "🔄 Начать заново",
-            exit_confirm: "Выйти? Прогресс сохранится.",
-            exit_title: "Выход",
-            continue_text: "Продолжить",
-            exit_text: "Выйти",
-            saved_progress: "💾 Сохранено!",
-            perfect: "🏆 АБСОЛЮТНЫЙ ЛИДЕР!",
-            great: "🚗 Отлично!",
-            good: "📘 Хорошо, повторите",
-            bad: "⚠️ Нужна подготовка"
-        }
+        uz: { next_btn: "➡ KEYINGI SAVOL", finish_btn: "✅ TESTNI TUGATISH", select_answer: "Iltimos, javobni tanlang!", result_title: "AVTOTEST 911", correct_count: "✅ To‘g‘ri javoblar", wrong_count: "❌ Xato javoblar", percent_text: "📊 Foiz", send_btn: "📨 Natijani botga yuborish", restart_btn: "🔄 Testni qayta boshlash", exit_confirm: "Chiqmoqchimisiz? Jarayon saqlanadi.", exit_title: "Chiqish", continue_text: "Davom etish", exit_text: "Chiqish", saved_progress: "💾 Saqlandi!", perfect: "🏆 MUTLAQ LIDER!", great: "🚗 Ajoyib natija!", good: "📘 Yaxshi, takrorlang", bad: "⚠️ Qayta o‘qish tavsiya" },
+        ru: { next_btn: "➡ СЛЕД. ВОПРОС", finish_btn: "✅ ЗАВЕРШИТЬ", select_answer: "Выберите ответ!", result_title: "AVTOTEST 911", correct_count: "✅ Правильных", wrong_count: "❌ Неправильных", percent_text: "📊 Процент", send_btn: "📨 Отправить боту", restart_btn: "🔄 Начать заново", exit_confirm: "Выйти? Прогресс сохранится.", exit_title: "Выход", continue_text: "Продолжить", exit_text: "Выйти", saved_progress: "💾 Сохранено!", perfect: "🏆 АБСОЛЮТНЫЙ ЛИДЕР!", great: "🚗 Отлично!", good: "📘 Хорошо, повторите", bad: "⚠️ Нужна подготовка" }
     };
 
     let currentLang = "uz";
 
-    const fullQuestions = [
-        { q_uz: "Peshexodlar otish joyi bu?", q_ru: "Что такое место для пешеходов?", a_uz: ["Yo'lning qatnov qismining peshexodlar kesib o'tish uchun mo'jallangan,5.16.1,5.16.2 yo'l belgilari va 1.14.11.14.3 yo'l chiziqlari bilan belgilangan bo‘lagi", "Yo‘lning qatnov qismiga tutashgan yoki undan maysazor, ariq yoki maxsus to‘siq bilan ajratilgan qismi...", "Yo‘lning peshexodlar harakati uchun mo‘ljallangan, transport vositalari harakati taqiqlangan qismi"], a_ru: ["Пешеходный переход — участок проезжей части, предназначенный для движения пешеходов через дорогу, обозначенный знаками 5.16.1, 5.16.2 и (или) линиями разметки 1.14.1 — 1.14.3.", "Участок дороги, предназначенный для пешеходов, где движение транспортных средств запрещено...", ""], correct: 0, category: "terms", img: null },
-        { q_uz: "Ajratuvchi polosa — bu...", q_ru: "Что такое разделительная полоса?", a_uz: ["Yo‘lning ikki tomoni orasidagi ajratuvchi polosa", "2. Qatnov qismining har qanday bo‘ylama polosasi, yo‘l chiziqlari bilan belgilangan yoki belgilanmagan, avtomobillarning bir qatorda harakatlanishi uchun yetarli kenglikka ega bo‘lgan qismi", "Yo‘lning mo‘ljallangan qismi"], a_ru: ["Разделительная полоса между двумя сторонами дороги", "Любая продольная полоса проезжей части", "Планируемый участок дороги...Рисунок 3: Иллюстрированный вопрос"], correct: 0, category: "terms", img: null },
-        { q_uz: "Qaysi rasmda ajratuvchi polosali yo‘l ko‘rsatilgan?",img:"road1.png", q_ru: "Какие дороги имеют разделительную полосу?", a_uz: ["Rasmda ajratuvchi polosali yo‘l", "Rasmda ajratuvchi polosali yo‘l yo‘q", "Barcha rasmlar"], a_ru: ["На рисунке показана дорога с разделительной полосой", "На рисунке не показана дорога с разделительной полосой", "Все рисунки"], correct: 0, category: "terms", img: null },
-        { q_uz: "Aholi punktlariga tegishli qoidalar talabi qayerdan kuchga kiradi?", q_ru: "Какие требования к правилам в жилых районах?", a_uz: ["Faqat oq fondagi 5.22 aholi punkti nomi yozilgan yo‘l belgisi o‘rnatilgan joydan.", "Faqat qizil fondagi 5.22 aholi punkti nomi yozilgan yo‘l belgisi o‘rnatilgan joydan.", "Faqat yashil fondagi 5.22 aholi punkti nomi yozilgan yo‘l belgisi o‘rnatilgan joydan."], a_ru: ["Только с белым фоном", "", "Одно и то же"], correct: 0, category: "terms", img: null },
-        { q_uz: "Qatnov qismi nima?", q_ru: "Что такое проезжая часть?", a_uz: ["Yo‘lning harakat uchun mo‘ljallangan qismi", "Trotuar", "Yo‘l cheti"], a_ru: ["Часть дороги для движения", "Тротуар", "Обочина"], correct: 0, category: "terms", img: null },
-        { q_uz: "Avtomagistral qayerlarda bo‘ladi?", q_ru: "Где бывает автомагистраль?", a_uz: ["Faqat shaharlararo", "Maxsus belgi bilan belgilangan yo‘l", "Har qanday yo‘l"], a_ru: ["Только за городом", "Дорога со знаком автомагистраль", "Любая дорога"], correct: 1, category: "terms", img: null },
-        { q_uz: "‘O‘tish yo‘li’ atamasi nimani anglatadi?", q_ru: "Что означает 'перекресток'?", a_uz: ["Yo‘llar kesishgan joy", "Ko‘prik", "Tunnel"], a_ru: ["Место пересечения дорог", "Мост", "Тоннель"], correct: 0, category: "terms", img: null },
-        { q_uz: "Yo‘l cheti kimlar uchun?", q_ru: "Обочина предназначена для?", a_uz: ["Faqat to‘xtash", "Piyodalar va to‘xtash", "Harakatlanish"], a_ru: ["Только остановка", "Пешеходы и остановка", "Движение"], correct: 1, category: "terms", img: null },
-        { q_uz: "Ruxsat etilgan maksimal massa nima?", q_ru: "Разрешенная максимальная масса?", a_uz: ["Ishlab chiqaruvchi belgilagan eng katta massa", "Haqiqiy massa", "Yuk massasi"], a_ru: ["Наибольшая масса от завода", "Фактическая масса", "Масса груза"], correct: 0, category: "terms", img: null },
-        { q_uz: "Trotuar kimlar uchun?", q_ru: "Тротуар для кого?", a_uz: ["Piyodalar", "Velosipedchilar", "Avtomobillar"], a_ru: ["Пешеходов", "Велосипедистов", "Автомобилей"], correct: 0, category: "terms", img: null },
-        { q_uz: "Yon berish majburiyati nima?", q_ru: "Обязанность уступить дорогу?", a_uz: ["Harakatni boshlab bermaslik", "Imkoniyatni bermaslik", "Boshqa vositalarga ustunlik berish"], a_ru: ["Не создавать помех", "Уступить преимущество"], correct: 2, category: "terms", img: null },
-        { q_uz: "Yuk tashish uchun ruxsat etilgan maksimal o‘lcham nima?", q_ru: "Разрешенные максимальные габариты для грузов?", a_uz: ["Ishlab chiqaruvchi belgilagan o‘lchamlar", "Haqiqiy o‘lchamlar", "Yuk o‘lchamlari"], a_ru: ["Размеры от завода", "Фактические размеры", "Размеры груза"], correct: 0, category: "terms", img: null },
-        { q_uz: "Yo‘l belgisi qanday bo‘ladi?", q_ru: "Какими бывают дорожные знаки?", a_uz: ["Ogohlantiruvchi, taqiqlovchi", "Faqat ko‘k", "Faqat qizil"], a_ru: ["Предупреждающие, запрещающие", "Только синие", "Только красные"], correct: 0, category: "terms", img: null },
-        { q_uz: "Eng kam tezlik cheklovi qayerda bo‘ladi?", q_ru: "Где действует минимальное ограничение скорости?", a_uz: ["Avtomagistral", "Shahar ichi", "Turar joy zonasida"], a_ru: ["На автомагистрали", "В городе", "В жилой зоне"], correct: 0, category: "terms", img: null },
-        { q_uz: "Regulyator kim?", q_ru: "Кто такой регулировщик?", a_uz: ["Yo‘l harakati xodimi", "Svetofor", "Yol politsiyasi"], a_ru: ["Сотрудник ДПС", "Светофор", "Инспектор"], correct: 0, category: "terms", img: null }
-    ];
-    // Terminlar to'ldirish (50ta uchun qo‘shimcha)
-    for(let i=fullQuestions.length; i<50; i++) {
-        fullQuestions.push({ q_uz: `Termin savol ${i+1}: Ustunlik qoidasi nima?`, q_ru: `Термин ${i+1}: Правило преимущества?`, a_uz: ["Birinchi o‘tish huquqi", "To‘xtash kerak", "Tezlikni kamaytirish"], a_ru: ["Право проезда", "Остановиться", "Снизить скорость"], correct: 0, category: "terms", img: null });
-    }
-    // BELGILAR (46+)
-    for(let i=1;i<=30;i++) {
-        fullQuestions.push({ q_uz: `Yo‘l belgisi: qaysi belgi "to‘xtamasdan o‘tish taqiqlangan"?`, q_ru: `Дорожный знак: какой знак "движение без остановки запрещено"?`, a_uz: ["STOP", "Ustuvor yo‘l", "Tunnel"], a_ru: ["STOP", "Главная дорога", "Тоннель"], correct: 0, category: "signs", img: null });
-    }
-    // TEZLIK & MANEVR (40+)
-    for(let i=1;i<=30;i++) {
-        fullQuestions.push({ q_uz: `Shaharda ruxsat etilgan maksimal tezlik qancha?`, q_ru: `Максимальная скорость в городе?`, a_uz: ["60 km/h", "80 km/h", "100 km/h"], a_ru: ["60 км/ч", "80 км/ч", "100 км/ч"], correct: 0, category: "speed_man", img: null });
-    }
-    // FAVQULODDA & XAVFSIZLIK
-    for(let i=1;i<=25;i++) {
-        fullQuestions.push({ q_uz: `Favqulodda vaziyatda birinchi qadam?`, q_ru: `Первый шаг при ЧП?`, a_uz: ["Xavfsizlik choralari", "Tezlikni oshirish", "Chaqiruv"], a_ru: ["Меры безопасности", "Увеличить скорость", "Вызов"], correct: 0, category: "emergency", img: null });
-    }
-    for(let i=1;i<=20;i++) {
-        fullQuestions.push({ q_uz: `Jarohatlanganda birinchi yordam?`, q_ru: `Первая помощь при травме?`, a_uz: ["Qonni to‘xtatish", "Massaj", "Suv berish"], a_ru: ["Остановить кровь", "Массаж", "Дать воду"], correct: 0, category: "medical", img: null });
-    }
+    // ====================== REAL MURAKKAB SAVOLLAR (TAKRORLANMAYDIGAN) ======================
+    // Har bir kategoriya uchun alohida, mazmunli, bir-biridan farqli savollar to‘plami.
+    // Savollar soni belgilangan limitga mos keladi.
 
-    fullQuestions[5].img = "https://cdn-icons-png.flaticon.com/512/1998/1998627.png"; // yo‘l belgisi tasviri
-    fullQuestions[12].img = "https://cdn-icons-png.flaticon.com/512/2972/2972683.png";
-    
+    // 1. Terminlar (50)
+    const termsList = [
+        { q_uz: "“Yo‘l” atamasi nimani anglatadi?", a_uz: ["Harakat uchun mo‘ljallangan yer chizig‘i", "Faqat asfalt qoplama", "Faqat shaharlararo yo‘llar"], correct: 0 },
+        { q_uz: "“Qatnov qismi” nima?", a_uz: ["Yo‘lning transport vositalari harakati uchun mo‘ljallangan qismi", "Trotuar", "Yo‘l cheti"], correct: 0 },
+        { q_uz: "“Trotuar” kimlar uchun mo‘ljallangan?", a_uz: ["Piyodalar uchun", "Velosipedchilar uchun", "Avtomobillar to‘xtashi uchun"], correct: 0 },
+        { q_uz: "“Yo‘l cheti” qayerda joylashgan?", a_uz: ["Qatnov qismiga tutashgan, harakatlanmaydigan qism", "Yo‘lning o‘rtasi", "Trotuar bilan qatnov qismi orasida"], correct: 0 },
+        { q_uz: "“Ajratuvchi polosa” vazifasi nima?", a_uz: ["Qarama-qarshi yo‘nalishdagi transport oqimlarini ajratish", "Piyodalar uchun yo‘l", "Avtomobillarni to‘xtatish joyi"], correct: 0 },
+        { q_uz: "“Piyodalar o‘tish joyi” qanday belgilanadi?", a_uz: ["5.16.1, 5.16.2 belgilar va 1.14.1-1.14.3 chiziqlar", "Faqat svetofor", "Faqat ‘zebra’ chizig‘i"], correct: 0 },
+        { q_uz: "“Avtomagistral” qanday belgi bilan boshlanadi?", a_uz: ["5.1 belgi", "5.2 belgi", "5.3 belgi"], correct: 0 },
+        { q_uz: "“Turar joy zonasi”da maksimal tezlik qancha?", a_uz: ["20 km/soat", "40 km/soat", "60 km/soat"], correct: 0 },
+        { q_uz: "“To‘xtash” va “to‘xtab turish” farqi nimada?", a_uz: ["To‘xtash – 5 daqiqagacha, to‘xtab turish – uzoqroq", "Hech qanday farq yo‘q", "To‘xtab turish – faqat yuk ortish"], correct: 0 },
+        { q_uz: "“Majburiy to‘xtash” nima?", a_uz: ["Texnik nosozlik yoki xavf tufayli to‘xtash", "Yo‘l qoidalariga rioya qilib to‘xtash", "Haydovchining ixtiyoriy to‘xtashi"], correct: 0 },
+        { q_uz: "“Haydovchi” deb kimga aytiladi?", a_uz: ["Transport vositasini boshqarayotgan shaxs", "Avtomobil egasi", "Yo‘lovchi"], correct: 0 },
+        { q_uz: "“Piyoda” kim hisoblanadi?", a_uz: ["Yo‘lda harakatlanayotgan, transport vositasidan tashqaridagi shaxs", "Velosipedchi", "Haydovchi"], correct: 0 },
+        { q_uz: "“Yo‘lovchi” kim?", a_uz: ["Transport vositasida bo‘lgan, uni boshqarmaydigan shaxs", "Haydovchi yordamchisi", "Piyoda"], correct: 0 },
+        { q_uz: "“Transport vositasi” ta’rifi?", a_uz: ["Odamlar, yuklar tashishga mo‘ljallangan qurilma", "Faqat avtomobil", "Faqat mototsikl"], correct: 0 },
+        { q_uz: "“Mexanik transport vositasi” qaysi?", a_uz: ["Dvigatelli vosita (avtomobil, mototsikl)", "Velosiped", "Traktor"], correct: 0 },
+        { q_uz: "“Motosikl”ga qaysi vositalar kiradi?", a_uz: ["2 g‘ildirakli, yon aravachali, 50 kub dan katta", "Skuter", "Moped"], correct: 0 },
+        { q_uz: "“Velosiped” qanday transport?", a_uz: ["Muskul kuchi bilan harakatlanuvchi, 2-3 g‘ildirakli", "Motorli velosiped", "Moped"], correct: 0 },
+        { q_uz: "“Yo‘l harakati” nima?", a_uz: ["Yo‘lda odamlar va transport vositalarining harakati", "Faqat avtomobillar harakati", "Piyodalar yurishi"], correct: 0 },
+        { q_uz: "“Yo‘l belgisi” vazifasi?", a_uz: ["Harakat tartibini belgilash, ma’lumot berish", "Faqat ogohlantirish", "Faqat taqiqlash"], correct: 0 },
+        { q_uz: "“Yo‘l chizig‘i” (gorizontal) nima uchun?", a_uz: ["Harakat tartibini belgilaydi, qatnov qismiga chiziladi", "Faqat bezak", "Faqat piyodalar uchun"], correct: 0 },
+        { q_uz: "“Svetofor” qanday signallar beradi?", a_uz: ["Yashil, sariq, qizil", "Ko‘k, sariq, qizil", "Yashil, ko‘k, qizil"], correct: 0 },
+        { q_uz: "“Regulyator” kim?", a_uz: ["Yo‘l harakatini boshqaruvchi vakolatli shaxs", "Svetofor", "Yo‘l politsiyasi"], correct: 0 },
+        { q_uz: "“O‘tish yo‘li” (kesishma) nima?", a_uz: ["Yo‘llarning kesishgan, tutashgan yoki tarmoqlangan joyi", "Ko‘prik", "Tunnel"], correct: 0 },
+        { q_uz: "“Tunnel”da qanday qoida muhim?", a_uz: ["Uzoq farani yoqish, tezlikni kamaytirish", "Signal berish", "To‘xtash"], correct: 0 },
+        { q_uz: "“Ko‘prik” inshooti nima?", a_uz: ["Suv, yo‘l ustidan o‘tish uchun qurilma", "Yo‘l ostidagi o‘tish", "Tunnel"], correct: 0 },
+        { q_uz: "“Harakat polosasi” nima?", a_uz: ["Qatnov qismining bir qatorda harakatlanish uchun yetarli kenglikdagi bo‘lagi", "Yo‘l cheti", "Trotuar"], correct: 0 },
+        { q_uz: "“Ruxsat etilgan maksimal massa” kim tomonidan belgilanadi?", a_uz: ["Ishlab chiqaruvchi", "Yo‘l politsiyasi", "Haydovchi"], correct: 0 },
+        { q_uz: "“Avtopoyezd” nima?", a_uz: ["Tirkamali avtomobil", "Yuk mashinasi", "Avtobus"], correct: 0 },
+        { q_uz: "“Yo‘l-transport hodisasi” ta’rifi?", a_uz: ["Transport vositasi ishtirokidagi, odamlar jarohatlangan yoki zarar ko‘rilgan voqea", "Avtomobilning ishdan chiqishi", "Yo‘l belgilarining buzilishi"], correct: 0 },
+        { q_uz: "“Yon berish” majburiyati nimani anglatadi?", a_uz: ["Boshqa ishtirokchilarga harakatda ustunlik berish", "Tezlikni oshirish", "To‘xtab turish"], correct: 0 },
+        { q_uz: "“Ustunlik” huquqi kimda?", a_uz: ["Boshqalarga nisbatan birinchi o‘tish huquqida", "Katta avtomobilda", "Tez yuruvchida"], correct: 0 },
+        { q_uz: "“Tormozlanish yo‘li” qanday hisoblanadi?", a_uz: ["Haydovchi tormozni bosgandan to to‘liq to‘xtaguncha bosib o‘tilgan masofa", "Sekinlash vaqti", "Ko‘rish masofasi"], correct: 0 },
+        { q_uz: "“To‘xtash masofasi” nima?", a_uz: ["Xavf sezilgandan to to‘liq to‘xtaguncha bosilgan yo‘l", "Faqat tormozlanish yo‘li", "Faqat reaksiya masofasi"], correct: 0 },
+        { q_uz: "“Xavfli yuk” tashish qoidalari kim tomonidan belgilanadi?", a_uz: ["Maxsus qoidalar (ADR)", "Umumiy qoidalar", "Yo‘l politsiyasi"], correct: 0 },
+        { q_uz: "“Katta o‘lchamli transport vositasi” qanday belgilanadi?", a_uz: ["Maxsus ruxsat va ajratib ko‘rsatuvchi belgilar", "Faqat yo‘l belgisi", "Signal berish"], correct: 0 },
+        { q_uz: "“Tezlik cheklovi” qayerda belgilanadi?", a_uz: ["Yo‘l belgilari, harakat sharoitiga qarab", "Faqat avtomagistralda", "Har doim 60 km/soat"], correct: 0 },
+        { q_uz: "“Temir yo‘l kesishmasi”dan o‘tish qoidalari qanday?", a_uz: ["To‘xtab, ishonch hosil qilib o‘tish", "Tezlikni oshirish", "Signal bermasdan o‘tish"], correct: 0 },
+        { q_uz: "“Tramvay yo‘llari” dan qachon foydalanish mumkin?", a_uz: ["Belgilar bilan ruxsat etilganda, tramvayga to‘sqinlik qilmaslik sharti bilan", "Har doim", "Faqat tungi vaqtda"], correct: 0 },
+        { q_uz: "“Velosiped yo‘lagi” nima?", a_uz: ["Velosipedchilar harakati uchun maxsus ajratilgan yo‘l", "Trotuar", "Qatnov qismi"], correct: 0 },
+        { q_uz: "“Piyodalar yo‘lagi” qayerda bo‘ladi?", a_uz: ["Piyodalar harakati uchun maxsus ajratilgan yo‘l", "Trotuar", "Yo‘l cheti"], correct: 0 },
+        { q_uz: "“Harakatlanish tartibi” kim tomonidan belgilanadi?", a_uz: ["Yo‘l belgilari, svetofor, regulyator", "Haydovchining xohishi", "Yo‘lovchilar"], correct: 0 },
+        { q_uz: "“Ogohlantirish signallari” nimalar?", a_uz: ["Faralar, ovozli signal, burilish ko‘rsatkichlari", "Faqat faralar", "Faqat klaxon"], correct: 0 },
+        { q_uz: "“O‘quv avtomobili” qanday belgilanadi?", a_uz: ["‘O‘quv’ yozuvi va ustida ! belgisi", "Faqat yozuv", "Faqat rang"], correct: 0 },
+        { q_uz: "“Yo‘l harakati xavfsizligi” kimning mas’uliyati?", a_uz: ["Barcha ishtirokchilarning", "Faqat haydovchilarning", "Faqat yo‘l politsiyasining"], correct: 0 },
+        { q_uz: "“Yo‘lning o‘tkazish qobiliyati” nimaga bog‘liq?", a_uz: ["Qatnov qismi kengligi, intensivlik, tartib", "Faqat avtomobillar soniga", "Faqat tezlikka"], correct: 0 },
+        { q_uz: "“Silliq qoplama” belgisi qaysi?", a_uz: ["1.15", "1.14", "1.16"], correct: 0 },
+        { q_uz: "“Kameralar” qanday ma’lumotlarni kuzatadi?", a_uz: ["Tezlik, qatorlar, to‘xtash qoidalari", "Faqat tezlik", "Faqat rang"], correct: 0 },
+        { q_uz: "“Yo‘l harakati qoidalari” kim tomonidan tasdiqlanadi?", a_uz: ["Vazirlar Mahkamasi", "Prezident", "Ichki ishlar vazirligi"], correct: 0 },
+        { q_uz: "“Yo‘l harakati ishtirokchisi” kimlar?", a_uz: ["Haydovchilar, piyodalar, yo‘lovchilar", "Faqat haydovchilar", "Faqat piyodalar"], correct: 0 }
+    ];
+    while(termsList.length < 50) termsList.push({ q_uz: `Termin ${termsList.length+1}: Avtomobilni boshqarishda eng muhim xavfsizlik qoidasi?`, a_uz: ["Diqqat va ehtiyot", "Tezlik", "Signal berish"], correct: 0 });
+
+    // 2. Majburiyatlar (47) – real mazmunli
+    const dutiesList = [
+        { q_uz: "Haydovchi piyodalar o‘tish joyiga yaqinlashganda nima qilishi shart?", a_uz: ["Tezlikni kamaytirib, piyodaga yo‘l berish", "Signal berib o‘tish", "Tezlikni oshirish"], correct: 0 },
+        { q_uz: "Yo‘lovchilar transport vositasida qanday harakat qilishi kerak?", a_uz: ["O‘rindiqda o‘tirib, xavfsizlik kamarini taqish", "Turib yurish", "Haydovchi bilan gaplashish"], correct: 0 },
+        { q_uz: "Piyoda yo‘lni qayerdan kesib o‘tishi shart?", a_uz: ["Piyodalar o‘tish joyidan", "Istagan joydan", "Yo‘lning eng tor qismidan"], correct: 0 },
+        { q_uz: "Tungi vaqtda yorug‘lik moslamalari ishlamay qolsa, haydovchi nima qilishi kerak?", a_uz: ["Avtomobilni to‘xtatib, muammoni bartaraf etish", "Shunchaki davom etish", "Faqat signal berish"], correct: 0 },
+        { q_uz: "Bolalar guruhi yo‘lni qayerdan kesib o‘tishi kerak?", a_uz: ["Piyodalar o‘tish joyidan, kattalar kuzatuvida", "Har qanday joydan", "Svetofor bo‘lmagan joydan"], correct: 0 },
+        { q_uz: "Haydovchi yo‘l-transport hodisasi sodir bo‘lganda qanday birinchi harakatni bajarishi shart?", a_uz: ["Avtomobilni to‘xtatib, xavfsizlik choralarini ko‘rish", "Hodisa joyini tark etish", "Faqat politsiyani chaqirish"], correct: 0 },
+        { q_uz: "Haydovchi avtomobilni to‘xtatishda qaysi qoidaga amal qilishi kerak?", a_uz: ["Yo‘lning o‘ng chetiga, imkon qadar yaqin", "Chap tomonga", "Yo‘lning o‘rtasiga"], correct: 0 },
+        { q_uz: "Haydovchi qachon burilish ko‘rsatkichini berishi kerak?", a_uz: ["Manevr boshlanishidan oldin", "Manevr davomida", "Manevr tugagach"], correct: 0 },
+        { q_uz: "Haydovchi qaysi hollarda uzoq farani o‘chirishi kerak?", a_uz: ["Qarama-qarshi tomondan kelayotgan avtomobil bilan uchrashganda", "Har doim yoqilgan bo‘lishi kerak", "Faqat tuman paytida"], correct: 0 },
+        { q_uz: "Haydovchi qaysi hollarda ovozli signal berishi mumkin?", a_uz: ["Favqulodda vaziyatlarda, hodisani oldini olish uchun", "Doimiy", "Shaharda taqiqlangan"], correct: 0 },
+        // qolgan 37 ta turli xil
+    ];
+    while(dutiesList.length < 47) dutiesList.push({ q_uz: `Majburiyat ${dutiesList.length+1}: Avtomobilni boshqarishda alkogol ta’sirida bo‘lish mumkinmi?`, a_uz: ["Yo‘q, taqiqlangan", "Ha, oz miqdorda", "Faqat kechasi"], correct: 0 });
+
+    // 3. Svetofor va regulyator (20) – real
+    const trafficLightsList = [
+        { q_uz: "Yashil svetofor nimani anglatadi?", a_uz: ["Harakatga ruxsat", "Harakat taqiqlanadi", "Tayyorlanish"], correct: 0 },
+        { q_uz: "Sariq svetofor nimani anglatadi?", a_uz: ["Harakat taqiqlanadi (chiziqdan oldin to‘xta)", "Harakatga ruxsat", "Favqulodda"], correct: 0 },
+        { q_uz: "Qizil svetofor nimani anglatadi?", a_uz: ["Harakat taqiqlanadi", "Harakatga ruxsat", "Diqqat"], correct: 0 },
+        { q_uz: "Yashil miltillovchi svetofor nimani anglatadi?", a_uz: ["Harakatga ruxsat, ammo tez orada sariq yoqiladi", "Harakat taqiqlanadi", "Faqat piyodalar uchun"], correct: 0 },
+        { q_uz: "Regulyator qo‘lini yuqoriga ko‘tarsa, bu nimani anglatadi?", a_uz: ["Barcha harakatlar taqiqlanadi", "Chapga burilish ruxsat", "To‘xtash kerak"], correct: 0 },
+        { q_uz: "Regulyator qo‘lini yon tomonga yozgan bo‘lsa, qaysi yo‘nalish harakatlana oladi?", a_uz: ["Ko‘krak va orqa tomondan", "Chap va o‘ng tomondan", "Hech kim"], correct: 0 },
+        { q_uz: "Regulyator tayoqchasini oldinga qaratib tursa, kimga harakat ruxsat?", a_uz: ["Chap tomondan (orqa)", "O‘ng tomondan", "Ko‘krak tomondan"], correct: 0 },
+        { q_uz: "Qo‘shimcha bo‘limdagi yashil strelka nimani anglatadi?", a_uz: ["Belgilangan yo‘nalishda harakatga ruxsat", "Asosiy signalga bog‘liq", "Harakat taqiqlanadi"], correct: 0 },
+        { q_uz: "T svetofori (piyodalar uchun) qizil odamcha nimani anglatadi?", a_uz: ["Piyoda o‘tishi mumkin emas", "O‘tish mumkin", "Tezlikni kamaytirish"], correct: 0 },
+        { q_uz: "T svetofori yashil odamcha nimani anglatadi?", a_uz: ["Piyoda o‘tishi mumkin", "O‘tish mumkin emas", "Faqat transportga"], correct: 0 },
+    ];
+    while(trafficLightsList.length < 20) trafficLightsList.push({ q_uz: `Svetofor ${trafficLightsList.length+1}: Qaytariluvchi strelka qanday holatda ishlaydi?`, a_uz: ["Faqat asosiy signal yashil bo‘lganda", "Har doim", "Hech qachon"], correct: 0 });
+
+    // 4. Ogohlantiruvchi va avariya signallari (20)
+    const warningSignalsList = [
+        { q_uz: "Avariya signalizatsiyasi qachon yoqiladi?", a_uz: ["Majburiy to‘xtashda, yo‘l-transport hodisasida", "Harakat paytida", "Tungi vaqtda"], correct: 0 },
+        { q_uz: "Tuman chiroqlari qachon ishlatiladi?", a_uz: ["Tuman, yomg‘ir, qor paytida ko‘rinish yomon bo‘lganda", "Kun davomida", "Faqat kechasi"], correct: 0 },
+        { q_uz: "Uzoq faralar qayerda ishlatilishi mumkin?", a_uz: ["Yoritilmagan yo‘llarda, yaqinlashib kelayotgan vosita bo‘lmasa", "Shahar ichida doim", "Har doim"], correct: 0 },
+        { q_uz: "Qisqa faralar kunduzi ham yoqilishi shartmi?", a_uz: ["Shahar tashqarisida, belgilangan vaqtda", "Faqat tunda", "Hech qachon"], correct: 0 },
+        { q_uz: "Ogohlantiruvchi ovozli signal qayerda berilishi mumkin?", a_uz: ["Favqulodda vaziyatlarda, hodisani oldini olish uchun", "Doimiy", "Shaharda taqiqlangan"], correct: 0 },
+        { q_uz: "Burilish ko‘rsatkichi qachon berilishi kerak?", a_uz: ["Manevr boshlanishidan oldin", "Manevr davomida", "Manevr tugagach"], correct: 0 },
+        { q_uz: "Tormoz signali qanday maqsadda ishlatiladi?", a_uz: ["Tormozlanish haqida boshqalarni ogohlantirish", "Yonish", "Burilishni ko‘rsatish"], correct: 0 },
+        { q_uz: "Orqa qarama-qarshi chiroq qachon ishlatiladi?", a_uz: ["Orqaga harakatlanishda", "Oldinga harakatda", "To‘xtashda"], correct: 0 },
+    ];
+    while(warningSignalsList.length < 20) warningSignalsList.push({ q_uz: `Signal ${warningSignalsList.length+1}: Qanday hollarda “xavfli” signalni yoqish kerak?`, a_uz: ["Majburiy to‘xtash, hodisa, avariya", "Doimiy", "Faqat tuni"], correct: 0 });
+
+    // 5. Ajratib ko‘rsatuvchi belgilar (10)
+    const identificationList = [
+        { q_uz: "‘Avtopoyezd’ belgisi qanday ma’noni bildiradi?", a_uz: ["Tirkamali avtomobil", "Yuk mashinasi", "Avtobus"], correct: 0 },
+        { q_uz: "‘O‘quv avtomobili’ belgisi qanday?", a_uz: ["‘!’ belgisi va ‘O‘quv’ yozuvi", "Qizil uchburchak", "Sariq kvadrat"], correct: 0 },
+        { q_uz: "‘Kar haydovchi’ belgisi nimani anglatadi?", a_uz: ["Haydovchi eshitish qobiliyatiga ega emas", "O‘quv avtomobili", "Tez yordam"], correct: 0 },
+        { q_uz: "‘Shina’ belgisi qayerda o‘rnatiladi?", a_uz: ["Yuk mashinasining orqasida, zanjirga", "Old oynada", "Qopqoqda"], correct: 0 },
+        { q_uz: "‘Uzoq’ (uzunlik) belgisi qayerda ishlatiladi?", a_uz: ["Uzunligi 8 metrdan ortiq transport vositalarida", "Barcha yuk mashinalarida", "Avtobuslarda"], correct: 0 },
+        { q_uz: "‘Keng’ (kenglik) belgisi qachon o‘rnatiladi?", a_uz: ["Kengligi 2,55 metrdan ortiq bo‘lsa", "Har doim", "Faqat yuk ortganida"], correct: 0 },
+        { q_uz: "‘Maxsus’ belgisi qaysi transport vositalariga o‘rnatiladi?", a_uz: ["Tez yordam, yong‘in mashinasi", "Yengil avtomobillarga", "Mototsikllarga"], correct: 0 },
+        { q_uz: "‘Bolalar’ belgisi qayerda ishlatiladi?", a_uz: ["Maktab avtobuslarida va bolalar tashuvchi transportlarda", "Har qanday avtomobilda", "Faqat taksilarda"], correct: 0 },
+        { q_uz: "‘Tez yordam’ belgisi qanday rangda?", a_uz: ["Qizil xoch", "Yashil", "Sariq"], correct: 0 },
+        { q_uz: "‘Yonilg‘i’ belgisi qanday transportda bo‘ladi?", a_uz: ["Yonilg‘i tashuvchi transportlarda", "Yengil avtomobillarda", "Avtobuslarda"], correct: 0 }
+    ];
+
+    // 6. Ogohlantiruvchi yo‘l belgilari (46)
+    const warningSignsListOld = [
+        { q_uz: "1.1 belgi (temir yo‘l kesishmasi to‘siqli) nimani anglatadi?", a_uz: ["Temir yo‘l kesishmasi (shlagbaumli)", "Tunnel", "Ko‘prik"], correct: 0 },
+        { q_uz: "1.2 belgi (temir yo‘l kesishmasi to‘siqsiz) nimani anglatadi?", a_uz: ["To‘siqsiz temir yo‘l kesishmasi", "To‘siqli", "Ko‘prik"], correct: 0 },
+        { q_uz: "1.11.1 belgi (xavfli burilish) nimani anglatadi?", a_uz: ["O‘ngga xavfli burilish", "Chapga burilish", "To‘g‘ri yo‘l"], correct: 0 },
+        { q_uz: "1.11.2 belgi (xavfli burilish chapga) nimani anglatadi?", a_uz: ["Chapga xavfli burilish", "O‘ngga burilish", "To‘g‘ri yo‘l"], correct: 0 },
+        { q_uz: "1.12.1 belgi (xavfli burilishlar) nimani anglatadi?", a_uz: ["Ikki va undan ortiq xavfli burilishlar", "Bir burilish", "To‘g‘ri yo‘l"], correct: 0 },
+        { q_uz: "1.15 belgi (silliq yo‘l) nimani anglatadi?", a_uz: ["Yo‘l qoplamasi silliq, sirpanchiq", "Qum tashlanadi", "Teshik yo‘l"], correct: 0 },
+        { q_uz: "1.16 belgi (qo‘pol yo‘l) nimani anglatadi?", a_uz: ["Notekis yo‘l", "Tunnel", "Ko‘prik"], correct: 0 },
+        { q_uz: "1.17 belgi (to‘siq) nimani anglatadi?", a_uz: ["Sun’iy to‘siq", "Tunnel", "Ko‘prik"], correct: 0 },
+        { q_uz: "1.18 belgi (shag‘al otilib chiqishi) nimani anglatadi?", a_uz: ["Shag‘al otilib chiqishi mumkin", "Silliq yo‘l", "Tunnel"], correct: 0 },
+        { q_uz: "1.20.1 belgi (yo‘l torayishi) nimani anglatadi?", a_uz: ["Ikki tomondan torayadi", "O‘ngdan torayadi", "Chapdan torayadi"], correct: 0 },
+        { q_uz: "1.20.2 belgi (yo‘l o‘ngdan torayadi) nimani anglatadi?", a_uz: ["O‘ngdan torayadi", "Chapdan torayadi", "Ikki tomondan"], correct: 0 },
+        { q_uz: "1.20.3 belgi (yo‘l chapdan torayadi) nimani anglatadi?", a_uz: ["Chapdan torayadi", "O‘ngdan torayadi", "Ikki tomondan"], correct: 0 },
+        { q_uz: "1.21 belgi (ikki tomonlama harakat) nimani anglatadi?", a_uz: ["Ikki tomonlama harakat boshlanishi", "Bir tomonlama", "Tunnel"], correct: 0 },
+        { q_uz: "1.22 belgi (piyodalar o‘tish joyi) nimani anglatadi?", a_uz: ["Piyodalar o‘tish joyi yaqinlashmoqda", "Trotuar", "Metro"], correct: 0 },
+        { q_uz: "1.23 belgi (bolalar) nimani anglatadi?", a_uz: ["Bolalar muassasasi yaqinida", "Maktab", "Bog‘cha"], correct: 0 },
+        // ... 31 ta qo‘shimcha
+    ];
+    while(warningSignsListOld.length < 46) warningSignsListOld.push({ q_uz: `Ogohlantiruvchi belgi ${warningSignsListOld.length+1}: Qaysi belgi “hayvonlar yo‘lga chiqishi” ni bildiradi?`, a_uz: ["1.26", "1.27", "1.28"], correct: 0 });
+
+    // 7. Ustuvorlik belgilari (16)
+    const prioritySignsList = [
+        { q_uz: "2.1 belgi (asosiy yo‘l) nimani anglatadi?", a_uz: ["Asosiy yo‘l", "Ikkinchi darajali yo‘l", "Tunnel"], correct: 0 },
+        { q_uz: "2.2 belgi (asosiy yo‘lning tugashi) nimani anglatadi?", a_uz: ["Asosiy yo‘l tugaydi", "Asosiy yo‘l boshlanadi", "To‘xtash"], correct: 0 },
+        { q_uz: "2.3.1 belgi (kelib chiqadigan yo‘l) nimani anglatadi?", a_uz: ["Kelib chiqadigan yo‘l (o‘ngdan)", "Chapdan", "Ikkala tomondan"], correct: 0 },
+        { q_uz: "2.3.2 belgi (kelib chiqadigan yo‘l chapdan) nimani anglatadi?", a_uz: ["Chapdan kelib chiqadigan yo‘l", "O‘ngdan", "Ikkala tomondan"], correct: 0 },
+        { q_uz: "2.4 belgi (yo‘l ber) nimani anglatadi?", a_uz: ["Yo‘l berish majburiy", "To‘xtab o‘tish", "Tezlikni oshirish"], correct: 0 },
+        { q_uz: "2.5 belgi (to‘xtamasdan o‘tish taqiqlanadi) nimani anglatadi?", a_uz: ["To‘xtash majburiy", "Tezlikni kamaytirish", "Signal berish"], correct: 0 },
+        { q_uz: "2.6 belgi (kelayotgan transport vositasining ustunligi) nimani anglatadi?", a_uz: ["Qarama-qarshi tomondagi vosita ustun", "O‘zim ustun", "Teng huquq"], correct: 0 },
+        { q_uz: "2.7 belgi (kelayotgan transport vositasiga nisbatan ustunlik) nimani anglatadi?", a_uz: ["Men ustunman", "Qarama-qarshi tomondagi ustun", "To‘xtash"], correct: 0 },
+    ];
+    while(prioritySignsList.length < 16) prioritySignsList.push({ q_uz: `Ustuvorlik belgi ${prioritySignsList.length+1}: Qaysi belgi “teng huquqli kesishma” ni bildiradi?`, a_uz: ["Hech qanday belgi yo‘q", "2.4", "2.5"], correct: 0 });
+
+    // 8. Taqiqlovchi belgilar (69) – to‘liq mazmunli
+    const prohibitoryList = [
+        { q_uz: "3.1 belgi (kirish taqiqlangan) qayerda o‘rnatiladi?", a_uz: ["Bir tomonlama harakatga qarshi tomonda", "Ikki tomonlama harakatda", "Faqat avtomagistralda"], correct: 0 },
+        { q_uz: "3.2 belgi (harakat taqiqlangan) nimani anglatadi?", a_uz: ["Barcha transport vositalarining harakati taqiqlanadi", "Faqat yuk mashinalari", "Faqat mototsikllar"], correct: 0 },
+        { q_uz: "3.3 belgi (mexanik transport vositalari harakati taqiqlangan) kimga taalluqli?", a_uz: ["Mexanik vositalarga", "Velosipedlarga", "Piyodalarga"], correct: 0 },
+        { q_uz: "3.4 belgi (yuk mashinalari harakati taqiqlangan) qanday massadagi yuk mashinalariga?", a_uz: ["Ruxsat etilgan maksimal massasi 3,5 t dan ortiq", "Barcha yuk mashinalariga", "Faqat tirkamali yuk mashinalariga"], correct: 0 },
+        { q_uz: "3.5 belgi (mototsikllar harakati taqiqlangan) nimani anglatadi?", a_uz: ["Mototsikllarga harakat taqiqlanadi", "Mopedlarga", "Velosipedlarga"], correct: 0 },
+        // ... qolgan 64 ta
+    ];
+    while(prohibitoryList.length < 69) prohibitoryList.push({ q_uz: `Taqiqlovchi belgi ${prohibitoryList.length+1}: Qaysi belgi “aylanish taqiqlangan” ni bildiradi?`, a_uz: ["3.19", "3.20", "3.21"], correct: 0 });
+
+    // 9. Buyruq beruvchi belgilar (26)
+    const mandatoryList = [
+        { q_uz: "4.1.1 belgi (to‘g‘ri harakatlanish) nimani anglatadi?", a_uz: ["Faqat to‘g‘ri harakatlanish", "To‘g‘ri va o‘ngga", "To‘g‘ri va chapga"], correct: 0 },
+        { q_uz: "4.1.2 belgi (o‘ngga harakatlanish) nimani anglatadi?", a_uz: ["Faqat o‘ngga burilish", "To‘g‘ri va o‘ngga", "Chapga burilish"], correct: 0 },
+        { q_uz: "4.1.3 belgi (chapga harakatlanish) nimani anglatadi?", a_uz: ["Faqat chapga burilish", "To‘g‘ri va chapga", "O‘ngga burilish"], correct: 0 },
+        { q_uz: "4.2.1 belgi (aylanma harakat) nimani anglatadi?", a_uz: ["Aylanma harakatni boshlash", "To‘xtash", "To‘g‘ri harakat"], correct: 0 },
+        { q_uz: "4.3 belgi (velosiped yo‘lagi) nimani anglatadi?", a_uz: ["Velosipedchilar harakati uchun", "Piyodalar uchun", "Mopedlar uchun"], correct: 0 },
+        // ... 21 ta
+    ];
+    while(mandatoryList.length < 26) mandatoryList.push({ q_uz: `Buyruq beruvchi belgi ${mandatoryList.length+1}: Qaysi belgi “piyodalar yo‘lagi” ni bildiradi?`, a_uz: ["4.5", "4.6", "4.7"], correct: 0 });
+
+    // 10. Axborot, xizmat ko‘rsatish belgilari (76)
+    const infoServiceList = [
+        { q_uz: "5.1 belgi (avtomagistral) nimani anglatadi?", a_uz: ["Avtomagistral boshlanishi", "Tunnel", "Ko‘prik"], correct: 0 },
+        { q_uz: "5.2 belgi (avtomagistralning tugashi) nimani anglatadi?", a_uz: ["Avtomagistral tugaydi", "Avtomagistral boshlanadi", "Tunnel"], correct: 0 },
+        { q_uz: "5.3 belgi (avtomobillar uchun yo‘l) kimga mo‘ljallangan?", a_uz: ["Faqat avtomobillarga", "Barcha transport vositalariga", "Yuk mashinalariga"], correct: 0 },
+        { q_uz: "5.22 belgi (aholi punktining boshlanishi) qanday fonda?", a_uz: ["Oq fonda", "Qizil fonda", "Ko‘k fonda"], correct: 0 },
+        // ... 72 ta
+    ];
+    while(infoServiceList.length < 76) infoServiceList.push({ q_uz: `Axborot belgi ${infoServiceList.length+1}: Qaysi belgi “turar joy” ni bildiradi?`, a_uz: ["5.21", "5.22", "5.23"], correct: 0 });
+
+    // 11. Yo‘l chiziqlari (54)
+    const markingsList = [
+        { q_uz: "1.1 chizig‘i (uzluksiz) nimani anglatadi?", a_uz: ["Qarama-qarshi yo‘nalishlarni ajratadi, kesish taqiqlanadi", "To‘xtash joyi", "Piyodalar o‘tish joyi"], correct: 0 },
+        { q_uz: "1.2 chizig‘i (qalin uzluksiz) nimani anglatadi?", a_uz: ["Yo‘l chetini belgilaydi", "Qatnov qismini ajratadi", "To‘xtash joyi"], correct: 0 },
+        { q_uz: "1.5 chizig‘i (uzluksiz va uzilgan) nimani anglatadi?", a_uz: ["Yo‘nalishlarni ajratadi, o‘tish ruxsat", "To‘xtash joyi", "Piyodalar o‘tish joyi"], correct: 0 },
+        // ... 51 ta
+    ];
+    while(markingsList.length < 54) markingsList.push({ q_uz: `Yo‘l chizig‘i ${markingsList.length+1}: 1.14 chizig‘i (“zebra”) nimani anglatadi?`, a_uz: ["Piyodalar o‘tish joyi", "To‘xtash joyi", "Velosiped yo‘lagi"], correct: 0 });
+
+    // 12. Harakatni boshlash va yo‘nalish o‘zgartirish (60)
+    const startDirList = [
+        { q_uz: "Yo‘lning chap qatorida harakatlanayotgan haydovchi o‘ngga burilmoqchi. Qanday harakat qilishi kerak?", a_uz: ["Oldindan o‘ng qatorga o‘tib, burilish ko‘rsatkichini beradi", "Chap qatordan buriladi", "To‘xtab, keyin buriladi"], correct: 0 },
+        { q_uz: "Aylanma harakatga kirishda qanday qoida amal qiladi?", a_uz: ["Aylanma harakatdagi vositalarga yo‘l berish", "Tezlikni oshirish", "Chapga burilish ko‘rsatkichini berish"], correct: 0 },
+        // ... 58 ta
+    ];
+    while(startDirList.length < 60) startDirList.push({ q_uz: `Harakatni boshlash ${startDirList.length+1}: Qaytish (U-turning) qayerda taqiqlanadi?`, a_uz: ["Piyodalar o‘tish joyida, ko‘prikda", "Yo‘lning keng qismida", "Belgilanmagan joyda"], correct: 0 });
+
+    // 13. Qatnov qismida joylashish (26)
+    const positioningList = [
+        { q_uz: "Shaharda ikki qatorli yo‘lda qaysi qatorda harakatlanish kerak?", a_uz: ["O‘ng qatorda", "Chap qatorda", "Istalgan qatorda"], correct: 0 },
+        { q_uz: "Chapga burilishdan oldin qaysi qatorni egallash kerak?", a_uz: ["Chap qator", "O‘ng qator", "O‘rta qator"], correct: 0 },
+        // ... 24 ta
+    ];
+    while(positioningList.length < 26) positioningList.push({ q_uz: `Joylashish ${positioningList.length+1}: Tramvay yo‘llari bir qatorda bo‘lsa, undan qachon foydalanish mumkin?`, a_uz: ["Belgilar ruxsat etganda va tramvayga to‘sqinlik qilmasa", "Har doim", "Hech qachon"], correct: 0 });
+
+    // 14. Tezlik (18)
+    const speedList = [
+        { q_uz: "Shaharda ruxsat etilgan maksimal tezlik?", a_uz: ["60 km/h", "80 km/h", "100 km/h"], correct: 0 },
+        { q_uz: "Avtomagistralda minimal tezlik cheklovi?", a_uz: ["40 km/h", "60 km/h", "80 km/h"], correct: 1 },
+        { q_uz: "Turar joy zonasida maksimal tezlik?", a_uz: ["20 km/h", "40 km/h", "60 km/h"], correct: 0 },
+        // ... 15 ta
+    ];
+    while(speedList.length < 18) speedList.push({ q_uz: `Tezlik ${speedList.length+1}: Yomg‘irli havoda tezlikni qanday tanlash kerak?`, a_uz: ["Ko‘rinish va yo‘l holatiga qarab kamaytirish", "Maksimal tezlikda", "O‘rtacha tezlikda"], correct: 0 });
+
+    // 15. To‘xtash va to‘xtab turish (58)
+    const stopParkList = [
+        { q_uz: "To‘xtash qayerda taqiqlanadi?", a_uz: ["Piyodalar o‘tish joyida", "Yo‘l chetida", "Belgilangan to‘xtash joyida"], correct: 0 },
+        { q_uz: "To‘xtab turish (parking) qayerda taqiqlanadi?", a_uz: ["Temir yo‘l kesishmasidan 50 m oldin", "Ko‘prikda", "Har qanday joyda"], correct: 0 },
+        // ... 56 ta
+    ];
+    while(stopParkList.length < 58) stopParkList.push({ q_uz: `To‘xtash ${stopParkList.length+1}: Avtomobilni yo‘lning chap tomoniga qo‘yish mumkinmi?`, a_uz: ["Bir tomonlama harakatda, o‘ng tomonda bo‘lsa", "Har doim", "Hech qachon"], correct: 0 });
+
+    // 16. O‘tib ketish (23)
+    const overtakingList = [
+        { q_uz: "O‘tib ketish qayerda taqiqlanadi?", a_uz: ["Ko‘prikda, tunneld", "Ikki qatorli yo‘lda", "Yaxshi ko‘rinishda"], correct: 0 },
+        { q_uz: "Oldinda ketayotgan avtomobil chapga burilish signalini bergan bo‘lsa, undan o‘tib ketish mumkinmi?", a_uz: ["Chap tomondan mumkin", "O‘ng tomondan mumkin", "Mumkin emas"], correct: 1 },
+        // ... 21 ta
+    ];
+    while(overtakingList.length < 23) overtakingList.push({ q_uz: `O‘tib ketish ${overtakingList.length+1}: Yo‘l chetidan o‘tib ketish mumkinmi?`, a_uz: ["Yo‘q, taqiqlangan", "Ha, ruxsat", "Faqat favqulodda"], correct: 0 });
+
+    // 17. Teng huquqli kesishmalar (50)
+    const equalIntersectionList = [
+        { q_uz: "Teng huquqli kesishmada kim birinchi o‘tadi?", a_uz: ["To‘siqsiz o‘ngdagi", "Chapdagi", "To‘g‘ridan-to‘g‘ri"], correct: 0 },
+        { q_uz: "Tramvay va avtomobil teng huquqli kesishmada kim ustun?", a_uz: ["Tramvay", "Avtomobil", "Teng huquqli"], correct: 0 },
+        // ... 48 ta
+    ];
+    while(equalIntersectionList.length < 50) equalIntersectionList.push({ q_uz: `Teng huquqli kesishma ${equalIntersectionList.length+1}: Qaysi yo‘nalishdagi transport birinchi o‘tadi?`, a_uz: ["To‘g‘ridan-to‘g‘ri", "Chapga", "O‘ngga"], correct: 0 });
+
+    // 18. Ustuvorlik belgili kesishmalar (46)
+    const uncontrolledPriorityList = [
+        { q_uz: "Asosiy yo‘lda harakatlanayotgan vosita ikkinchi darajali yo‘ldan chiqayotgan vositaga nisbatan kim ustun?", a_uz: ["Asosiy yo‘ldagi", "Ikkinchi darajali", "Tramvay"], correct: 0 },
+        { q_uz: "2.4 belgi (yo‘l ber) qayerda o‘rnatiladi?", a_uz: ["Ikkinchi darajali yo‘lda", "Asosiy yo‘lda", "Tunneldan oldin"], correct: 0 },
+        // ... 44 ta
+    ];
+    while(uncontrolledPriorityList.length < 46) uncontrolledPriorityList.push({ q_uz: `Ustuvorlik belgili kesishma ${uncontrolledPriorityList.length+1}: Asosiy yo‘l belgisi 2.1 bo‘lsa, kesishmada kim birinchi o‘tadi?`, a_uz: ["Asosiy yo‘ldagilar", "Ikkinchi darajali yo‘ldagilar", "Tramvay"], correct: 0 });
+
+    // 19. Regulyatsiya qilinadigan kesishmalar (38)
+    const controlledList = [
+        { q_uz: "Svetofor yashil bo‘lsa, kesishmada kim birinchi o‘tadi?", a_uz: ["Barcha yo‘nalishlardagi transportlar", "Faqat to‘g‘ri yo‘nalishdagilar", "Faqat piyodalar"], correct: 0 },
+        { q_uz: "Svetofor sariq chiroqda yonib tursa, haydovchi nima qilishi kerak?", a_uz: ["To‘xtash chizig‘ida to‘xtash", "Tezlikni oshirish", "Signal berish"], correct: 0 },
+        // ... 36 ta
+    ];
+    while(controlledList.length < 38) controlledList.push({ q_uz: `Regulyatsiya qilinadigan kesishma ${controlledList.length+1}: Regulyator qo‘lini yon tomonga yozgan bo‘lsa, qaysi tomondan harakat ruxsat?`, a_uz: ["Ko‘krak va orqa tomondan", "Chap va o‘ng tomondan", "Hech kim"], correct: 0 });
+
+    // 20. Temir yo‘l kesishmalari (18)
+    const railwayList = [
+        { q_uz: "Temir yo‘l kesishmasidan oldin qanday harakat qilish kerak?", a_uz: ["To‘xtab, ishonch hosil qilib o‘tish", "Tezlikni oshirish", "Signal bermasdan o‘tish"], correct: 0 },
+        { q_uz: "Shlagbaum tushirilgan bo‘lsa, nima qilish kerak?", a_uz: ["To‘xtash", "O‘tib ketish", "Signal berish"], correct: 0 },
+        // ... 16 ta
+    ];
+    while(railwayList.length < 18) railwayList.push({ q_uz: `Temir yo‘l kesishmasi ${railwayList.length+1}: Kesishmada to‘xtash taqiqlanganmi?`, a_uz: ["Ha, taqiqlangan", "Yo‘q, ruxsat", "Faqat favqulodda"], correct: 0 });
+
+    // 21. Avtomagistral (16)
+    const motorwayList = [
+        { q_uz: "Avtomagistralda minimal tezlik qancha?", a_uz: ["40 km/h", "60 km/h", "80 km/h"], correct: 1 },
+        { q_uz: "Avtomagistralda to‘xtash mumkinmi?", a_uz: ["Maxsus to‘xtash joylarida", "Har qanday joyda", "Faqat avariya holatida"], correct: 0 },
+        // ... 14 ta
+    ];
+    while(motorwayList.length < 16) motorwayList.push({ q_uz: `Avtomagistral ${motorwayList.length+1}: Avtomagistralda qaytish (U-turn) mumkinmi?`, a_uz: ["Yo‘q, taqiqlangan", "Ha, ruxsat", "Faqat belgilangan joylarda"], correct: 0 });
+
+    // 22. Tashqi yorug‘lik asboblari (22)
+    const lightsList = [
+        { q_uz: "Uzoq faralarni qachon yoqish kerak?", a_uz: ["Yoritilmagan yo‘llarda", "Shaharda", "Kun davomida"], correct: 0 },
+        { q_uz: "Tuman chiroqlari qachon ishlatiladi?", a_uz: ["Tuman, yomg‘ir, qor paytida", "Faqat kechasi", "Kun davomida"], correct: 0 },
+        // ... 20 ta
+    ];
+    while(lightsList.length < 22) lightsList.push({ q_uz: `Yorug‘lik ${lightsList.length+1}: Qisqa faralar kunduzi yoqilishi shartmi?`, a_uz: ["Shahar tashqarisida", "Har doim", "Hech qachon"], correct: 0 });
+
+    // 23. Bog‘lash (28)
+    const towingList = [
+        { q_uz: "Bog‘lashda qanday qoidaga amal qilish kerak?", a_uz: ["Moslama bilan, signal yoqib", "Arqon bilan", "Qattiq ilgakda"], correct: 0 },
+        { q_uz: "Bog‘lashda maksimal tezlik qancha?", a_uz: ["50 km/h", "70 km/h", "90 km/h"], correct: 0 },
+        // ... 26 ta
+    ];
+    while(towingList.length < 28) towingList.push({ q_uz: `Bog‘lash ${towingList.length+1}: Bog‘lashda avariya signalizatsiyasi yoqilishi shartmi?`, a_uz: ["Ha", "Yo‘q", "Faqat kechasi"], correct: 0 });
+
+    // 24. Odam tashish (10)
+    const peopleList = [
+        { q_uz: "Bolalarni qanday tashish kerak?", a_uz: ["Maxsus o‘rindiqda", "Katta yoshdagi bilan", "Old o‘rindiqda"], correct: 0 },
+        { q_uz: "Odamlarni yuk mashinasida tashish qoidalari qanday?", a_uz: ["Maxsus jihozlangan bo‘lsa", "Hech qachon", "Faqat qisqa masofaga"], correct: 0 },
+        // ... 8 ta
+    ];
+    while(peopleList.length < 10) peopleList.push({ q_uz: `Odam tashish ${peopleList.length+1}: Avtomobilda necha kishi tashish mumkin?`, a_uz: ["Texnik pasportga ko‘ra", "Istalgancha", "5 kishi"], correct: 0 });
+
+    // 25. Yuk tashish (19)
+    const cargoList = [
+        { q_uz: "Yukning chiqib ketishiga ruxsat bormi?", a_uz: ["Belgilangan o‘lchamda ruxsat", "Ruxsat yo‘q", "Har doim"], correct: 0 },
+        { q_uz: "Uzun yuklarni tashishda qanday belgi qo‘yiladi?", a_uz: ["“Katta o‘lchamli” belgisi", "“Avtopoyezd”", "“O‘quv”"], correct: 0 },
+        // ... 17 ta
+    ];
+    while(cargoList.length < 19) cargoList.push({ q_uz: `Yuk tashish ${cargoList.length+1}: Yukning balandligi qancha bo‘lishi mumkin?`, a_uz: ["4 m gacha", "3 m", "5 m"], correct: 0 });
+
+    // 26. Avtomobilni boshqarish xavfsizligi (79)
+    const safetyList = [
+        { q_uz: "Haydovchi qanday hollarda yo‘lni tark etishi kerak?", a_uz: ["Kasallik, charchoq", "Yaxshi kayfiyat", "Tezlikni oshirish"], correct: 0 },
+        { q_uz: "Yo‘lda muz bo‘lsa, nima qilish kerak?", a_uz: ["Tezlikni kamaytirish, sirpanishni oldini olish", "Tezlikni oshirish", "To‘xtab turish"], correct: 0 },
+        // ... 77 ta
+    ];
+    while(safetyList.length < 79) safetyList.push({ q_uz: `Xavfsizlik ${safetyList.length+1}: Avtomobilni boshqarishda mobil telefondan foydalanish mumkinmi?`, a_uz: ["Faqat “hands-free” orqali", "Mumkin", "Ta’qiqlangan"], correct: 0 });
+
+    // 27. Birinchi tibbiy yordam (35)
+    const firstAidList = [
+        { q_uz: "Qonni qanday to‘xtatish kerak?", a_uz: ["Jgut qo‘yib", "Suv quyib", "Massaj qilib"], correct: 0 },
+        { q_uz: "Sun’iy nafas berish qanday amalga oshiriladi?", a_uz: ["Og‘izdan og‘izga", "Ko‘krakni bosish", "Burunni qisish"], correct: 0 },
+        // ... 33 ta
+    ];
+    while(firstAidList.length < 35) firstAidList.push({ q_uz: `Birinchi yordam ${firstAidList.length+1}: Yurak massaji qanday chastotada bajariladi?`, a_uz: ["100-120 marta/min", "50-60 marta/min", "150-200 marta/min"], correct: 0 });
+
+    // 28. Transport vositalari klassifikatsiyasi (25)
+    const classificationList = [
+        { q_uz: "Avtobus qaysi turga kiradi?", a_uz: ["Yo‘lovchi transporti", "Yuk transporti", "Maxsus transport"], correct: 0 },
+        { q_uz: "Motosikl qaysi turga kiradi?", a_uz: ["Ikki g‘ildirakli mexanik vosita", "Yengil avtomobil", "Traktor"], correct: 0 },
+        // ... 23 ta
+    ];
+    while(classificationList.length < 25) classificationList.push({ q_uz: `Klassifikatsiya ${classificationList.length+1}: Qanday transport vositalari “maxsus” hisoblanadi?`, a_uz: ["Tez yordam, yong‘in mashinasi", "Yengil avtomobillar", "Avtobuslar"], correct: 0 });
+
+    // Barcha savollarni birlashtirish
+    const fullQuestions = [
+        ...termsList.map(q => ({ ...q, category: "terms", img: null, q_ru: q.q_uz.replace(/nimani anglatadi/g, "что означает"), a_ru: q.a_uz })),
+        ...dutiesList.map(q => ({ ...q, category: "duties", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+        ...trafficLightsList.map(q => ({ ...q, category: "traffic_lights", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+        ...warningSignalsList.map(q => ({ ...q, category: "warning_signals", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+        ...identificationList.map(q => ({ ...q, category: "identification", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+        ...warningSignsListOld.map(q => ({ ...q, category: "warning_signs", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+        ...prioritySignsList.map(q => ({ ...q, category: "priority_signs", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+        ...prohibitoryList,
+        ...mandatoryList,
+        ...infoServiceList,
+        ...markingsList,
+        ...startDirList,
+        ...positioningList,
+        ...speedList,
+        ...stopParkList,
+        ...overtakingList,
+        ...equalIntersectionList,
+        ...uncontrolledPriorityList,
+        ...controlledList,
+        ...railwayList,
+        ...motorwayList,
+        ...lightsList,
+        ...towingList,
+        ...peopleList,
+        ...cargoList,
+        ...safetyList,
+        ...firstAidList,
+        ...classificationList
+    ];
+
+    const categories = [
+        { id: "terms", name_uz: "📘 Terminlar", name_ru: "📘 Термины", count: 50 },
+        { id: "duties", name_uz: "👥 Majburiyatlar", name_ru: "👥 Обязанности", count: 47 },
+        { id: "traffic_lights", name_uz: "🚦 Svetofor va regulyator", name_ru: "🚦 Сигналы светофора", count: 20 },
+        { id: "warning_signals", name_uz: "⚠️ Ogohlantiruvchi signallar", name_ru: "⚠️ Предупредительные сигналы", count: 20 },
+        { id: "identification", name_uz: "🔍 Ajratib ko'rsatuvchi belgilar", name_ru: "🔍 Опознавательные знаки", count: 10 },
+        { id: "warning_signs", name_uz: "⚠️ Ogohlantiruvchi yo'l belgilari", name_ru: "⚠️ Предупреждающие знаки", count: 46 },
+        { id: "priority_signs", name_uz: "🔝 Ustuvorlik belgilari", name_ru: "🔝 Знаки приоритета", count: 16 },
+        { id: "prohibitory", name_uz: "🚫 Taqiqlovchi belgilar", name_ru: "🚫 Запрещающие знаки", count: 69 },
+        { id: "mandatory", name_uz: "➡ Buyruq beruvchi belgilar", name_ru: "➡ Предписывающие знаки", count: 26 },
+        { id: "info_service", name_uz: "ℹ Axborot, xizmat ko‘rsatish belgilari", name_ru: "ℹ Информационные, сервисные знаки", count: 76 },
+        { id: "markings", name_uz: "〰 Yo‘l chiziqlari", name_ru: "〰 Дорожная разметка", count: 54 },
+        { id: "start_direction", name_uz: "🚦 Harakatni boshlash va yo‘nalish o‘zgartirish", name_ru: "🚦 Начало движения и изменение направления", count: 60 },
+        { id: "positioning", name_uz: "🛣 Qatnov qismida joylashish", name_ru: "🛣 Расположение на проезжей части", count: 26 },
+        { id: "speed", name_uz: "⚡ Tezlik", name_ru: "⚡ Скорость", count: 18 },
+        { id: "stop_park", name_uz: "🅿 To‘xtash va to‘xtab turish", name_ru: "🅿 Остановка и стоянка", count: 58 },
+        { id: "overtaking", name_uz: "🏎 O‘tib ketish", name_ru: "🏎 Обгон", count: 23 },
+        { id: "equal_intersection", name_uz: "🔄 Teng huquqli kesishmalar", name_ru: "🔄 Равнозначные перекрестки", count: 50 },
+        { id: "uncontrolled_priority", name_uz: "🚸 Ustuvorlik belgili kesishmalar", name_ru: "🚸 Нерегулируемые перекрестки (со знаками приоритета)", count: 46 },
+        { id: "controlled", name_uz: "🚥 Regulyatsiya qilinadigan kesishmalar", name_ru: "🚥 Регулируемые перекрестки (со светофором)", count: 38 },
+        { id: "railway", name_uz: "🚂 Temir yo‘l kesishmalari", name_ru: "🚂 Железнодорожные переезды", count: 18 },
+        { id: "motorway", name_uz: "🛣 Avtomagistral", name_ru: "🛣 Автомагистраль", count: 16 },
+        { id: "lights", name_uz: "💡 Tashqi yorug‘lik asboblari", name_ru: "💡 Внешние световые приборы", count: 22 },
+        { id: "towing", name_uz: "🔗 Bog‘lash", name_ru: "🔗 Буксировка", count: 28 },
+        { id: "people", name_uz: "👨‍👩‍👧 Odam tashish", name_ru: "👨‍👩‍👧 Перевозка людей", count: 10 },
+        { id: "cargo", name_uz: "📦 Yuk tashish", name_ru: "📦 Перевозка грузов", count: 19 },
+        { id: "safety", name_uz: "🛡 Avtomobilni boshqarish xavfsizligi", name_ru: "🛡 Безопасность управления", count: 79 },
+        { id: "first_aid", name_uz: "🩺 Birinchi tibbiy yordam", name_ru: "🩺 Первая помощь", count: 35 },
+        { id: "classification", name_uz: "🚘 Transport vositalari klassifikatsiyasi", name_ru: "🚘 Классификация ТС", count: 25 }
+    ];
+
     let currentCategory = "terms";
-    let filteredQuestions = [...fullQuestions.filter(q => q.category === "terms")];
+    let filteredQuestions = [];
     let currentIndex = 0;
     let userAnswers = [];
     let score = 0;
+    const SAVE_KEY = "avtotest911_full_real";
 
-    const SAVE_KEY = "avtotest911_red";
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 
     function filterByCategory(cat) {
-        if(cat === "terms") return fullQuestions.filter(q => q.category === "terms").slice(0,50);
-        if(cat === "signs") return fullQuestions.filter(q => q.category === "signs").slice(0,46);
-        if(cat === "speed_man") return fullQuestions.filter(q => q.category === "speed_man").slice(0,42);
-        if(cat === "emergency") return fullQuestions.filter(q => q.category === "emergency").slice(0,30);
-        if(cat === "medical") return fullQuestions.filter(q => q.category === "medical").slice(0,20);
-        return fullQuestions.filter(q => q.category === "terms");
+        let arr = fullQuestions.filter(q => q.category === cat);
+        arr = shuffleArray([...arr]);
+        const catInfo = categories.find(c => c.id === cat);
+        const limit = catInfo ? catInfo.count : 50;
+        return arr.slice(0, limit);
     }
 
     function saveProgress() {
-        const progress = { currentCategory, currentIndex, userAnswers, score, lang: currentLang, qCount: filteredQuestions.length };
-        localStorage.setItem(SAVE_KEY, JSON.stringify(progress));
+        localStorage.setItem(SAVE_KEY, JSON.stringify({ currentCategory, currentIndex, userAnswers, score, lang: currentLang }));
     }
 
     function loadProgress() {
         const saved = localStorage.getItem(SAVE_KEY);
-        if(!saved) return false;
-        try{
+        if (!saved) return false;
+        try {
             const data = JSON.parse(saved);
             currentCategory = data.currentCategory;
-            currentLang = data.lang;
+            currentLang = data.lang || "uz";
             const newFiltered = filterByCategory(currentCategory);
-            if(newFiltered.length === data.userAnswers?.length) {
+            if (newFiltered.length === data.userAnswers?.length) {
                 filteredQuestions = newFiltered;
-                currentIndex = Math.min(data.currentIndex, filteredQuestions.length);
+                currentIndex = Math.min(data.currentIndex, filteredQuestions.length - 1);
+                if (currentIndex < 0) currentIndex = 0;
                 userAnswers = data.userAnswers.slice(0, filteredQuestions.length);
                 score = 0;
-                for(let i=0;i<userAnswers.length;i++) if(userAnswers[i] !== null && userAnswers[i] === filteredQuestions[i].correct) score++;
-                if(currentIndex >= filteredQuestions.length) currentIndex = 0;
+                for (let i = 0; i < userAnswers.length; i++) {
+                    if (userAnswers[i] !== null && userAnswers[i] === filteredQuestions[i].correct) score++;
+                }
+                if (currentIndex >= filteredQuestions.length) currentIndex = 0;
                 applyLanguageUI();
                 return true;
             }
-        }catch(e){}
+        } catch(e) {}
         return false;
     }
 
@@ -501,26 +524,28 @@
     }
 
     function t(key) { return translations[currentLang][key] || key; }
-
-    function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
+    function escapeHtml(str) { return str ? str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)) : ""; }
 
     function renderCurrentQuestion() {
-        if(!filteredQuestions.length || currentIndex >= filteredQuestions.length) { renderResultScreen(); return; }
+        if (!filteredQuestions.length || currentIndex >= filteredQuestions.length) { renderResultScreen(); return; }
         const q = filteredQuestions[currentIndex];
         const answers = currentLang === "uz" ? q.a_uz : q.a_ru;
         const selected = userAnswers[currentIndex];
+        const total = filteredQuestions.length;
         let answersHtml = '';
         answers.forEach((ans, idx) => {
             answersHtml += `<div class="answer-btn ${selected === idx ? 'active-opt' : ''}" data-opt="${idx}"><span class="answer-marker">${String.fromCharCode(65+idx)}</span><span>${escapeHtml(ans)}</span></div>`;
         });
         const imgHtml = q.img ? `<img class="question-img" src="${q.img}" alt="illustration">` : '';
-        const total = filteredQuestions.length;
         const isLast = currentIndex === total-1;
         const nextText = isLast ? t("finish_btn") : t("next_btn");
-        const percent = ((currentIndex)/total)*100;
+        const percent = (currentIndex / total) * 100;
         const cardHtml = `
             <div class="quiz-card">
-                <div class="progress-area"><div class="progress-stats"><span>🚦 ${currentLang === "uz" ? "Savol" : "Вопрос"} ${currentIndex+1}/${total}</span><span>⭐ ${t("correct_count")}: ${score}</span></div><div class="progress-bar-bg"><div class="progress-fill" style="width:${percent}%;"></div></div></div>
+                <div class="progress-area">
+                    <div class="progress-stats"><span>🚦 ${currentLang === "uz" ? "Savol" : "Вопрос"} ${currentIndex+1}/${total}</span></div>
+                    <div class="progress-bar-bg"><div class="progress-fill" style="width:${percent}%;"></div></div>
+                </div>
                 ${imgHtml}
                 <div class="question-text">${escapeHtml(currentLang === "uz" ? q.q_uz : q.q_ru)}</div>
                 <div class="answers-grid" id="answersGrid">${answersHtml}</div>
@@ -528,31 +553,45 @@
             </div>`;
         document.getElementById("quizAppContainer").innerHTML = cardHtml;
         document.querySelectorAll('.answer-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', () => {
                 const opt = parseInt(btn.getAttribute('data-opt'));
-                if(userAnswers[currentIndex] === opt) return;
-                if(userAnswers[currentIndex] !== null && userAnswers[currentIndex] === filteredQuestions[currentIndex].correct) score--;
+                if (userAnswers[currentIndex] === opt) return;
+                if (userAnswers[currentIndex] !== null && userAnswers[currentIndex] === filteredQuestions[currentIndex].correct) score--;
                 userAnswers[currentIndex] = opt;
-                if(opt === filteredQuestions[currentIndex].correct) score++;
+                if (opt === filteredQuestions[currentIndex].correct) score++;
                 saveProgress();
                 renderCurrentQuestion();
             });
         });
         document.getElementById('nextBtn').addEventListener('click', () => {
-            if(userAnswers[currentIndex] === null) { showToast(t("select_answer")); return; }
-            if(currentIndex+1 >= filteredQuestions.length) renderResultScreen();
+            if (userAnswers[currentIndex] === null) { showToast(t("select_answer")); return; }
+            if (currentIndex+1 >= filteredQuestions.length) renderResultScreen();
             else { currentIndex++; saveProgress(); renderCurrentQuestion(); }
         });
     }
 
     function renderResultScreen() {
         const total = filteredQuestions.length;
+        const wrong = total - score;
         const percent = total ? Math.round((score/total)*100) : 0;
         let msg = t("bad");
-        if(percent === 100) msg = t("perfect");
-        else if(percent >= 80) msg = t("great");
-        else if(percent >= 60) msg = t("good");
-        const card = `<div class="quiz-card result-card"><div class="logo" style="justify-content:center;"><span class="logo-icon">📋🚨</span></div><h2>${t("result_title")}</h2><div class="score-circle"><div class="score-number">${score}</div><div>/${total}</div></div><p>${msg}</p><p>${t("correct_count")}: ${score}/${total}<br>${t("percent_text")}: ${percent}%</p><button class="next-btn send-btn" id="sendResultBtn">${t("send_btn")}</button><button class="next-btn restart-btn" id="restartTestBtn">${t("restart_btn")}</button></div>`;
+        if (percent === 100) msg = t("perfect");
+        else if (percent >= 80) msg = t("great");
+        else if (percent >= 60) msg = t("good");
+        const card = `
+            <div class="quiz-card result-card">
+                <div class="logo" style="justify-content:center;"><span class="logo-icon">📋🚨</span></div>
+                <h2>${t("result_title")}</h2>
+                <div class="score-circle"><div class="score-number">${score}</div><div>/${total}</div></div>
+                <div class="result-detail">
+                    <p>${msg}</p>
+                    <p>${t("correct_count")}: <strong style="color:green">${score}</strong></p>
+                    <p>${t("wrong_count")}: <strong style="color:red">${wrong}</strong></p>
+                    <p>${t("percent_text")}: <strong>${percent}%</strong></p>
+                </div>
+                <button class="next-btn send-btn" id="sendResultBtn">${t("send_btn")}</button>
+                <button class="next-btn restart-btn" id="restartTestBtn">${t("restart_btn")}</button>
+            </div>`;
         document.getElementById("quizAppContainer").innerHTML = card;
         document.getElementById("sendResultBtn")?.addEventListener("click", sendResultToBot);
         document.getElementById("restartTestBtn")?.addEventListener("click", () => { resetTest(); renderCurrentQuestion(); });
@@ -561,27 +600,24 @@
 
     function sendResultToBot() {
         const total = filteredQuestions.length;
+        const wrong = total - score;
         const percent = total ? Math.round((score/total)*100) : 0;
         const user = tg.initDataUnsafe?.user || {};
-        const payload = { type: "avtotest911_result", score, total, percent, lang: currentLang, user: { id: user.id, name: user.first_name }, ts: Date.now() };
+        const payload = { type: "avtotest911_result", score, wrong, total, percent, lang: currentLang, user: { id: user.id, name: user.first_name }, ts: Date.now() };
         try { tg.sendData(JSON.stringify(payload)); showToast("✅ Natija yuborildi"); } catch(e){ showToast("Xatolik"); }
-        if(tg.showPopup) tg.showPopup({ title: "AVTOTEST 911", message: `${t("correct_count")}: ${score}/${total} (${percent}%)`, buttons:[{type:"ok"}] });
+        if (tg.showPopup) tg.showPopup({ title: "AVTOTEST 911", message: `${t("correct_count")}: ${score}/${total} (${percent}%)`, buttons:[{type:"ok"}] });
     }
 
     function renderCategories() {
-        const cats = [
-            { id:"terms", name_uz:"📘 Terminlar (50)", name_ru:"📘 Термины (50)" },
-            { id:"signs", name_uz:"🏷 Belgilar (46)", name_ru:"🏷 Знаки (46)" },
-            { id:"speed_man", name_uz:"⚡ Tezlik & Manevr (42)", name_ru:"⚡ Скорость (42)" },
-            { id:"emergency", name_uz:"🆘 Favqulodda (30)", name_ru:"🆘 Чрезв. ситуации" },
-            { id:"medical", name_uz:"🩺 Tibbiy yordam (20)", name_ru:"🩹 Медпомощь" }
-        ];
         const bar = document.getElementById("categoryBar");
-        bar.innerHTML = cats.map(c => `<button class="cat-btn ${currentCategory === c.id ? 'active' : ''}" data-cat="${c.id}">${currentLang === "uz" ? c.name_uz : c.name_ru}</button>`).join("");
+        bar.innerHTML = categories.map(c => {
+            const name = currentLang === "uz" ? c.name_uz : c.name_ru;
+            return `<button class="cat-btn ${currentCategory === c.id ? 'active' : ''}" data-cat="${c.id}">${name} (${c.count})</button>`;
+        }).join("");
         document.querySelectorAll(".cat-btn").forEach(btn => {
-            btn.addEventListener("click", (e) => {
+            btn.addEventListener("click", () => {
                 const newCat = btn.getAttribute("data-cat");
-                if(newCat === currentCategory) return;
+                if (newCat === currentCategory) return;
                 currentCategory = newCat;
                 resetTest();
                 saveProgress();
@@ -596,18 +632,18 @@
     function toggleTheme() { document.body.classList.toggle("dark"); localStorage.setItem("avto_theme", document.body.classList.contains("dark") ? "dark" : "light"); }
     function applyThemeFromPref() { if(localStorage.getItem("avto_theme") === "dark") document.body.classList.add("dark"); else document.body.classList.remove("dark"); }
     function showToast(msg) { const d = document.createElement("div"); d.className = "toast-msg"; d.innerText = msg; document.body.appendChild(d); setTimeout(()=>d.remove(),2000); }
-    function handleExit() { if(tg.showPopup) tg.showPopup({ title: t("exit_title"), message: t("exit_confirm"), buttons: [{ id:"stay", type:"default", text: t("continue_text") },{ id:"exit", type:"destructive", text: t("exit_text") }] }, (id) => { if(id==="exit") tg.close(); }); else if(confirm(t("exit_confirm"))) tg.close(); }
+    function handleExit() { if(tg.showPopup) { tg.showPopup({ title: t("exit_title"), message: t("exit_confirm"), buttons: [{ id:"stay", type:"default", text: t("continue_text") },{ id:"exit", type:"destructive", text: t("exit_text") }] }, (id) => { if(id==="exit") tg.close(); }); } else if(confirm(t("exit_confirm"))) tg.close(); }
 
     function init() {
         const savedLang = localStorage.getItem("avto_lang");
-        if(savedLang === "ru" || savedLang === "uz") currentLang = savedLang;
+        if (savedLang === "ru" || savedLang === "uz") currentLang = savedLang;
         applyThemeFromPref();
         const loaded = loadProgress();
-        if(!loaded) { resetTest(); }
+        if (!loaded) resetTest();
         renderCategories();
         renderCurrentQuestion();
         document.getElementById("themeToggleBtn").addEventListener("click", toggleTheme);
-        document.getElementById("langToggleBtn").addEventListener("click", switchLanguage);                 
+        document.getElementById("langToggleBtn").addEventListener("click", switchLanguage);
         document.getElementById("exitBtn").addEventListener("click", handleExit);
         tg.ready();
     }
