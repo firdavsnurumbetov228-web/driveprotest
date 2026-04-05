@@ -126,8 +126,58 @@
         { q_uz: "“Silliq qoplama” belgisi qaysi?", a_uz: ["1.15", "1.14", "1.16"], correct: 0 },
         { q_uz: "“Kameralar” qanday ma’lumotlarni kuzatadi?", a_uz: ["Tezlik, qatorlar, to‘xtash qoidalari", "Faqat tezlik", "Faqat rang"], correct: 0 },
         { q_uz: "“Yo‘l harakati qoidalari” kim tomonidan tasdiqlanadi?", a_uz: ["Vazirlar Mahkamasi", "Prezident", "Ichki ishlar vazirligi"], correct: 0 },
-        { q_uz: "“Yo‘l harakati ishtirokchisi” kimlar?", a_uz: ["Haydovchilar, piyodalar, yo‘lovchilar", "Faqat haydovchilar", "Faqat piyodalar"], correct: 0 }
-    ];
+        { q_uz: "“Yo‘l harakati ishtirokchisi” kimlar?", a_uz: ["Haydovchilar, piyodalar, yo‘lovchilar", "Faqat haydovchilar", "Faqat piyodalar"], correct: 0 },
+        {
+        q_uz: "“To‘xtash masofasi” tarkibiga qaysilar kiradi?",
+        a_uz: ["Reaksiya masofasi + tormozlanish yo‘li", "Faqat tormoz yo‘li", "Faqat reaksiya vaqti"],
+        correct: 0
+    },
+    {
+        q_uz: "“Harakat xavfsizligi masofasi” nimaga bog‘liq?",
+        a_uz: ["Tezlik, yo‘l sharoiti va transport holatiga", "Faqat tezlikka", "Faqat haydovchiga"],
+        correct: 0
+    },
+    {
+        q_uz: "“Ko‘rinish cheklangan sharoit” deganda nima tushuniladi?",
+        a_uz: ["Yo‘lni 300 m dan kam ko‘rish", "Faqat tunda", "Faqat tuman"],
+        correct: 0
+    },
+    {
+        q_uz: "“Quvib o‘tish” nimani anglatadi?",
+        a_uz: ["Oldinda ketayotgan transportni qarama-qarshi yo‘nalish orqali o‘tib ketish", "Yonidan o‘tish", "Sekinlashish"],
+        correct: 0
+    },
+    {
+        q_uz: "“Yonlama interval” nima?",
+        a_uz: ["Yon tomondan xavfsiz masofa", "Old masofa", "Tezlik oralig‘i"],
+        correct: 0
+    },
+    {
+        q_uz: "“Yo‘lning qatnov qismi kengligi” nimaga ta’sir qiladi?",
+        a_uz: ["O‘tkazish qobiliyatiga", "Faqat tezlikka", "Faqat belgilarga"],
+        correct: 0
+    },
+    {
+        q_uz: "“Transport oqimi intensivligi” nima?",
+        a_uz: ["Bir vaqtda o‘tuvchi transport soni", "Tezlik", "Masofa"],
+        correct: 0
+    },
+    {
+        q_uz: "“Harakat tezligini tanlash” nimaga bog‘liq?",
+        a_uz: ["Yo‘l, ob-havo va transport holatiga", "Faqat belgiga", "Faqat mashinaga"],
+        correct: 0
+    },
+    {
+        q_uz: "“Favqulodda vaziyat” nima?",
+        a_uz: ["Kutilmagan xavfli holat", "Oddiy to‘xtash", "Yo‘l belgisi"],
+        correct: 0
+    },
+    {
+        q_uz: "“Yo‘l belgilarining amal qilish hududi” nimaga bog‘liq?",
+        a_uz: ["Belgi turi va qo‘shimcha belgiga", "Faqat yo‘lga", "Faqat tezlikka"],
+        correct: 0
+    }
+];
     while(termsList.length < 50) termsList.push({ q_uz: `Termin ${termsList.length+1}: Avtomobilni boshqarishda eng muhim xavfsizlik qoidasi?`, a_uz: ["Diqqat va ehtiyot", "Tezlik", "Signal berish"], correct: 0 });
 
     // 2. Majburiyatlar (47) – real mazmunli
@@ -380,6 +430,11 @@
     const safetyList = [
         { q_uz: "Haydovchi qanday hollarda yo‘lni tark etishi kerak?", a_uz: ["Kasallik, charchoq", "Yaxshi kayfiyat", "Tezlikni oshirish"], correct: 0 },
         { q_uz: "Yo‘lda muz bo‘lsa, nima qilish kerak?", a_uz: ["Tezlikni kamaytirish, sirpanishni oldini olish", "Tezlikni oshirish", "To‘xtab turish"], correct: 0 },
+        { q_uz: "Yomg‘irli havoda qanday xavfsizlik choralarini ko‘rish kerak?", a_uz: ["Tezlikni kamaytirish, masofani oshirish", "Tezlikni oshirish", "Hech qanday o‘zgarish kerak emas"], correct: 0 },
+        {q_uz: "Qaysi holatda xavfsizlik kamari taqilishi shart?", a_uz: ["Har doim", "Faqat tezlikni oshirganda", "Faqat shaharda"], correct: 0 },
+        {q_uz: "avtomobilda nechinchi yoshgacha bo‘lgan bolalarni maxsus o‘rindiqda tashish shart?", a_uz: ["12 yoshgacha", "10 yoshgacha", "14 yoshgacha"], correct: 0 },
+        {q_uz: "Qaysi holatda mobil telefondan foydalanish taqiqlanadi?", a_uz: ["Avtomobil harakatda bo‘lsa", "To‘xtab turganda", "Faqat shaharda"], correct: 0 },
+        
         // ... 77 ta
     ];
     while(safetyList.length < 79) safetyList.push({ q_uz: `Xavfsizlik ${safetyList.length+1}: Avtomobilni boshqarishda mobil telefondan foydalanish mumkinmi?`, a_uz: ["Faqat “hands-free” orqali", "Mumkin", "Ta’qiqlangan"], correct: 0 });
@@ -402,36 +457,36 @@
 
     // Barcha savollarni birlashtirish
     const fullQuestions = [
-        ...termsList.map(q => ({ ...q, category: "terms", img: null, q_ru: q.q_uz.replace(/nimani anglatadi/g, "что означает"), a_ru: q.a_uz })),
-        ...dutiesList.map(q => ({ ...q, category: "duties", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
-        ...trafficLightsList.map(q => ({ ...q, category: "traffic_lights", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
-        ...warningSignalsList.map(q => ({ ...q, category: "warning_signals", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
-        ...identificationList.map(q => ({ ...q, category: "identification", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
-        ...warningSignsListOld.map(q => ({ ...q, category: "warning_signs", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
-        ...prioritySignsList.map(q => ({ ...q, category: "priority_signs", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
-        ...prohibitoryList,
-        ...mandatoryList,
-        ...infoServiceList,
-        ...markingsList,
-        ...startDirList,
-        ...positioningList,
-        ...speedList,
-        ...stopParkList,
-        ...overtakingList,
-        ...equalIntersectionList,
-        ...uncontrolledPriorityList,
-        ...controlledList,
-        ...railwayList,
-        ...motorwayList,
-        ...lightsList,
-        ...towingList,
-        ...peopleList,
-        ...cargoList,
-        ...safetyList,
-        ...firstAidList,
-        ...classificationList
-    ];
+    ...termsList.map(q => ({ ...q, category: "terms", img: null, q_ru: q.q_uz.replace(/nimani anglatadi/g, "что означает"), a_ru: q.a_uz })),
+    ...dutiesList.map(q => ({ ...q, category: "duties", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+    ...trafficLightsList.map(q => ({ ...q, category: "traffic_lights", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+    ...warningSignalsList.map(q => ({ ...q, category: "warning_signals", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+    ...identificationList.map(q => ({ ...q, category: "identification", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+    ...warningSignsListOld.map(q => ({ ...q, category: "warning_signs", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
+    ...prioritySignsList.map(q => ({ ...q, category: "priority_signs", img: null, q_ru: q.q_uz, a_ru: q.a_uz })),
 
+    ...prohibitoryList.map(q => ({ ...q, category: "prohibitory" })),
+    ...mandatoryList.map(q => ({ ...q, category: "mandatory" })),
+    ...infoServiceList.map(q => ({ ...q, category: "info_service" })),
+    ...markingsList.map(q => ({ ...q, category: "markings" })),
+    ...startDirList.map(q => ({ ...q, category: "start_direction" })),
+    ...positioningList.map(q => ({ ...q, category: "positioning" })),
+    ...speedList.map(q => ({ ...q, category: "speed" })),
+    ...stopParkList.map(q => ({ ...q, category: "stop_park" })),
+    ...overtakingList.map(q => ({ ...q, category: "overtaking" })),
+    ...equalIntersectionList.map(q => ({ ...q, category: "equal_intersection" })),
+    ...uncontrolledPriorityList.map(q => ({ ...q, category: "uncontrolled_priority" })),
+    ...controlledList.map(q => ({ ...q, category: "controlled" })),
+    ...railwayList.map(q => ({ ...q, category: "railway" })),
+    ...motorwayList.map(q => ({ ...q, category: "motorway" })),
+    ...lightsList.map(q => ({ ...q, category: "lights" })),
+    ...towingList.map(q => ({ ...q, category: "towing" })),
+    ...peopleList.map(q => ({ ...q, category: "people" })),
+    ...cargoList.map(q => ({ ...q, category: "cargo" })),
+    ...safetyList.map(q => ({ ...q, category: "safety" })),
+    ...firstAidList.map(q => ({ ...q, category: "first_aid" })),
+    ...classificationList.map(q => ({ ...q, category: "classification" }))
+];
     const categories = [
         { id: "terms", name_uz: "📘 Terminlar", name_ru: "📘 Термины", count: 50 },
         { id: "duties", name_uz: "👥 Majburiyatlar", name_ru: "👥 Обязанности", count: 47 },
@@ -649,5 +704,6 @@
     }
     init();
 </script>
+
 </body>
-</html>
+</html
