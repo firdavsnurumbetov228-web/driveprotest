@@ -3,7 +3,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from aiogram.filters import Command
 
-TOKEN = "8291260233:AAFBXv_1is_ulavf_cPY7D3tUhxZeSdCXUM"  # xavfsizlik uchun tokenni yashir!
+TOKEN = "8291260233:AAFEnaQvAMkq5zk-Nw3LIde7rxmo9Y4bOjI"  # xavfsizlik uchun tokenni yashir!
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -56,26 +56,27 @@ def get_default_keyboard(user_id: int):
         )
 
 
-# START (IMAGE + TEXT)
 @dp.message(Command("start"))
 async def start(message: types.Message):
-    user_lang[message.from_user.id] = "uz"
-    keyboard = get_default_keyboard(message.from_user.id)
+    user_id = message.from_user.id
+    user_lang[user_id] = "uz"
 
-    photo_url = "https://i.imgur.com/3ZQ3Z4L.png"  # 🔥 shu yerga o‘zingni logo URL qo‘y
+    keyboard = get_default_keyboard(user_id)
+
+    photo = types.FSInputFile("test.jpg")  # 🔥 rasmni project papkaga qo‘y
 
     await message.answer_photo(
-        photo=photo_url,
+        photo=photo,
         caption=(
-            "🚗 AVTOTEST 911 botga xush kelibsiz!\n\n"
+            "🚗 AVTOTEST 911\n"
+            "📘 Haydovchilik imtihoniga tayyorlov\n\n"
             "📚 Terminlarni o‘rganing\n"
             "📝 Bot haqida ma'lumot oling\n"
             "💳 Aktivatsiya qilib test ishlang\n\n"
-            "👇 Pastdagi tugmalardan foydalaning"
+            "📞 Aloqa: +998940907300"
         ),
         reply_markup=keyboard
     )
-
 
 # HAMMA MESSAGE HANDLER (BITTA QILDIM)
 @dp.message()
