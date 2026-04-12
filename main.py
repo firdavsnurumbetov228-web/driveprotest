@@ -3,7 +3,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from aiogram.filters import Command
 
-TOKEN = "8291260233:AAFEnaQvAMkq5zk-Nw3LIde7rxmo9Y4bOjI"  # xavfsizlik uchun tokenni yashir!
+TOKEN = "8291260233:AAFEnaQvAMkq5zk-Nw3LIde7rxmo9Y4bOjI" 
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -63,7 +63,7 @@ async def start(message: types.Message):
 
     keyboard = get_default_keyboard(user_id)
 
-    photo = types.FSInputFile("test.jpg")  # 🔥 rasmni project papkaga qo‘y
+    photo = types.FSInputFile("test.jpg")  
 
     await message.answer_photo(
         photo=photo,
@@ -93,7 +93,7 @@ async def handle_all(message: types.Message):
     # UZ
     if lang == "uz":
         if message.text == "💳 Aktivatsiya / Подписка":
-            await message.answer("💳 Aktivatsiya bo‘limi: tez kunda qo‘shiladi...")
+            await message.answer("💳 Aktivatsiya qilish uchun @sariyev_u bilan bog'laning")
         elif message.text == "🌐 Tilni o‘zgartirish":
             user_lang[user_id] = "ru"
             await message.answer(
