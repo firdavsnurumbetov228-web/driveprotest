@@ -11,10 +11,12 @@
             --bg-primary: #fef2f2; --bg-secondary: #ffffff; --text-primary: #2d1a1a; --text-secondary: #7a4e4e;
             --accent: #cc0000; --accent-dark: #990000; --border-light: #ffcccc;
             --card-shadow: 0 20px 30px -12px rgba(204,0,0,0.15); --progress-bg: #ffe0e0;
+            --correct-bg: #d4edda; --correct-border: #28a745; --wrong-bg: #f8d7da; --wrong-border: #dc3545;
         }
         body.dark {
             --bg-primary: #0a0508; --bg-secondary: #1f1215; --text-primary: #ffe6e6; --text-secondary: #cfa0a0;
             --border-light: #4a2525; --card-shadow: 0 20px 35px -12px rgba(204,0,0,0.3); --progress-bg: #3a2020;
+            --correct-bg: #1e4a2b; --correct-border: #2ecc71; --wrong-bg: #5c2b2b; --wrong-border: #e74c3c;
         }
         body {
             font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-primary); color: var(--text-primary);
@@ -38,8 +40,12 @@
         .answers-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
         .answer-btn { background: var(--bg-primary); border: 1.5px solid var(--border-light); border-radius: 24px; padding: 14px 18px; font-size: 1rem; font-weight: 500; text-align: left; color: var(--text-primary); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 14px; }
         .answer-btn.active-opt { border-color: var(--accent); background: rgba(204,0,0,0.1); box-shadow: 0 0 0 2px rgba(204,0,0,0.2); }
+        .answer-btn.correct-answer { background: var(--correct-bg); border-color: var(--correct-border); }
+        .answer-btn.wrong-answer { background: var(--wrong-bg); border-color: var(--wrong-border); }
         .answer-marker { width: 28px; height: 28px; background: var(--progress-bg); border-radius: 30px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: var(--text-secondary); }
         .answer-btn.active-opt .answer-marker { background: var(--accent); color: white; }
+        .answer-btn.correct-answer .answer-marker { background: var(--correct-border); color: white; }
+        .answer-btn.wrong-answer .answer-marker { background: var(--wrong-border); color: white; }
         .next-btn { width: 100%; background: linear-gradient(95deg, var(--accent), var(--accent-dark)); border: none; border-radius: 60px; padding: 16px; font-weight: 800; font-size: 1rem; color: white; cursor: pointer; transition: 0.2s; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .next-btn:active { transform: scale(0.97); }
         .category-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center; max-height: 150px; overflow-y: auto; padding: 5px; }
@@ -50,6 +56,11 @@
         .score-number { font-size: 3rem; font-weight: 800; color: var(--accent); }
         .restart-btn { background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-light); box-shadow: none; }
         .result-detail { margin: 15px 0; padding: 10px; background: var(--bg-primary); border-radius: 20px; }
+        .mistakes-list { text-align: left; max-height: 300px; overflow-y: auto; margin-top: 15px; background: var(--bg-primary); border-radius: 20px; padding: 15px; }
+        .mistake-item { background: var(--bg-secondary); border-radius: 16px; padding: 12px; margin-bottom: 10px; border-left: 5px solid var(--wrong-border); }
+        .mistake-question { font-weight: 600; margin-bottom: 6px; }
+        .mistake-answer { font-size: 0.9rem; color: var(--text-secondary); }
+        .mistake-correct { color: var(--correct-border); font-weight: 500; }
         footer { text-align: center; margin-top: 20px; font-size: 0.7rem; color: var(--text-secondary); }
         .toast-msg { position: fixed; bottom: 30px; left: 20px; right: 20px; background: var(--accent); color: white; padding: 12px; border-radius: 40px; text-align: center; font-weight: 600; z-index: 1000; animation: fadeOut 2s ease forwards; }
         @keyframes fadeOut { 0% { opacity: 1; transform: translateY(0); } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(20px); visibility: hidden; } }
@@ -89,7 +100,9 @@
             good: "📘 Yaxshi, takrorlang", bad: "⚠️ Qayta o‘qish tavsiya", question_word: "Savol",
             footer: "AVTOTEST 911 | Intellektual test markazi | 1500+ savol",
             access_denied_title: "🔒 Kirish taqiqlangan", access_denied_text: "Bu sahifaga faqat aktivlashtirilgan foydalanuvchilar kira oladi.",
-            contact_btn: "📞 Bog'lanish", your_id: "Sizning ID'ingiz:"
+            contact_btn: "📞 Bog'lanish", your_id: "Sizning ID'ingiz:",
+            mistakes_title: "📋 Xatolar ro'yxati", no_mistakes: "🎉 Tabriklaymiz! Barcha javoblar to'g'ri!",
+            your_answer: "Sizning javobingiz", correct_answer: "To'g'ri javob"
         },
         ru: {
             next_btn: "➡ СЛЕД. ВОПРОС", finish_btn: "✅ ЗАВЕРШИТЬ", select_answer: "Выберите ответ!",
@@ -100,7 +113,9 @@
             good: "📘 Хорошо, повторите", bad: "⚠️ Нужна подготовка", question_word: "Вопрос",
             footer: "AVTOTEST 911 | Интеллектуальный тест-центр | 1500+ вопросов",
             access_denied_title: "🔒 Доступ закрыт", access_denied_text: "Эта страница доступна только для активированных пользователей.",
-            contact_btn: "📞 Связаться", your_id: "Ваш ID:"
+            contact_btn: "📞 Связаться", your_id: "Ваш ID:",
+            mistakes_title: "📋 Список ошибок", no_mistakes: "🎉 Поздравляем! Все ответы верны!",
+            your_answer: "Ваш ответ", correct_answer: "Правильный ответ"
         }
     };
     let currentLang = localStorage.getItem("avto_lang") || "uz";
@@ -110,8 +125,6 @@
     const ALLOWED_USER_IDS = [-1];  // faqat ruxsat berilgan IDlar
     function checkAccess() {
         return true;  // hammaga ochiq (o‘zgartirish mumkin)
-        // const userId = tg.initDataUnsafe?.user?.id;
-        // return ALLOWED_USER_IDS.includes(userId);
     }
 
     // ---------- SAVOLLAR (TO‘LIQ 29 KATEGORIYA) ----------
@@ -1162,11 +1175,18 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
         const grid = document.getElementById("answersGrid");
         answers.forEach((ans, idx) => {
             const btn = document.createElement("button");
-            btn.className = `answer-btn ${saved?.selected === idx ? "active-opt" : ""}`;
+            btn.className = `answer-btn ${saved ? (idx === q.correct ? "correct-answer" : (saved.selected === idx ? "wrong-answer" : "")) : ""}`;
             btn.innerHTML = `<span class="answer-marker">${String.fromCharCode(65+idx)}</span><span>${ans}</span>`;
             btn.onclick = () => {
-                if (quizFinished) return;
-                userAnswers[currentIndex] = { selected: idx, isCorrect: idx === q.correct };
+                if (quizFinished || userAnswers[currentIndex]) return; // уже ответили
+                const isCorrect = idx === q.correct;
+                userAnswers[currentIndex] = { 
+                    selected: idx, 
+                    isCorrect,
+                    questionText: questionText,
+                    answers: answers,
+                    correctIndex: q.correct
+                };
                 saveState();
                 renderCurrentQuestion();
             };
@@ -1191,11 +1211,39 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
     function renderResults() {
         const total = currentQuestions.length;
         let correct = 0;
-        userAnswers.forEach(a => { if (a && a.isCorrect) correct++; });
+        const mistakes = [];
+        userAnswers.forEach((a, idx) => { 
+            if (a && a.isCorrect) correct++; 
+            else if (a) {
+                mistakes.push({
+                    index: idx,
+                    question: a.questionText,
+                    yourAnswer: a.answers[a.selected],
+                    correctAnswer: a.answers[a.correctIndex]
+                });
+            }
+        });
         const percent = Math.round((correct/total)*100);
         const msg = percent >= 90 ? t("perfect") : percent >= 70 ? t("great") : percent >= 50 ? t("good") : t("bad");
         const container = document.getElementById("quizAppContainer");
         if (!container) return;
+        
+        let mistakesHtml = "";
+        if (mistakes.length === 0) {
+            mistakesHtml = `<p>🎉 ${t("no_mistakes")}</p>`;
+        } else {
+            mistakesHtml = `<h4 style="margin-bottom:10px;">${t("mistakes_title")} (${mistakes.length})</h4>`;
+            mistakes.forEach(m => {
+                mistakesHtml += `
+                    <div class="mistake-item">
+                        <div class="mistake-question">${m.index+1}. ${m.question}</div>
+                        <div class="mistake-answer">${t("your_answer")}: <span style="color: var(--wrong-border);">${m.yourAnswer}</span></div>
+                        <div class="mistake-answer">${t("correct_answer")}: <span class="mistake-correct">${m.correctAnswer}</span></div>
+                    </div>
+                `;
+            });
+        }
+
         container.innerHTML = `
             <div class="quiz-card result-card">
                 <div class="score-circle"><div class="score-number">${percent}%</div></div>
@@ -1205,7 +1253,10 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
                     <p>${t("wrong_count")}: ${total-correct}</p>
                     <p>${t("percent_text")}: ${percent}%</p>
                 </div>
-                <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                <div class="mistakes-list">
+                    ${mistakesHtml}
+                </div>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px;">
                     <button class="next-btn restart-btn" id="restartBtn">${t("restart_btn")}</button>
                     <button class="next-btn" id="sendBtn">${t("send_btn")}</button>
                 </div>
@@ -1239,7 +1290,6 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
         if (langBtn) langBtn.innerHTML = lang === "uz" ? "🇷🇺 Рус" : "🇺🇿 O'zbek";
         const footer = document.getElementById("footerText");
         if (footer) footer.innerText = t("footer");
-        // kategoriya tugmalarini yangilash
         document.querySelectorAll(".cat-btn").forEach(btn => {
             const cat = btn.getAttribute("data-cat");
             if (cat) btn.textContent = (categoryNames[currentLang] || categoryNames.uz)[cat] || cat;
@@ -1267,7 +1317,6 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
         buildCategoryTabs();
         renderCurrentQuestion();
 
-        // Event listenerlar
         document.getElementById("themeToggleBtn").onclick = toggleTheme;
         document.getElementById("langToggleBtn").onclick = () => setLanguage(currentLang === "uz" ? "ru" : "uz");
         document.getElementById("exitBtn").onclick = () => {
@@ -1283,7 +1332,6 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
         setLanguage(currentLang);
     }
 
-    // Ishga tushirish
     init();
 })();
 </script>
