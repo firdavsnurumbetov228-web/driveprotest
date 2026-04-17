@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>AVTOTEST 911 · 29 ta kategoriya</title>
+    <title>AVTOTEST 911</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -42,7 +42,7 @@
         .answer-btn.active-opt { border-color: var(--accent); background: rgba(204,0,0,0.1); box-shadow: 0 0 0 2px rgba(204,0,0,0.2); }
         .answer-btn.correct-answer { background: var(--correct-bg); border-color: var(--correct-border); }
         .answer-btn.wrong-answer { background: var(--wrong-bg); border-color: var(--wrong-border); }
-        .answer-marker { width: 28px; height: 28px; background: var(--progress-bg); border-radius: 30px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: var(--text-secondary); }
+        .answer-marker { width: 28px; height: 28px; background: var(--progress-bg); border-radius: 30px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: var(--text-secondary); flex-shrink: 0; }
         .answer-btn.active-opt .answer-marker { background: var(--accent); color: white; }
         .answer-btn.correct-answer .answer-marker { background: var(--correct-border); color: white; }
         .answer-btn.wrong-answer .answer-marker { background: var(--wrong-border); color: white; }
@@ -67,40 +67,28 @@
         .loading-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; }
         .spinner { width: 48px; height: 48px; border: 4px solid var(--border-light); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .access-denied { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; gap: 16px; }
-        .lock-icon { font-size: 64px; }
-        .access-denied h2 { font-size: 1.4rem; color: var(--accent); }
-        .user-id-box { background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 16px; padding: 12px 20px; }
-        .contact-btn { background: linear-gradient(95deg, var(--accent), var(--accent-dark)); color: white; border: none; border-radius: 60px; padding: 14px 28px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 <body>
 <div id="appRoot"><div class="loading-screen"><div class="spinner"></div><p>Tekshirilmoqda...</p></div></div>
 <script>
 (function(){
-    // ---------- TELEGRAM WEB APP ----------
-    const tg = window.Telegram.WebApp || {
-        expand: () => {},
-        ready: () => {},
-        initDataUnsafe: {},
-        sendData: () => {},
-        showPopup: (o, cb) => { alert(o.message); if(cb) cb('ok'); },
+    const tg = window.Telegram?.WebApp || {
+        expand: () => {}, ready: () => {}, initDataUnsafe: {},
+        sendData: () => {}, showPopup: (o, cb) => { alert(o.message); if(cb) cb('ok'); },
         close: () => { window.close(); }
     };
     tg.expand();
 
-    // ---------- TRANSLATIONS ----------
     const translations = {
         uz: {
             next_btn: "➡ KEYINGI SAVOL", finish_btn: "✅ TESTNI TUGATISH", select_answer: "Iltimos, javobni tanlang!",
-            result_title: "AVTOTEST 911", correct_count: "✅ To‘g‘ri javoblar", wrong_count: "❌ Xato javoblar",
+            result_title: "AVTOTEST 911", correct_count: "✅ To'g'ri javoblar", wrong_count: "❌ Xato javoblar",
             percent_text: "📊 Foiz", send_btn: "📨 Natijani botga yuborish", restart_btn: "🔄 Testni qayta boshlash",
-            exit_confirm: "Chiqmoqchimisiz? Jarayon saqlanadi.", exit_title: "Chiqish", continue_text: "Davom etish", exit_text: "Chiqish",
+            exit_confirm: "Chiqmoqchimisiz?", exit_title: "Chiqish", continue_text: "Davom etish", exit_text: "Chiqish",
             saved_progress: "💾 Saqlandi!", perfect: "🏆 MUTLAQ LIDER!", great: "🚗 Ajoyib natija!",
-            good: "📘 Yaxshi, takrorlang", bad: "⚠️ Qayta o‘qish tavsiya", question_word: "Savol",
+            good: "📘 Yaxshi, takrorlang", bad: "⚠️ Qayta o'qish tavsiya", question_word: "Savol",
             footer: "AVTOTEST 911 | Intellektual test markazi | 1500+ savol",
-            access_denied_title: "🔒 Kirish taqiqlangan", access_denied_text: "Bu sahifaga faqat aktivlashtirilgan foydalanuvchilar kira oladi.",
-            contact_btn: "📞 Bog'lanish", your_id: "Sizning ID'ingiz:",
             mistakes_title: "📋 Xatolar ro'yxati", no_mistakes: "🎉 Tabriklaymiz! Barcha javoblar to'g'ri!",
             your_answer: "Sizning javobingiz", correct_answer: "To'g'ri javob"
         },
@@ -108,12 +96,10 @@
             next_btn: "➡ СЛЕД. ВОПРОС", finish_btn: "✅ ЗАВЕРШИТЬ", select_answer: "Выберите ответ!",
             result_title: "AVTOTEST 911", correct_count: "✅ Правильных", wrong_count: "❌ Неправильных",
             percent_text: "📊 Процент", send_btn: "📨 Отправить боту", restart_btn: "🔄 Начать заново",
-            exit_confirm: "Выйти? Прогресс сохранится.", exit_title: "Выход", continue_text: "Продолжить", exit_text: "Выйти",
+            exit_confirm: "Выйти?", exit_title: "Выход", continue_text: "Продолжить", exit_text: "Выйти",
             saved_progress: "💾 Сохранено!", perfect: "🏆 АБСОЛЮТНЫЙ ЛИДЕР!", great: "🚗 Отлично!",
             good: "📘 Хорошо, повторите", bad: "⚠️ Нужна подготовка", question_word: "Вопрос",
             footer: "AVTOTEST 911 | Интеллектуальный тест-центр | 1500+ вопросов",
-            access_denied_title: "🔒 Доступ закрыт", access_denied_text: "Эта страница доступна только для активированных пользователей.",
-            contact_btn: "📞 Связаться", your_id: "Ваш ID:",
             mistakes_title: "📋 Список ошибок", no_mistakes: "🎉 Поздравляем! Все ответы верны!",
             your_answer: "Ваш ответ", correct_answer: "Правильный ответ"
         }
@@ -121,18 +107,11 @@
     let currentLang = localStorage.getItem("avto_lang") || "uz";
     function t(key) { return translations[currentLang][key] || key; }
 
-    // ---------- ACCESS CONTROL ----------
-    const ALLOWED_USER_IDS = [-1];  // faqat ruxsat berilgan IDlar
-    function checkAccess() {
-        return true;  // hammaga ochiq (o‘zgartirish mumkin)
-    }
-
-    // ---------- SAVOLLAR (TO‘LIQ 29 KATEGORIYA) ----------
+    // ---------- SAVOLLAR ----------
     function q(uzQ, uzA, ruQ, ruA, correct, cat, img=null){
         return { q_uz:uzQ, a_uz:uzA, q_ru:ruQ, a_ru:ruA, correct, category:cat, img };
     }
 
-   
 const allQuestions = [
 // 1. TERMINLAR (50)
 q("“Yo‘l” atamasi nimani anglatadi?", ["Harakat uchun mo‘ljallangan yer chizig‘i","Faqat asfalt qoplama","Faqat shaharlararo yo‘llar"], "Что означает термин «дорога»?", ["Полоса земли для движения","Только асфальт","Только межгород"],0,"terms"),
@@ -1019,65 +998,69 @@ q("Harbiy transport vositalari qanday tasniflanadi?", ["Maxsus transport","Yengi
 q("Yong‘in mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil avtomobil","Yuk avtomobili"], "Пожарная машина?", ["Специальный транспорт","Легковой","Грузовой"],0,"classification"),
 q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil avtomobil","Yuk avtomobili"], "Скорая помощь?", ["Специальный транспорт","Легковой","Грузовой"],0,"classification"),
 ];
-    // KATEGORIYA NOMLARI
+
     const categoryNames = {
         uz: {
-            terms: "📖 Terminlar", duties: "⚖️ Yo'l harakati qatnashchilarining majburiyatlari", traffic_lights: "🚦 Svetofor va tartibga soluvchi ishoralar", warning_signals: "⚠️ Ogohlantiruvchi va falokat ishoralari",
+            terms: "📖 Terminlar", duties: "⚖️ Majburiyatlar", traffic_lights: "🚦 Svetofor", warning_signals: "⚠️ Ogohlantirish signallari",identification:"ajratib ko'rsatuvchi belgilar",
             warning_signs: "🚙 Ogohlantiruvchi belgilar", priority_signs: "🥇 Ustuvorlik belgilari", prohibitory: "🚫 Taqiqlovchi belgilar", mandatory: "⬆️ Buyruq beruvchi belgilar",
-            info_service: "ℹ️ Axborot va xizmat ko‘rsatish belgilari", markings: "〰️ Yo'l chiziqlari", start_direction: "🔄 Harakatni boshlash va yo‘nalish o‘zgartirish", positioning: "🚗 Qatnov qismida joylashish",
-            speed: "🏁 Harakatlanish tezligi", stop_park: "🅿️ To‘xtash va to‘xtab turish", overtaking: "🚗 Quvib o‘tish", equal_intersect: "⚖️ Teng ahamiyatli chorrahalar",
-            uncontrolled_priority: "🛑 Ustuvorlik belgili chorrahalar", controlled: "🚦 Tartibga solinadigan chorrahalar", railway: "🚂 Temir yo‘l kesishmalari", motorway: "🛣️ Avtomagistralda harakatlanish",
-            lights: "💡 Tashqi yorug‘lik asboblari", towing: "🔗 Bog‘lash", people: "👥 Odam tashish", cargo: "📦 Yuk tashish", safety: "🛡️ Avtomobilni boshqarish xavfsizligi",
-            first_aid: "🩹 Birinchi tibbiy yordam", classification: "🚘 Transport vositalari klassifikatsiyasi"
+            info_service: "ℹ️ Axborot belgilari", markings: "〰️ Yo'l chiziqlari", start_direction: "🔄 Harakatni boshlash", positioning: "🚗 Qatorda joylashish",
+            speed: "🏁 Tezlik", stop_park: "🅿️ To'xtash", overtaking: "🚗 Quvib o'tish", equal_intersect: "⚖️ Teng chorrahalar",
+            uncontrolled_priority: "🛑 Ustuvorlik belgili chorrahalar", controlled: "🚦 Tartibga solinadigan chorrahalar", railway: "🚂 Temir yo'l", motorway: "🛣️ Avtomagistral",
+            lights: "💡 Chiroqlar", towing: "🔗 Bog'lash", people: "👥 Odam tashish", cargo: "📦 Yuk tashish", safety: "🛡️ Boshqarish xavfsizligi",
+            first_aid: "🩹 Birinchi yordam", classification: "🚘 Transport turlari"
         },
         ru: {
-            terms: "📖 Термины", duties: "⚖️ Обязанности участников движения", traffic_lights: "🚦 Светофор и сигналы регулировщика", warning_signals: "⚠️ Предупредительные и аварийные сигналы",
+            terms: "📖 Термины", duties: "⚖️ Обязанности", traffic_lights: "🚦 Светофор", warning_signals: "⚠️ Предупредит. сигналы",identification:"выделительные знаки",
             warning_signs: "🚙 Предупреждающие знаки", priority_signs: "🥇 Знаки приоритета", prohibitory: "🚫 Запрещающие знаки", mandatory: "⬆️ Предписывающие знаки",
-            info_service: "ℹ️ Информация и сервис", markings: "〰️ Дорожная разметка", start_direction: "🔄 Начало движения и смена направления", positioning: "🚗 Расположение ТС на проезжей части",
-            speed: "🏁 Скорость движения", stop_park: "🅿️ Остановка и стоянка", overtaking: "🚗 Обгон", equal_intersect: "⚖️ Равнозначные перекрёстки",
-            uncontrolled_priority: "🛑 Перекрёстки с приоритетом", controlled: "🚦 Регулируемые перекрёстки", railway: "🚂 Движение через ж/д переезды", motorway: "🛣️ Движение по автомагистрали",
-            lights: "💡 Внешние световые приборы", towing: "🔗 Буксировка", people: "👥 Перевозка людей", cargo: "📦 Перевозка грузов", safety: "🛡️ Безопасность управления ТС",
-            first_aid: "🩹 Первая медицинская помощь", classification: "🚘 Классификация транспортных средств"
+            info_service: "ℹ️ Информационные знаки", markings: "〰️ Разметка", start_direction: "🔄 Начало движения", positioning: "🚗 Расположение на дороге",
+            speed: "🏁 Скорость", stop_park: "🅿️ Остановка/стоянка", overtaking: "🚗 Обгон", equal_intersect: "⚖️ Равнозначные перекрёстки",
+            uncontrolled_priority: "🛑 Приоритет знаков", controlled: "🚦 Регулируемые перекрёстки", railway: "🚂 Ж/д переезд", motorway: "🛣️ Автомагистраль",
+            lights: "💡 Световые приборы", towing: "🔗 Буксировка", people: "👥 Перевозка людей", cargo: "📦 Перевозка грузов", safety: "🛡️ Безопасность",
+            first_aid: "🩹 Первая помощь", classification: "🚘 Классификация ТС"
         }
     };
 
-    // ---------- GLOBAL STATE ----------
+    // ---------- STATE ----------
     let currentCategory = "terms";
     let currentQuestions = [];
     let currentIndex = 0;
     let userAnswers = [];
     let quizFinished = false;
+    let shuffleCache = [];  // KEY: stores shuffled order per question index
 
-    // ---------- YORDAMCHI FUNKSIYALAR ----------
+    // ---------- SHUFFLE FUNCTIONS ----------
+    function getShuffled(idx) {
+        if (!shuffleCache[idx]) {
+            const q = currentQuestions[idx];
+            const n = q.a_uz.length;
+            // Build random permutation of indices
+            const indices = Array.from({length: n}, (_, i) => i);
+            for (let i = n - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
+            shuffleCache[idx] = {
+                a_uz: indices.map(i => q.a_uz[i]),
+                a_ru: indices.map(i => q.a_ru[i]),
+                correct: indices.indexOf(q.correct)  // where did the correct answer end up?
+            };
+        }
+        return shuffleCache[idx];
+    }
+
+    function resetShuffle() {
+        shuffleCache = [];
+    }
+
+    // ---------- HELPERS ----------
     function getQuestionsByCategory(cat) {
         return allQuestions.filter(q => q.category === cat);
     }
     function getUniqueCategories() {
-        const s = new Set();
-        allQuestions.forEach(q => s.add(q.category));
-        return s;
-    }
-    function loadSavedState() {
-        try {
-            const saved = localStorage.getItem("avto_quiz_full29");
-            if (saved) {
-                const data = JSON.parse(saved);
-                currentCategory = data.currentCategory || "terms";
-                userAnswers = data.userAnswers || [];
-                currentIndex = data.currentIndex || 0;
-                quizFinished = data.quizFinished || false;
-                return true;
-            }
-        } catch(e) {}
-        return false;
-    }
-    function saveState() {
-        if (quizFinished) return;
-        try {
-            localStorage.setItem("avto_quiz_full29", JSON.stringify({
-                currentCategory, userAnswers, currentIndex, quizFinished
-            }));
-        } catch(e) {}
+        const seen = new Set();
+        const cats = [];
+        allQuestions.forEach(q => { if (!seen.has(q.category)) { seen.add(q.category); cats.push(q.category); } });
+        return cats;
     }
     function showToast(msg) {
         const old = document.querySelector(".toast-msg");
@@ -1088,8 +1071,9 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 2200);
     }
+    function t(key) { return translations[currentLang][key] || key; }
 
-    // ---------- ASOSIY UI ----------
+    // ---------- MAIN UI ----------
     function showMainApp() {
         document.getElementById("appRoot").innerHTML = `
             <div class="main-container">
@@ -1104,18 +1088,6 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
                 <div id="categoryBar" class="category-tabs"></div>
                 <div id="quizAppContainer"></div>
                 <footer id="footerText">${t("footer")}</footer>
-            </div>
-        `;
-    }
-
-    function showAccessDenied() {
-        document.getElementById("appRoot").innerHTML = `
-            <div class="access-denied">
-                <div class="lock-icon">🔒</div>
-                <h2>${t("access_denied_title")}</h2>
-                <p>${t("access_denied_text")}</p>
-                <div class="user-id-box">${t("your_id")} <strong>${tg.initDataUnsafe?.user?.id || "Noma'lum"}</strong></div>
-                <button class="contact-btn" onclick="window.open('https://t.me/sariyev_u','_blank')">${t("contact_btn")}</button>
             </div>
         `;
     }
@@ -1136,11 +1108,10 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
                 currentIndex = 0;
                 userAnswers = new Array(currentQuestions.length).fill(null);
                 quizFinished = false;
-                saveState();
+                resetShuffle();
                 renderCurrentQuestion();
                 document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
-                showToast(t("saved_progress"));
             };
             container.appendChild(btn);
         }
@@ -1152,11 +1123,14 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
             return;
         }
         const q = currentQuestions[currentIndex];
+        const sh = getShuffled(currentIndex);  // get or create shuffled version
         const questionText = currentLang === "uz" ? q.q_uz : q.q_ru;
-        const answers = currentLang === "uz" ? q.a_uz : q.a_ru;
+        const answers = currentLang === "uz" ? sh.a_uz : sh.a_ru;
+        const correctIdx = sh.correct;
         const saved = userAnswers[currentIndex];
         const container = document.getElementById("quizAppContainer");
         if (!container) return;
+
         container.innerHTML = `
             <div class="quiz-card">
                 <div class="progress-area">
@@ -1172,26 +1146,29 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
                 <button class="next-btn" id="nextBtn">${currentIndex === currentQuestions.length-1 ? t("finish_btn") : t("next_btn")}</button>
             </div>
         `;
+
         const grid = document.getElementById("answersGrid");
         answers.forEach((ans, idx) => {
             const btn = document.createElement("button");
-            btn.className = `answer-btn ${saved ? (idx === q.correct ? "correct-answer" : (saved.selected === idx ? "wrong-answer" : "")) : ""}`;
+            const isAnswered = !!saved;
+            const isSelected = saved && saved.selected === idx;
+            const isCorrect = idx === correctIdx;
+            let className = "answer-btn";
+            if (isAnswered) {
+                if (isCorrect) className += " correct-answer";
+                else if (isSelected) className += " wrong-answer";
+            }
+            btn.className = className;
             btn.innerHTML = `<span class="answer-marker">${String.fromCharCode(65+idx)}</span><span>${ans}</span>`;
             btn.onclick = () => {
-                if (quizFinished || userAnswers[currentIndex]) return; // уже ответили
-                const isCorrect = idx === q.correct;
-                userAnswers[currentIndex] = { 
-                    selected: idx, 
-                    isCorrect,
-                    questionText: questionText,
-                    answers: answers,
-                    correctIndex: q.correct
-                };
-                saveState();
+                if (quizFinished || userAnswers[currentIndex]) return;
+                const correct = idx === correctIdx;
+                userAnswers[currentIndex] = { selected: idx, isCorrect: correct };
                 renderCurrentQuestion();
             };
             grid.appendChild(btn);
         });
+
         document.getElementById("nextBtn").onclick = () => {
             if (!userAnswers[currentIndex]) {
                 showToast(t("select_answer"));
@@ -1199,7 +1176,6 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
             }
             if (currentIndex + 1 < currentQuestions.length) {
                 currentIndex++;
-                saveState();
                 renderCurrentQuestion();
             } else {
                 quizFinished = true;
@@ -1212,22 +1188,29 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
         const total = currentQuestions.length;
         let correct = 0;
         const mistakes = [];
-        userAnswers.forEach((a, idx) => { 
-            if (a && a.isCorrect) correct++; 
-            else if (a) {
+        for (let idx = 0; idx < total; idx++) {
+            const q = currentQuestions[idx];
+            const ans = userAnswers[idx];
+            if (!ans) continue;
+            if (ans.isCorrect) {
+                correct++;
+            } else {
+                const sh = getShuffled(idx);
+                const questionText = currentLang === "uz" ? q.q_uz : q.q_ru;
+                const answers = currentLang === "uz" ? sh.a_uz : sh.a_ru;
                 mistakes.push({
                     index: idx,
-                    question: a.questionText,
-                    yourAnswer: a.answers[a.selected],
-                    correctAnswer: a.answers[a.correctIndex]
+                    question: questionText,
+                    yourAnswer: answers[ans.selected] || "?",
+                    correctAnswer: answers[sh.correct] || "?"
                 });
             }
-        });
-        const percent = Math.round((correct/total)*100);
+        }
+        const percent = total > 0 ? Math.round((correct/total)*100) : 0;
         const msg = percent >= 90 ? t("perfect") : percent >= 70 ? t("great") : percent >= 50 ? t("good") : t("bad");
         const container = document.getElementById("quizAppContainer");
         if (!container) return;
-        
+
         let mistakesHtml = "";
         if (mistakes.length === 0) {
             mistakesHtml = `<p>🎉 ${t("no_mistakes")}</p>`;
@@ -1243,7 +1226,6 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
                 `;
             });
         }
-
         container.innerHTML = `
             <div class="quiz-card result-card">
                 <div class="score-circle"><div class="score-number">${percent}%</div></div>
@@ -1253,9 +1235,7 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
                     <p>${t("wrong_count")}: ${total-correct}</p>
                     <p>${t("percent_text")}: ${percent}%</p>
                 </div>
-                <div class="mistakes-list">
-                    ${mistakesHtml}
-                </div>
+                <div class="mistakes-list">${mistakesHtml}</div>
                 <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px;">
                     <button class="next-btn restart-btn" id="restartBtn">${t("restart_btn")}</button>
                     <button class="next-btn" id="sendBtn">${t("send_btn")}</button>
@@ -1267,7 +1247,7 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
             currentIndex = 0;
             userAnswers = new Array(currentQuestions.length).fill(null);
             quizFinished = false;
-            saveState();
+            resetShuffle();
             renderCurrentQuestion();
         };
         document.getElementById("sendBtn").onclick = () => {
@@ -1294,29 +1274,17 @@ q("Tez yordam mashinasi qanday transport vositasi?", ["Maxsus transport","Yengil
             const cat = btn.getAttribute("data-cat");
             if (cat) btn.textContent = (categoryNames[currentLang] || categoryNames.uz)[cat] || cat;
         });
-        if (!quizFinished && currentQuestions.length) renderCurrentQuestion();
-        else if (quizFinished) renderResults();
-        else renderCurrentQuestion();
+        if (quizFinished) renderResults();
+        else if (currentQuestions.length > 0) renderCurrentQuestion();
     }
 
-    // ---------- BOSH IKKI ----------
     function init() {
         initTheme();
-        if (!checkAccess()) {
-            showAccessDenied();
-            return;
-        }
         showMainApp();
-        loadSavedState();
         currentQuestions = getQuestionsByCategory(currentCategory);
-        if (userAnswers.length !== currentQuestions.length) {
-            userAnswers = new Array(currentQuestions.length).fill(null);
-            currentIndex = 0;
-            quizFinished = false;
-        }
+        userAnswers = new Array(currentQuestions.length).fill(null);
         buildCategoryTabs();
         renderCurrentQuestion();
-
         document.getElementById("themeToggleBtn").onclick = toggleTheme;
         document.getElementById("langToggleBtn").onclick = () => setLanguage(currentLang === "uz" ? "ru" : "uz");
         document.getElementById("exitBtn").onclick = () => {
