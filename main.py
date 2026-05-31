@@ -1,14 +1,17 @@
+import os
 import asyncio
+from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from aiogram.filters import Command
 
-TOKEN = "8291260233:AAFEnaQvAMkq5zk-Nw3LIde7rxmo9Y4bOjI"
+load_dotenv()
+
+TOKEN = os.getenv("BOT_TOKEN")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-# USER LANGUAGE STORAGE
 user_lang = {}
 
 
@@ -19,18 +22,27 @@ def get_keyboard(lang: str):
             keyboard=[
                 [
                     KeyboardButton(
-                        text="📚 Terminlar",
+                        text="📝 Mavzuni tanlash",
                         web_app=WebAppInfo(url="https://auto-test-911-lg62.vercel.app/")
-                    ),
-                    KeyboardButton(
-                        text="📝 Bot haqida qisqacha",
-                        web_app=WebAppInfo(url="https://avtot-test-malumotlar.vercel.app/")
                     )
                 ],
                 [
-                    KeyboardButton(text="💳 Aktivatsiya"),
-                    KeyboardButton(text="🌐 Tilni o‘zgartirish")
-                ]
+                    KeyboardButton(
+                        text="📚 Imtihon topshirish",
+                        web_app=WebAppInfo(url="https://auto-test-911-lg62.vercel.app/")
+                    )
+                ],
+                [KeyboardButton(text="💳 Aktivatsiya")],
+                [
+                    KeyboardButton(
+                        text="🎥 Video qo‘llanma",
+                    ),
+                    KeyboardButton(
+                        text="ℹ️ Bot haqida qisqacha",
+                        web_app=WebAppInfo(url="https://avtot-test-malumotlar.vercel.app/")
+                    )
+                ],
+                [KeyboardButton(text="🌐 Tilni o‘zgartirish")]
             ],
             resize_keyboard=True
         )
@@ -39,22 +51,30 @@ def get_keyboard(lang: str):
             keyboard=[
                 [
                     KeyboardButton(
-                        text="📚 Термины",
+                        text="📝 ВЫБИРАЕМ ТЕМУ",
                         web_app=WebAppInfo(url="https://auto-test-911-lg62.vercel.app/")
-                    ),
-                    KeyboardButton(
-                        text="📝 О боте",
-                        web_app=WebAppInfo(url="https://avtot-test-malumotlar.vercel.app/")
                     )
                 ],
                 [
-                    KeyboardButton(text="💳 Активация"),
-                    KeyboardButton(text="🌐 Сменить язык")
-                ]
+                    KeyboardButton(
+                        text="📚 Сдавать экзамен",
+                        web_app=WebAppInfo(url="https://auto-test-911-lg62.vercel.app/")
+                    )
+                ],
+                [KeyboardButton(text="💳 Активация подписки")],
+                [
+                    KeyboardButton(
+                        text="🎥 Видео инструкция",
+                    ),
+                    KeyboardButton(
+                        text="ℹ️ Коротко о Боте",
+                        web_app=WebAppInfo(url="https://avtot-test-malumotlar.vercel.app/")
+                    )
+                ],
+                [KeyboardButton(text="🌐 Сменить язык")]
             ],
             resize_keyboard=True
         )
-
 
 # 🚀 START
 @dp.message(Command("start"))
@@ -106,7 +126,9 @@ async def lang_uz(message: types.Message):
         "🇺🇿 Til o‘zbek tiliga o‘zgartirildi!",
         reply_markup=get_keyboard("uz")
     )
-
+@dp.message(F.text == "🎥 Video qo‘llanma")
+async def video_uz(message: types.Message):
+    await message.answer("🎥 Video qo‘llanma")
 
 # 📊 WEB APP DATA
 @dp.message(F.web_app_data)
