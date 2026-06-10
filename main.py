@@ -88,7 +88,7 @@ def get_keyboard(lang: str):
                     KeyboardButton(
                         text="📝 Mavzuni tanlash",
                         web_app=WebAppInfo(
-                            url="https://auto-test-911-lg62.vercel.app/"
+                            url=f"https://auto-test-911-lg62.vercel.app/?lang={lang}"
                         )
                     )
                 ],
@@ -113,7 +113,7 @@ def get_keyboard(lang: str):
                 KeyboardButton(
                     text="📝 ВЫБИРАЕМ ТЕМУ",
                     web_app=WebAppInfo(
-                        url="https://auto-test-911-lg62.vercel.app/"
+                        url=f"https://auto-test-911-lg62.vercel.app/?lang={lang}"
                     )
                 )
             ],
@@ -140,7 +140,8 @@ def get_keyboard(lang: str):
 async def start(message: types.Message):
     user_id = message.from_user.id
 
-    await set_lang(user_id, "uz")
+    lang = await get_lang(user_id)
+    await set_lang(user_id, lang)
 
     await message.answer_photo(
         photo=types.FSInputFile("testt.jpg"),

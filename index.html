@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>AVTOTEST 911</title>
+    <title>Driving-pro-test</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -369,7 +369,13 @@
             progress_saved:"📌 Продолжение", progress_fresh:"Начато заново"
         }
     };
-    let currentLang = localStorage.getItem("avto_lang") || "uz";
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get("lang");
+
+    if (urlLang === "uz" || urlLang === "ru") {
+    localStorage.setItem("avto_lang", urlLang);
+    }
+let currentLang = localStorage.getItem("avto_lang") || "uz";
     function t(k){ return translations[currentLang][k] || k; }
 
     // ─── SAVOL YARATUVCHI ───
@@ -1735,11 +1741,10 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
                 <div class="brand-header">
                     <div class="logo">
                         <span class="logo-icon">🚨</span>
-                        <div><div class="logo-text">AVTOTEST 911</div><div class="logo-sub">avtotest</div></div>
+                        <div><div class="logo-text">Driving pro test</div><div class="logo-sub">driving pro</div></div>
                     </div>
                     <div class="control-panel">
                         <button class="icon-btn" id="themeBtn">☀️ Kunduz</button>
-                        <button class="icon-btn" id="langBtn">🇷🇺 Рус</button>
                         <button class="icon-btn exit-btn" id="exitBtn">✕ Chiqish</button>
                     </div>
                 </div>
@@ -1880,7 +1885,7 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
             renderQ();
         };
         document.getElementById("sendBtn").onclick=()=>{
-            const txt=`📊 AVTOTEST 911:\n✅ ${correct}/${total}\n📈 ${pct}%\n🏷 ${currentCategory}`;
+            const txt=`📊 Driving pro-test:\n✅ ${correct}/${total}\n📈 ${pct}%\n🏷 ${currentCategory}`;
             try{ tg.sendData(JSON.stringify({score:pct,correct,total,category:currentCategory})); }
             catch(e){ alert(txt); }
         };
