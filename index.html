@@ -351,7 +351,7 @@
             exit_confirm:"Chiqmoqchimisiz?", exit_title:"Chiqish", continue_text:"Davom etish", exit_text:"Chiqish",
             saved_progress:"💾 Saqlandi!", perfect:"🏆 MUTLAQ LIDER!", great:"🚗 Ajoyib natija!",
             good:"📘 Yaxshi, takrorlang", bad:"⚠️ Qayta o'qish tavsiya",
-            question_word:"SAVOL", footer:"AVTOTEST 911 · 1500+ savol · Intellektual test markazi",
+            question_word:"SAVOL", footer:"Driving pro-teest  · Intellektual testlar",
             mistakes_title:"📋 Xatolar ro'yxati", no_mistakes:"🎉 Barcha javoblar to'g'ri!",
             your_answer:"Sizning javobingiz", correct_answer:"To'g'ri javob",
             progress_saved:"📌 Davom ettirilmoqda", progress_fresh:"Yangi boshlandi"
@@ -1885,7 +1885,7 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
             renderQ();
         };
         document.getElementById("sendBtn").onclick=()=>{
-            const txt=`📊 Driving pro-test:\n✅ ${correct}/${total}\n📈 ${pct}%\n🏷 ${currentCategory}`;
+            const txt=`📊 Driving pro test:\n✅ ${correct}/${total}\n📈 ${pct}%\n🏷 ${currentCategory}`;
             try{ tg.sendData(JSON.stringify({score:pct,correct,total,category:currentCategory})); }
             catch(e){ alert(txt); }
         };
@@ -1945,10 +1945,7 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
 
         const isLight=document.body.classList.contains("light");
         document.getElementById("themeBtn").innerHTML=isLight?"🌙 Tungi":"☀️ Kunduz";
-        document.getElementById("langBtn").innerHTML=currentLang==="uz"?"🇷🇺 Рус":"🇺🇿 O'zbek";
-
         document.getElementById("themeBtn").onclick=toggleTheme;
-        document.getElementById("langBtn").onclick=()=>setLang(currentLang==="uz"?"ru":"uz");
         document.getElementById("exitBtn").onclick=()=>{
             tg.showPopup({title:t("exit_title"),message:t("exit_confirm"),buttons:[{id:"c",type:"default",text:t("continue_text")},{id:"x",type:"destructive",text:t("exit_text")}]},(id)=>{ if(id==="x") tg.close(); });
         };
