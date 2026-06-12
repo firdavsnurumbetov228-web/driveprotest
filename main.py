@@ -146,7 +146,7 @@ async def start(message: types.Message):
     await message.answer_photo(
         photo=types.FSInputFile("testt.jpg"),
         caption=(
-            "🚗 Driving pro test\n"
+            "🚗 Drive pro test\n"
             "📘 Haydovchilik imtihoniga tayyorlov\n\n"
             "📚 Terminlarni o‘rganing\n"
             "📝 Bot haqida ma'lumot oling\n"
