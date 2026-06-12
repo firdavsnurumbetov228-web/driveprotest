@@ -1740,7 +1740,7 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
             <div class="main-container">
                 <div class="brand-header">
                     <div class="logo">
-                        <span class="logo-icon">🚨</span>
+                        <span class="logo-icon"></span>
                         <div><div class="logo-text">Driving pro test</div><div class="logo-sub">driving pro</div></div>
                     </div>
                     <div class="control-panel">
@@ -1885,7 +1885,7 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
             renderQ();
         };
         document.getElementById("sendBtn").onclick=()=>{
-            const txt=`📊 Driving pro test:\n✅ ${correct}/${total}\n📈 ${pct}%\n🏷 ${currentCategory}`;
+            const txt=`📊 Drive pro test:\n✅ ${correct}/${total}\n📈 ${pct}%\n🏷 ${currentCategory}`;
             try{ tg.sendData(JSON.stringify({score:pct,correct,total,category:currentCategory})); }
             catch(e){ alert(txt); }
         };

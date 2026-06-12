@@ -163,7 +163,7 @@ async def start(message: types.Message):
 @dp.message(F.text, F.text.in_(ACTIVATION_TEXTS))
 async def activation(message: types.Message):
     await message.answer(
-        "💳 Aktivatsiya uchun @sariyev_u bilan bog‘laning"
+        "💳 Aktivatsiya uchun @DRIVE_PRO_admin bilan bog‘laning"
     )
 
 
