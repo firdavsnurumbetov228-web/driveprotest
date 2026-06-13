@@ -372,9 +372,28 @@
     const params = new URLSearchParams(window.location.search);
     const urlLang = params.get("lang");
 
+    // URL parametri har doim localStorage dan USTUN — til o'zgartirish ishlashi uchun
     if (urlLang === "uz" || urlLang === "ru") {
-    localStorage.setItem("avto_lang", urlLang);
+        localStorage.setItem("avto_lang", urlLang);
     }
+    // Telegram WebApp hash (#) orqali ham lang kelishi mumkin
+    const hashParams = new URLSearchParams(window.location.hash.replace("#", ""));
+    const hashLang = hashParams.get("lang");
+    if (hashLang === "uz" || hashLang === "ru") {
+        localStorage.setItem("avto_lang", hashLang);
+    }
+    // Telegram tgWebAppData dan lang olishga urinish
+    try {
+        if (window.Telegram && window.Telegram.WebApp) {
+            const tg = window.Telegram.WebApp;
+            const startParam = tg.initDataUnsafe && tg.initDataUnsafe.start_param;
+            if (startParam === "lang_ru") {
+                localStorage.setItem("avto_lang", "ru");
+            } else if (startParam === "lang_uz") {
+                localStorage.setItem("avto_lang", "uz");
+            }
+        }
+    } catch(e) {}
 let currentLang = localStorage.getItem("avto_lang") || "uz";
     function t(k){ return translations[currentLang][k] || k; }
 

@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.storage.memory import MemoryStorage
 
 import database as db
-from config import BOT_TOKEN, ADMIN_ID
+from config import BOT_TOKEN, ADMIN_IDS
 from keyboards import (
     get_main_keyboard,
     get_phone_keyboard,
@@ -78,7 +78,7 @@ async def cmd_start(message: types.Message, state: FSMContext):
     await state.clear()
 
     # ── Admin ──
-    if user_id == ADMIN_ID:
+    if user_id in ADMIN_IDS:
         await message.answer(
             "👨‍💼 *Admin paneliga xush kelibsiz!*\n\nQuyidagi amallardan birini tanlang:",
             parse_mode="Markdown",
@@ -188,7 +188,7 @@ async def _finish_registration(
     user = await db.get_user(user_id)
     name = user["full_name"] if user else "—"
 
-    # ── Admin ga xabar ──
+    # ── Adminlarga xabar ──
     admin_msg = (
         f"🆕 *Yangi foydalanuvchi ro'yxatdan o'tdi!*\n\n"
         f"👤 Ism: {name}\n"
@@ -196,10 +196,11 @@ async def _finish_registration(
         f"🆔 ID: `{user_id}`\n"
         f"🌐 Til: {lang.upper()}"
     )
-    try:
-        await bot.send_message(ADMIN_ID, admin_msg, parse_mode="Markdown")
-    except Exception:
-        pass
+    for admin_id in ADMIN_IDS:
+        try:
+            await bot.send_message(admin_id, admin_msg, parse_mode="Markdown")
+        except Exception:
+            pass
 
     # ── Userga javob ──
     text = (
@@ -230,7 +231,7 @@ async def _finish_registration(
 # ─────────────────────────────────────────────
 @dp.callback_query(F.data == "admin_users")
 async def cb_admin_users(callback: types.CallbackQuery):
-    if callback.from_user.id != ADMIN_ID:
+    if callback.from_user.id not in ADMIN_IDS:
         return await callback.answer("❌ Ruxsat yo'q", show_alert=True)
 
     users = await db.get_all_users()
@@ -266,7 +267,7 @@ async def cb_admin_users(callback: types.CallbackQuery):
 # ─────────────────────────────────────────────
 @dp.callback_query(F.data == "admin_stats")
 async def cb_admin_stats(callback: types.CallbackQuery):
-    if callback.from_user.id != ADMIN_ID:
+    if callback.from_user.id not in ADMIN_IDS:
         return await callback.answer("❌ Ruxsat yo'q", show_alert=True)
 
     total, activated, pending = await db.get_stats()
@@ -293,7 +294,7 @@ async def cb_admin_stats(callback: types.CallbackQuery):
 # ─────────────────────────────────────────────
 @dp.callback_query(F.data == "admin_activate")
 async def cb_admin_activate_list(callback: types.CallbackQuery):
-    if callback.from_user.id != ADMIN_ID:
+    if callback.from_user.id not in ADMIN_IDS:
         return await callback.answer("❌ Ruxsat yo'q", show_alert=True)
 
     users = await db.get_pending_users()
@@ -316,7 +317,7 @@ async def cb_admin_activate_list(callback: types.CallbackQuery):
 # ─────────────────────────────────────────────
 @dp.callback_query(F.data == "admin_deactivate")
 async def cb_admin_deactivate_list(callback: types.CallbackQuery):
-    if callback.from_user.id != ADMIN_ID:
+    if callback.from_user.id not in ADMIN_IDS:
         return await callback.answer("❌ Ruxsat yo'q", show_alert=True)
 
     users = await db.get_activated_users()
@@ -339,7 +340,7 @@ async def cb_admin_deactivate_list(callback: types.CallbackQuery):
 # ─────────────────────────────────────────────
 @dp.callback_query(F.data.startswith("activate_"))
 async def cb_do_activate(callback: types.CallbackQuery):
-    if callback.from_user.id != ADMIN_ID:
+    if callback.from_user.id not in ADMIN_IDS:
         return await callback.answer("❌ Ruxsat yo'q", show_alert=True)
 
     target_id = int(callback.data.split("_", 1)[1])
@@ -385,7 +386,7 @@ async def cb_do_activate(callback: types.CallbackQuery):
 # ─────────────────────────────────────────────
 @dp.callback_query(F.data.startswith("deactivate_"))
 async def cb_do_deactivate(callback: types.CallbackQuery):
-    if callback.from_user.id != ADMIN_ID:
+    if callback.from_user.id not in ADMIN_IDS:
         return await callback.answer("❌ Ruxsat yo'q", show_alert=True)
 
     target_id = int(callback.data.split("_", 1)[1])
@@ -410,7 +411,7 @@ async def cb_do_deactivate(callback: types.CallbackQuery):
         await bot.send_message(
             target_id,
             notify_text,
-            parse_mode="Markdown",
+            parse_mode="MarkdownV2",
             reply_markup=get_main_keyboard(lang, activated=False),
         )
     except Exception:
@@ -429,7 +430,7 @@ async def cb_do_deactivate(callback: types.CallbackQuery):
 # ─────────────────────────────────────────────
 @dp.callback_query(F.data == "admin_back")
 async def cb_admin_back(callback: types.CallbackQuery):
-    if callback.from_user.id != ADMIN_ID:
+    if callback.from_user.id not in ADMIN_IDS:
         return await callback.answer()
     await callback.message.edit_text(
         "👨‍💼 *Admin paneliga xush kelibsiz!*\n\nQuyidagi amallardan birini tanlang:",
@@ -444,20 +445,35 @@ async def cb_admin_back(callback: types.CallbackQuery):
 # ─────────────────────────────────────────────
 @dp.message(F.text.in_(ACTIVATION_TEXTS))
 async def msg_activation(message: types.Message):
-    lang = await db.get_lang(message.from_user.id)
-    text = (
-        "💳 *Aktivatsiya*\n\n"
-        "Aktivatsiya uchun admin bilan bog'laning:\n"
-        "@DRIVE_PRO_admin\n\n"
-        "📞 Tel: +998940907300"
-        if lang == "uz"
-        else
-        "💳 *Активация*\n\n"
-        "Для активации свяжитесь с администратором:\n"
-        "@DRIVE_PRO_admin\n\n"
-        "📞 Тел: +998940907300"
-    )
-    await message.answer(text, parse_mode="Markdown")
+    user_id = message.from_user.id
+    lang = await db.get_lang(user_id)
+    is_active = await db.is_activated(user_id)
+
+    if is_active:
+        # ── Allaqachon faollashtirilgan ──
+        text = (
+            "✅ *Siz allaqachon aktivatsiyaga egasiz!*\n\n"
+            "Testlardan to'liq foydalana olasiz. 🚗"
+            if lang == "uz"
+            else
+            "✅ *У вас уже есть активация!*\n\n"
+            "Вы можете пользоваться тестами в полном объёме. 🚗"
+        )
+    else:
+        # ── Hali faollashtirilmagan ──
+        text = (
+            "💳 *Aktivatsiya*\n\n"
+            "Aktivatsiya uchun admin bilan bog'laning:\n"
+            "@DRIVE_PRO_admin\n\n"
+            "📞 Tel: +998940907300"
+            if lang == "uz"
+            else
+            "💳 *Активация*\n\n"
+            "Для активации свяжитесь с администратором:\n"
+            "@DRIVE_PRO_admin\n\n"
+            "📞 Тел: +998940907300"
+        )
+    await message.answer(text, parse_mode="MarkdownV2")
 
 
 # ─────────────────────────────────────────────

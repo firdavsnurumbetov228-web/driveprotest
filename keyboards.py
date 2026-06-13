@@ -1,3 +1,5 @@
+import time as _time
+
 from aiogram.types import (
     ReplyKeyboardMarkup,
     KeyboardButton,
@@ -26,14 +28,20 @@ def get_main_keyboard(lang: str, activated: bool = False) -> ReplyKeyboardMarkup
     """
     activated=True  → mini-app tugmasi bor (to'liq klaviatura)
     activated=False → mini-app tugmasi yo'q (cheklangan klaviatura)
+
+    URL ga 't=' timestamp qo'shiladi — Telegram keshini o'chiradi,
+    til o'zgarganda mini-app ham yangi tilda ochiladi.
     """
+    # Cache-buster: har safar til o'zgarganda Telegram yangi URL ko'radi
+    ts = int(_time.time())
+
     if lang == "uz":
         rows = []
         if activated:
             rows.append([
                 KeyboardButton(
                     text="📝 Mavzuni tanlash",
-                    web_app=WebAppInfo(url=f"{WEBAPP_URL}?lang={lang}")
+                    web_app=WebAppInfo(url=f"{WEBAPP_URL}?lang={lang}&t={ts}")
                 )
             ])
         rows.append([KeyboardButton(text="💳 Aktivatsiya")])
@@ -51,7 +59,7 @@ def get_main_keyboard(lang: str, activated: bool = False) -> ReplyKeyboardMarkup
             rows.append([
                 KeyboardButton(
                     text="📝 ВЫБИРАЕМ ТЕМУ",
-                    web_app=WebAppInfo(url=f"{WEBAPP_URL}?lang={lang}")
+                    web_app=WebAppInfo(url=f"{WEBAPP_URL}?lang={lang}&t={ts}")
                 )
             ])
         rows.append([KeyboardButton(text="💳 Активация подписки")])
