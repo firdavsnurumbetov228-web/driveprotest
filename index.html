@@ -9,42 +9,48 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root {
-            --bg-primary: #0f0f13;
+            --bg-primary: #000000;
             --bg-secondary: #1a1a22;
             --bg-card: #1e1e28;
             --text-primary: #f0ede8;
             --text-secondary: #9a96a0;
-            --accent: #e8b84b;
-            --accent-dark: #c49830;
-            --accent-glow: rgba(232,184,75,0.18);
+            --accent: #ffffff;
+            --accent-dark: #e0e0e0;
+            --accent-glow: rgba(255,255,255,0.18);
             --border-light: #2e2e3e;
-            --border-accent: rgba(232,184,75,0.35);
+            --border-accent: rgba(255,255,255,0.35);
             --card-shadow: 0 24px 48px -12px rgba(0,0,0,0.6);
             --progress-bg: #2a2a36;
             --correct-bg: #0d2e1a;
             --correct-border: #2ecc71;
             --wrong-bg: #2e0d0d;
             --wrong-border: #e74c3c;
-            --stripe: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(232,184,75,0.03) 10px, rgba(232,184,75,0.03) 20px);
+            --logo-color: #e8b84b;
+            --logo-filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85));
+            --logo-glow: rgba(232,184,75,0.4);
+            --stripe: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
         }
         body.light {
-            --bg-primary: #f5f0e8;
-            --bg-secondary: #ffffff;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
             --bg-card: #ffffff;
             --text-primary: #1a1510;
             --text-secondary: #7a6e5e;
-            --accent: #c49830;
-            --accent-dark: #9a7820;
-            --accent-glow: rgba(196,152,48,0.12);
-            --border-light: #e8dfc8;
-            --border-accent: rgba(196,152,48,0.4);
+            --accent: #000000;
+            --accent-dark: #333333;
+            --accent-glow: rgba(0,0,0,0.12);
+            --border-light: #e0e0e0;
+            --border-accent: rgba(0,0,0,0.4);
             --card-shadow: 0 24px 48px -12px rgba(0,0,0,0.12);
-            --progress-bg: #ede8dc;
+            --progress-bg: #e0e0e0;
             --correct-bg: #eafbf0;
             --correct-border: #27ae60;
             --wrong-bg: #fdeaea;
             --wrong-border: #e74c3c;
-            --stripe: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(196,152,48,0.04) 10px, rgba(196,152,48,0.04) 20px);
+            --logo-color: #c49830;
+            --logo-filter: none;
+            --logo-glow: rgba(196,152,48,0.4);
+            --stripe: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.04) 10px, rgba(0,0,0,0.04) 20px);
         }
         body {
             font-family: 'Source Sans 3', system-ui, sans-serif;
@@ -72,16 +78,18 @@
             background: var(--bg-card);
             border: 1px solid var(--border-accent);
             border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(232,184,75,0.1);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 var(--accent-glow);
         }
         .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-icon { font-size: 32px; }
+        .logo-icon { font-size: 36px; }
+        .logo-icon img { filter: var(--logo-filter); transition: filter 0.3s; }
         .logo-text {
             font-family: 'Oswald', sans-serif;
-            font-weight: 700; font-size: 1.5rem;
-            color: var(--accent);
+            font-weight: 700; font-size: 1.8rem;
+            color: var(--logo-color);
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(232,184,75,0.4);
+            text-shadow: 0 0 20px var(--logo-glow);
+            transition: color 0.3s;
         }
         .logo-sub { font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 2px; text-transform: uppercase; }
         .control-panel { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
@@ -119,7 +127,7 @@
         .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
         .cat-btn.active {
             background: var(--accent); border-color: var(--accent);
-            color: #0f0f13; box-shadow: 0 0 16px var(--accent-glow);
+            color: var(--bg-primary); box-shadow: 0 0 16px var(--accent-glow);
         }
 
         /* QUIZ CARD */
@@ -170,14 +178,41 @@
             border: 1px solid var(--border-light);
         }
         .gallery-img {
-        max-width: calc(50% - 10px);
-        flex: 1 1 auto;
-        min-width: 120px;
-        max-height: 180px;
-        object-fit: contain;
-        width: 100%;
-        height: auto;
-        border-radius: 10px;}
+            max-width: calc(50% - 10px);
+            flex: 1 1 auto;
+            min-width: 120px;
+            max-height: 180px;
+            object-fit: contain;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+        .gallery-img:hover {
+            transform: scale(1.02);
+        }
+        /* IMAGE MODAL */
+        .img-modal {
+            display: none; position: fixed; z-index: 10000; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            align-items: center; justify-content: center;
+        }
+        .img-modal.show { display: flex; animation: fadeIn 0.2s; }
+        .img-modal-content {
+            max-width: 95%; max-height: 90%;
+            border-radius: 8px; object-fit: contain;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+            animation: zoomIn 0.2s;
+        }
+        .img-modal-close {
+            position: absolute; top: 20px; right: 25px;
+            color: #fff; font-size: 35px; font-weight: bold;
+            cursor: pointer; z-index: 10001; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        @keyframes zoomIn { from {transform:scale(0.95); opacity:0;} to {transform:scale(1); opacity:1;} }
         @media (max-width: 500px) {
             .gallery-img { max-width: 100%; max-height: 150px; }
             .images-gallery { flex-direction: column; align-items: center; }
@@ -228,7 +263,7 @@
             background: linear-gradient(90deg, var(--accent-dark), var(--accent));
             border: none; border-radius: 12px;
             padding: 15px; font-weight: 700;
-            font-size: 0.95rem; color: #0f0f13;
+            font-size: 0.95rem; color: var(--bg-primary);
             cursor: pointer; transition: 0.2s;
             margin-top: 8px; display: flex;
             align-items: center; justify-content: center; gap: 8px;
@@ -311,7 +346,7 @@
         /* TOAST */
         .toast-msg {
             position: fixed; bottom: 28px; left: 16px; right: 16px;
-            background: var(--accent); color: #0f0f13;
+            background: var(--accent); color: var(--bg-primary);
             padding: 13px 18px; border-radius: 10px;
             text-align: center; font-weight: 700;
             z-index: 1000; font-family: 'Oswald', sans-serif;
@@ -1759,7 +1794,7 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
             <div class="main-container">
                 <div class="brand-header">
                     <div class="logo">
-                        <span class="logo-icon"></span>
+                        <span class="logo-icon"><img src="media/logo.png" style="height:36px; margin-right:8px; vertical-align:middle; border-radius:4px;" alt="Logo" onerror="this.style.display='none'"></span>
                         <div><div class="logo-text">Drive Pro</div><div class="logo-sub">drive-pro.uz</div></div>
                     </div>
                     <div class="control-panel">
@@ -1803,7 +1838,7 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
 
     function renderImages(imgs){
         if(!imgs||!imgs.length) return '';
-        return `<div class="images-gallery">${imgs.map(s=>`<img class="gallery-img" src="${s}" alt="" loading="lazy" onerror="this.style.display='none'">`).join('')}</div>`;
+        return `<div class="images-gallery">${imgs.map(s=>`<img class="gallery-img" src="${s}" alt="" loading="lazy" onclick="openImgModal(this.src)" onerror="this.style.display='none'">`).join('')}</div>`;
     }
 
     function renderQ(){
@@ -1997,6 +2032,22 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
 
     init();
 })();
+</script>
+<div id="imgModal" class="img-modal">
+  <span class="img-modal-close" onclick="closeImgModal()">&times;</span>
+  <img class="img-modal-content" id="imgModalContent">
+</div>
+<script>
+  function openImgModal(src) {
+    document.getElementById('imgModalContent').src = src;
+    document.getElementById('imgModal').classList.add('show');
+  }
+  function closeImgModal() {
+    document.getElementById('imgModal').classList.remove('show');
+  }
+  document.getElementById('imgModal').addEventListener('click', function(e) {
+    if(e.target === this) closeImgModal();
+  });
 </script>
 </body>
 </html>
