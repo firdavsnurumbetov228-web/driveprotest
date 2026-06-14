@@ -398,14 +398,14 @@ async def cb_do_deactivate(callback: types.CallbackQuery):
 
     # ── Userga xabar ──
     notify_text = (
-        "⚠️ *Hisobingiz aktivatsiyasi o'chirildi.*\n\n"
-        "Murojaat uchun: @DRIVE_PRO_admin\n"
-        "📞 Tel: +998940907300"
+        "⚠️ *Hisobingiz aktivatsiyasi o'chirildi\.*\n\n"
+        "Murojaat uchun: @DRIVE\_PRO\_admin\n"
+        "📞 Tel: \+998940907300"
         if lang == "uz"
         else
-        "⚠️ *Активация вашего аккаунта отключена.*\n\n"
-        "Для связи: @DRIVE_PRO_admin\n"
-        "📞 Тел: +998940907300"
+        "⚠️ *Активация вашего аккаунта отключена\.*\n\n"
+        "Для связи: @DRIVE\_PRO\_admin\n"
+        "📞 Тел: \+998940907300"
     )
     try:
         await bot.send_message(
@@ -452,26 +452,26 @@ async def msg_activation(message: types.Message):
     if is_active:
         # ── Allaqachon faollashtirilgan ──
         text = (
-            "✅ *Siz allaqachon aktivatsiyaga egasiz!*\n\n"
-            "Testlardan to'liq foydalana olasiz. 🚗"
+            "\u2705 *Siz allaqachon aktivatsiyaga egasiz\!*\n\n"
+            "Testlardan to'liq foydalana olasiz\. \ud83d\ude97"
             if lang == "uz"
             else
-            "✅ *У вас уже есть активация!*\n\n"
-            "Вы можете пользоваться тестами в полном объёме. 🚗"
+            "\u2705 *У вас уже есть активация\!*\n\n"
+            "Вы можете пользоваться тестами в полном объёме\. \ud83d\ude97"
         )
     else:
         # ── Hali faollashtirilmagan ──
         text = (
-            "💳 *Aktivatsiya*\n\n"
+            "\ud83d\udcb3 *Aktivatsiya*\n\n"
             "Aktivatsiya uchun admin bilan bog'laning:\n"
-            "@DRIVE_PRO_admin\n\n"
-            "📞 Tel: +998940907300"
+            "@DRIVE\_PRO\_admin\n\n"
+            "\ud83d� Tel: \\+998940907300"
             if lang == "uz"
             else
-            "💳 *Активация*\n\n"
+            "\ud83d\udcb3 *Активация*\n\n"
             "Для активации свяжитесь с администратором:\n"
-            "@DRIVE_PRO_admin\n\n"
-            "📞 Тел: +998940907300"
+            "@DRIVE\_PRO\_admin\n\n"
+            "\ud83d� Тел: \\+998940907300"
         )
     await message.answer(text, parse_mode="MarkdownV2")
 
