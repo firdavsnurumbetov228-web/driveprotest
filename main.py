@@ -408,6 +408,8 @@ async def cb_do_deactivate(callback: types.CallbackQuery):
         "📞 Тел: \+998940907300"
     )
     try:
+        # Sanitize to prevent UnicodeEncodeError with surrogate characters
+        notify_text = notify_text.encode("utf-16", errors="surrogatepass").decode("utf-16")
         await bot.send_message(
             target_id,
             notify_text,
@@ -452,27 +454,29 @@ async def msg_activation(message: types.Message):
     if is_active:
         # ── Allaqachon faollashtirilgan ──
         text = (
-            "\u2705 *Siz allaqachon aktivatsiyaga egasiz\!*\n\n"
-            "Testlardan to'liq foydalana olasiz\. \ud83d\ude97"
+            "✅ *Siz allaqachon aktivatsiyaga egasiz\!*\n\n"
+            "Testlardan to'liq foydalana olasiz\. 🚗"
             if lang == "uz"
             else
-            "\u2705 *У вас уже есть активация\!*\n\n"
-            "Вы можете пользоваться тестами в полном объёме\. \ud83d\ude97"
+            "✅ *У вас уже есть активация\!*\n\n"
+            "Вы можете пользоваться тестами в полном объёме\. 🚗"
         )
     else:
         # ── Hali faollashtirilmagan ──
         text = (
-            "\ud83d\udcb3 *Aktivatsiya*\n\n"
+            "💳 *Aktivatsiya*\n\n"
             "Aktivatsiya uchun admin bilan bog'laning:\n"
             "@DRIVE\_PRO\_admin\n\n"
-            "\ud83d� Tel: \\+998940907300"
+            "📞 Tel: \+998940907300"
             if lang == "uz"
             else
-            "\ud83d\udcb3 *Активация*\n\n"
+            "💳 *Активация*\n\n"
             "Для активации свяжитесь с администратором:\n"
             "@DRIVE\_PRO\_admin\n\n"
-            "\ud83d� Тел: \\+998940907300"
+            "📞 Тел: \+998940907300"
         )
+    # Sanitize to prevent UnicodeEncodeError with surrogate characters
+    text = text.encode("utf-16", errors="surrogatepass").decode("utf-16")
     await message.answer(text, parse_mode="MarkdownV2")
 
 
