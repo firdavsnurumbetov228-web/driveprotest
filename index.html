@@ -1904,8 +1904,9 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
             renderQ();
         };
         document.getElementById("sendBtn").onclick=()=>{
-            const txt=`📊 Drive Pro Test:\n✅ ${correct}/${total}\n📈 ${pct}%\n🏷 ${currentCategory}`;
-            try{ tg.sendData(JSON.stringify({score:pct,correct,total,category:currentCategory})); }
+            const catName=(categoryNames[currentLang]||categoryNames.uz)[currentCategory]||currentCategory;
+            const txt=`📊 Drive Pro Test:\n✅ ${correct}/${total}\n📈 ${pct}%\n🏷 ${catName}`;
+            try{ tg.sendData(JSON.stringify({score:pct,correct,total,category:catName})); }
             catch(e){ alert(txt); }
         };
     }
@@ -1953,11 +1954,26 @@ q("\"M\" toifasining tasnifi?", ["— kamida to'rt g'ildirakka ega bo'lgan va yo
                 currentIndex=0;
                 userAnswers=new Array(currentQuestions.length).fill(null);
             }
-            if(saved.lang) currentLang=saved.lang;
+            // URL dagi lang parametri har doim progress saveddan USTUN
+            const _urlP = new URLSearchParams(window.location.search);
+            const _urlL = _urlP.get("lang");
+            if (_urlL === "uz" || _urlL === "ru") {
+                currentLang = _urlL;
+                localStorage.setItem("avto_lang", _urlL);
+            } else if(saved.lang) {
+                currentLang = saved.lang;
+            }
         } else {
             currentCategory="terms";
             currentQuestions=getByCategory(currentCategory);
             userAnswers=new Array(currentQuestions.length).fill(null);
+            // Yangi user — URL dagi lang parametrini ishlatish
+            const _urlP2 = new URLSearchParams(window.location.search);
+            const _urlL2 = _urlP2.get("lang");
+            if (_urlL2 === "uz" || _urlL2 === "ru") {
+                currentLang = _urlL2;
+                localStorage.setItem("avto_lang", _urlL2);
+            }
         }
 
         buildCats();
